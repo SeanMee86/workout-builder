@@ -55,7 +55,7 @@ class ExerciseDataForm extends Component{
                     onSubmit={this.onFormSubmitHandler}
                     id={'exerciseDataForm'}>
                     <label
-                        htmlFor="exerciseType">Exercise Type</label>
+                        htmlFor="exerciseType">Exercise Type:</label>
                     <select
                         onChange={this.onChangeHandler}
                         value={this.state.formData.exerciseType}
@@ -65,7 +65,7 @@ class ExerciseDataForm extends Component{
                         <option value="timed">Timed</option>
                     </select>
                     <label
-                        htmlFor="exerciseName">Exercise Name</label>
+                        htmlFor="exerciseName">Exercise Name:</label>
                     <input
                         onChange={this.onChangeHandler}
                         value={this.state.formData.exerciseName}
@@ -73,7 +73,7 @@ class ExerciseDataForm extends Component{
                         id={'exerciseName'}
                         type="text"/>
                     <label
-                        htmlFor="exerciseDescription">Exercise Description</label>
+                        htmlFor="exerciseDescription">Exercise Description:</label>
                     <input
                         onChange={this.onChangeHandler}
                         value={this.state.formData.exerciseDescription}
