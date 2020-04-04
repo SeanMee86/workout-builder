@@ -6,7 +6,7 @@ class ExerciseDataForm extends Component{
 
     state = {
         formData: {
-            exerciseType: 'interval',
+            exerciseType: 'Interval',
             exerciseName: '',
             exerciseDescription: ''
         }
@@ -15,7 +15,7 @@ class ExerciseDataForm extends Component{
     resetState = () => {
         this.setState({
             formData: {
-                exerciseType: 'interval',
+                exerciseType: 'Interval',
                 exerciseName: '',
                 exerciseDescription: ''
             }
@@ -61,8 +61,9 @@ class ExerciseDataForm extends Component{
                         value={this.state.formData.exerciseType}
                         name="exerciseType"
                         id="exerciseType">
-                        <option value="interval">Interval</option>
-                        <option value="timed">Timed</option>
+                        <option value="Interval">Interval</option>
+                        <option value="Timed">Timed</option>
+                        <option value="Cardio">Cardio</option>
                     </select>
                     <label
                         htmlFor="exerciseName">Exercise Name:</label>
