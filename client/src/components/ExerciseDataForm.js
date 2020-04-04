@@ -17,7 +17,7 @@ class ExerciseDataForm extends Component{
     resetState = () => {
         this.setState({
             formData: {
-                exerciseType: '',
+                exerciseType: 'interval',
                 exerciseName: '',
                 exerciseDescription: '',
                 exerciseRest: '',
