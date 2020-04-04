@@ -1,7 +1,7 @@
 const express = require('express');
 const router = module.exports = express.Router();
 
-const config = require('../../config');
+// const config = require('../../config');
 
 const mongoose = require('mongoose');
 const userSchema = require('../../models/User');
