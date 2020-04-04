@@ -1,20 +1,22 @@
 const express = require('express');
 const router = module.exports = express.Router();
 
-const mongoose = require('mongoose');
+const {model, connect} = require('mongoose');
+
 const userSchema = require('../../models/User');
-const User = mongoose.model('user', userSchema);
+const User = model('user', userSchema);
+
 const exerciseSchema = require('../../models/Exercise');
-const Exercise = mongoose.model('exercise', exerciseSchema);
+const Exercise = model('exercise', exerciseSchema);
+
 require('dotenv').config();
 
 const connectionString = process.env.CONNECTION_STRING;
-
-const mongooseOptions = {useNewUrlParser: true, useUnifiedTopology: true};
+const connectionOptions = {useNewUrlParser: true, useUnifiedTopology: true};
 
 router.route('/api/workouts')
     .get(async (req, res)=> {
-    mongoose.connect(connectionString, mongooseOptions)
+    connect(connectionString, connectionOptions)
         .then(() => {
             return User.find({}, (err, docs) => {
                 if(!err){
@@ -28,7 +30,7 @@ router.route('/api/workouts')
 
 router.route('/api/exercises')
     .post((req, res) => {
-        mongoose.connect(connectionString, mongooseOptions)
+        connect(connectionString, connectionOptions)
             .then(() => {
                 new Exercise({
                     type: req.body.exerciseType,

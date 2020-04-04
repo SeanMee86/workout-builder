@@ -1,7 +1,7 @@
-const mongoose = require('mongoose');
+const {Schema} = require('mongoose');
 const Exercises = require('./Exercise');
 
-const Workout = new mongoose.Schema({
+const Workout = new Schema({
     name: {
         type: String,
         required: true
