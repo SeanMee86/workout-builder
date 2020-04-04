@@ -1,15 +1,13 @@
 const express = require('express');
 const router = module.exports = express.Router();
 
-// const config = require('../../config');
-
 const mongoose = require('mongoose');
 const userSchema = require('../../models/User');
 const User = mongoose.model('user', userSchema);
 const exerciseSchema = require('../../models/Exercise');
 const Exercise = mongoose.model('exercise', exerciseSchema);
 
-const connectionString = process.env.CONNECTION_STRING || `mongodb+srv://${config.db.username}:${config.db.password}@${config.db.cluster}-day7y.mongodb.net/${config.db.name}?retryWrites=true&w=majority`;
+const connectionString = process.env.CONNECTION_STRING;
 
 const mongooseOptions = {useNewUrlParser: true, useUnifiedTopology: true};
 
@@ -31,7 +29,6 @@ router.route('/api/exercises')
     .post((req, res) => {
         mongoose.connect(connectionString, mongooseOptions)
             .then(() => {
-                console.log(req.body);
                 new Exercise({
                     type: req.body.exerciseType,
                     name: req.body.exerciseName,
@@ -39,8 +36,7 @@ router.route('/api/exercises')
                     rest: req.body.exerciseRest,
                     repetitions: req.body.exerciseReps
                 }).save()
-                    .then((mongoRes) => {
-                        console.log(mongoRes);
+                    .then(() => {
                         res.send('Exercise Submitted')
                     })
                     .catch(err => {
