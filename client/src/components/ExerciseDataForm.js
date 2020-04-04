@@ -43,6 +43,7 @@ class ExerciseDataForm extends Component{
         axios.post('/api/exercises', newExercise)
             .then((res) => {
                 this.resetState();
+                console.log(res.data);
             }).catch(err => {
                 console.log(err);
         })

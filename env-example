@@ -1,2 +1,2 @@
 PORT=8000
-CONNECTION_STRING=mongoString
+CONNECTION_STRING=mongodb+srv://<UserName>:<Password>@<Collection>-day7y.mongodb.net/<Database>?retryWrites=true&w=majority

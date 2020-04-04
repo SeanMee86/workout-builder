@@ -7,8 +7,6 @@ module.exports = (req, response) => {
         type: req.exerciseType,
         name: req.exerciseName,
         description: req.exerciseDescription,
-        rest: req.exerciseRest,
-        repetitions: req.exerciseReps
     }).save()
         .then(() => {
             response.send('Exercise Submitted')
