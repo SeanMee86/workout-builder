@@ -1,5 +1,5 @@
 const {Schema} = require('mongoose');
-const Workouts = require('./Workout');
+const Workout = require('./Workout');
 
 const userSchema = new Schema({
     name: {
@@ -22,7 +22,9 @@ const userSchema = new Schema({
         default: Date.now()
     },
     workouts: [
-        Workouts
+        {
+            workout: Workout
+        }
     ]
 });
 

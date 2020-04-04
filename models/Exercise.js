@@ -7,8 +7,6 @@ const Exercise = new Schema({
         required: true
     },
     description: String,
-    rest: String,
-    repetitions: Number
 });
 
 module.exports = Exercise;

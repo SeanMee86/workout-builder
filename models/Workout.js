@@ -1,5 +1,5 @@
 const {Schema} = require('mongoose');
-const Exercises = require('./Exercise');
+const Exercise = require('./Exercise');
 
 const Workout = new Schema({
     name: {
@@ -7,7 +7,11 @@ const Workout = new Schema({
         required: true
     },
     workout: [
-        Exercises
+        {
+            exercise: Exercise,
+            rest: String,
+            repetitions: Number
+        }
     ]
 });
 

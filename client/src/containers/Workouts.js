@@ -29,9 +29,9 @@ const Workouts = (props) => {
 
     return (
         <div>
-            <button onClick={props.getUserWorkouts}>Get Workouts</button>
-            {workoutRegimens}
-            {workoutRegimenInfo}
+            {/*<button onClick={props.getUserWorkouts}>Get Workouts</button>*/}
+            {/*{workoutRegimens}*/}
+            {/*{workoutRegimenInfo}*/}
             <ExerciseDataForm />
         </div>
     )

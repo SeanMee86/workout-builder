@@ -1,14 +1,11 @@
 import React from 'react';
-import Workouts from './containers/Workouts';
+import ExerciseDataForm from "./components/ExerciseDataForm";
 
 import './App.css';
 
 function App() {
-
   return (
-    <div className="App">
-      <Workouts/>
-    </div>
+      <ExerciseDataForm/>
   );
 }
 

@@ -8,9 +8,7 @@ class ExerciseDataForm extends Component{
         formData: {
             exerciseType: 'interval',
             exerciseName: '',
-            exerciseDescription: '',
-            exerciseRest: '',
-            exerciseReps: '',
+            exerciseDescription: ''
         }
     };
 
@@ -19,9 +17,7 @@ class ExerciseDataForm extends Component{
             formData: {
                 exerciseType: 'interval',
                 exerciseName: '',
-                exerciseDescription: '',
-                exerciseRest: '',
-                exerciseReps: '',
+                exerciseDescription: ''
             }
         })
     };
@@ -54,10 +50,9 @@ class ExerciseDataForm extends Component{
 
     render() {
         return (
-            <div>
+            <div className={classes.Form}>
                 <form
                     onSubmit={this.onFormSubmitHandler}
-                    className={classes.Form}
                     id={'exerciseDataForm'}>
                     <label
                         htmlFor="exerciseType">Exercise Type</label>
@@ -85,22 +80,6 @@ class ExerciseDataForm extends Component{
                         name={'exerciseDescription'}
                         id={'exerciseDescription'}
                         type="text"/>
-                    <label
-                        htmlFor="exerciseRest">Rest Time</label>
-                    <input
-                        onChange={this.onChangeHandler}
-                        value={this.state.formData.exerciseRest}
-                        name={'exerciseRest'}
-                        id={'exerciseRest'}
-                        type="text"/>
-                    <label
-                        htmlFor="exerciseReps">Repetitions</label>
-                    <input
-                        onChange={this.onChangeHandler}
-                        value={this.state.formData.exerciseReps}
-                        name={'exerciseReps'}
-                        id={'exerciseReps'}
-                        type="number"/>
                     <input
                         type="submit"
                         value={'Submit Exercise'}/>
