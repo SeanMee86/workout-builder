@@ -1,7 +1,7 @@
 const express = require('express');
 const router = module.exports = express.Router();
 
-const config = process.env.NODE_ENV === 'production' ? null : require('../../config');
+const config = require('../../config');
 
 const mongoose = require('mongoose');
 const userSchema = require('../../models/User');

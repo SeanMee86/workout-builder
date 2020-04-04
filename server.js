@@ -1,7 +1,7 @@
 const path = require('path');
 const express = require('express');
 const app = express();
-const config = process.env.NODE_ENV === 'production' ? null : require('./config');
+const config = require('./config');
 const routes = require('./routes');
 
 app.use(
