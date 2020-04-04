@@ -5,18 +5,22 @@
   align-items: center;
 
   form {
+    width: 100%;
     display: flex;
     flex-flow: column;
     font-family: 'Roboto', sans-serif;
     padding: 20px;
     border: 1px solid darkgray;
     border-radius: 3px;
+    max-width: 400px;
+    margin: 10px;
+    box-sizing: border-box;
     -webkit-box-shadow: 10px 10px 10px -10px rgba(0,0,0,0.45);
     -moz-box-shadow: 10px 10px 10px -10px rgba(0,0,0,0.45);
     box-shadow: 10px 10px 10px -10px rgba(0,0,0,0.45);
 
     input, select {
-      width: 400px;
+      width: 100%;
       padding: 5px;
       border: 1px solid rgba(120, 120, 120, 0.7);
       border-radius: 5px;
