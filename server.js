@@ -18,5 +18,5 @@ if(process.env.NODE_ENV === 'production') {
     })
 }
 
-const port = process.env.PORT || process.env.PORT;
+const port = process.env.PORT;
 app.listen(port, console.log(`listening on PORT: ${port}`));
