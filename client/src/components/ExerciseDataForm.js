@@ -6,7 +6,7 @@ class ExerciseDataForm extends Component{
 
     state = {
         formData: {
-            exerciseType: '',
+            exerciseType: 'interval',
             exerciseName: '',
             exerciseDescription: '',
             exerciseRest: '',
