@@ -1,6 +1,6 @@
 import {combineReducers} from "redux";
-import userWorkoutReducer from './userWorkouts'
+import userReducer from './userReducer'
 
 export default combineReducers({
-    userWorkouts: userWorkoutReducer
+    user: userReducer
 })

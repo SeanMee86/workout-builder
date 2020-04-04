@@ -4,7 +4,7 @@ const initialState = {
     userWorkouts: null
 };
 
-const userWorkoutReducer = (state = initialState, action) => {
+const userReducer = (state = initialState, action) => {
     switch(action.type){
         case GET_USER_WORKOUTS:
             return {
@@ -16,4 +16,4 @@ const userWorkoutReducer = (state = initialState, action) => {
     }
 };
 
-export default userWorkoutReducer;
+export default userReducer;
