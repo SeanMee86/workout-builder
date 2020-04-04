@@ -1,11 +1,14 @@
 import React from 'react';
-import ExerciseDataForm from "./components/ExerciseDataForm";
+import {Switch, Route, Link} from 'react-router-dom';
 
-import './App.css';
+import Exercises from "./containers/Exercises";
 
 function App() {
   return (
-      <ExerciseDataForm/>
+      <Switch>
+        <Route path={'/exercises'} component={Exercises}/>
+        <Route path={'/'} render={() => (<div>Welcome to Workout Builder <Link to={'/exercises'}>Click Here</Link> to add Exercises.</div>)}/>
+      </Switch>
   );
 }
 
