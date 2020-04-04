@@ -6,6 +6,7 @@ const userSchema = require('../../models/User');
 const User = mongoose.model('user', userSchema);
 const exerciseSchema = require('../../models/Exercise');
 const Exercise = mongoose.model('exercise', exerciseSchema);
+require('dotenv').config();
 
 const connectionString = process.env.CONNECTION_STRING;
 
