@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
-import {getUserWorkouts} from "../store/actions/workouts";
+import {getUserWorkouts} from "../store/actions/users";
 import {connect} from 'react-redux';
 
-import ExerciseDataForm from "../components/ExerciseDataForm";
+import ExerciseDataForm from "../components/ExerciseForm/ExerciseDataForm";
 
 const Workouts = (props) => {
 

@@ -1,1 +1,2 @@
 export const GET_USER_WORKOUTS = 'GET_USER_WORKOUTS';
+export const GET_EXERCISES = 'GET_EXERCISES';

@@ -19,10 +19,3 @@ router.route('/api/users')
         });
     });
 
-router.route('/api/exercises')
-    .post((req, res) => {
-        connect(connectionString, connectionOptions)
-            .then(() => {
-                insertExercise(req.body, res);
-            })
-    });

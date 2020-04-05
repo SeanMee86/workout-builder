@@ -1,8 +1,19 @@
 import React from 'react';
-import ExerciseDataForm from "../components/ExerciseDataForm";
+import ExerciseDataForm from "../components/ExerciseForm/ExerciseDataForm";
+import Button from "../components/UI/Button/Button";
+import { connect } from 'react-redux';
+import {getExercises} from "../store/actions/exercises";
+import ExerciseList from "../components/ExerciseList/ExerciseList";
 
-const Exercises = () => (
-    <ExerciseDataForm/>
-);
+const Exercises = (props) => {
 
-export default Exercises;
+    return (
+        <React.Fragment>
+            <ExerciseDataForm/>
+            <Button clicked={props.getExercises} text='Get Exercises'/>
+            <ExerciseList/>
+        </React.Fragment>
+    );
+};
+
+export default connect(null, {getExercises})(Exercises);

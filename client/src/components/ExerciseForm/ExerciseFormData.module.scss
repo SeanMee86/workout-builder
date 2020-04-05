@@ -1,11 +1,5 @@
 .Form {
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
   form {
-    width: 100%;
     display: flex;
     flex-flow: column;
     font-family: 'Roboto', sans-serif;
@@ -33,15 +27,15 @@
       &[type=submit]{
         width: 250px;
         font-weight: 700;
-        background-color: #23902c;
-        border-color: #23902c;
+        background-color: #092577;
+        border-color: #092577;
         color: #fff;
         transition: all 0.2s ease-in-out;
         align-self: center;
 
         &:hover {
           background-color: #fff;
-          color: #23902c;
+          color: #092577;
           cursor: pointer;
         }
 
