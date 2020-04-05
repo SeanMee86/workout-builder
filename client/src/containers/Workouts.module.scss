@@ -1,11 +1,15 @@
 .Workouts {
+  .ExerciseList,
+  .WorkoutBuilder {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+  }
+
   @media screen and(min-width:768px) {
     display: flex;
 
-    .ExerciseList {
-      width: 50%;
-    }
-
+    .ExerciseList,
     .WorkoutBuilder {
       width: 50%;
     }

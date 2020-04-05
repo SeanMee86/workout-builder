@@ -10,6 +10,7 @@ const Workouts = (props) => {
 
     useEffect(() => {
         props.getExercises();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     let workoutBody = props.exercises ? (
