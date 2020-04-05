@@ -4,6 +4,7 @@ import {getExercises, clearExercises} from "../store/actions/exercises";
 import ExerciseList from "../components/ExerciseList/ExerciseList";
 import WorkoutBuilder from "../components/WorkoutBuilder/WorkoutBuilder";
 import classes from './Workouts.module.scss'
+import Spinner from "../components/UI/Spinner/Spinner";
 
 const Workouts = (props) => {
 
@@ -11,7 +12,7 @@ const Workouts = (props) => {
         props.getExercises();
     }, []);
 
-    return (
+    let workoutBody = props.exercises ? (
         <div className={classes.Workouts}>
             <div className={classes.WorkoutBuilder}>
                 <h2>Your Workout</h2>
@@ -22,6 +23,12 @@ const Workouts = (props) => {
                 <ExerciseList/>
             </div>
         </div>
+    ) : (<Spinner/>);
+
+    return (
+        <React.Fragment>
+            {workoutBody}
+        </React.Fragment>
     )
 };
 
