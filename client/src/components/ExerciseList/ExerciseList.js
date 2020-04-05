@@ -8,9 +8,10 @@ const ExerciseList = (props) => {
         <div className={classes.List}>
             {props.exercises ? props.exercises.map(exercise => (
                 <ExerciseListItem
-                exerciseName={exercise.name}
-                exerciseType={exercise.type}
-                exerciseDescription={exercise.description}/>
+                    key={exercise["_id"]}
+                    exerciseName={exercise.name}
+                    exerciseType={exercise.type}
+                    exerciseDescription={exercise.description}/>
             )) : null}
         </div>
     )

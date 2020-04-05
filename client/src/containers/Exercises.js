@@ -10,7 +10,7 @@ const Exercises = (props) => {
     return (
         <React.Fragment>
             <ExerciseDataForm/>
-            <Button clicked={props.getExercises} text='Get Exercises'/>
+            <Button clicked={props.getExercises} text='View Exercises'/>
             <ExerciseList/>
         </React.Fragment>
     );
