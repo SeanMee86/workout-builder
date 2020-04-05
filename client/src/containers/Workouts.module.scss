@@ -1,0 +1,13 @@
+.Workouts {
+  @media screen and(min-width:768px) {
+    display: flex;
+
+    .ExerciseList {
+      width: 50%;
+    }
+
+    .WorkoutBuilder {
+      width: 50%;
+    }
+  }
+}

@@ -1,0 +1,17 @@
+.Nav {
+  list-style: none;
+  display: flex;
+  width: 100%;
+  padding: 0;
+  max-width: 400px;
+  justify-content: space-evenly;
+
+  li a {
+    text-decoration: none;
+    color: #666666;
+
+    &.active {
+      color: #f97e05;
+    }
+  }
+}

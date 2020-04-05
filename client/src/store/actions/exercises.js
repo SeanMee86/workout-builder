@@ -1,4 +1,4 @@
-import {GET_EXERCISES} from "./types";
+import {CLEAR_EXERCISES, GET_EXERCISES} from "./types";
 import axios from 'axios';
 
 export const getExercises = () => dispatch => {
@@ -12,3 +12,7 @@ export const getExercises = () => dispatch => {
             console.log(err);
     });
 };
+
+export const clearExercises = () => ({
+    type: CLEAR_EXERCISES
+});

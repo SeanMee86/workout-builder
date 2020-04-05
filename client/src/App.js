@@ -5,11 +5,13 @@ import Exercises from "./containers/Exercises";
 import Workouts from "./containers/Workouts";
 import classes from './App.module.scss';
 import Header from "./components/UI/Header/Header";
+import Nav from "./components/UI/Nav/Nav";
 
 function App() {
   return (
       <div className={classes.App}>
           <Header/>
+          <Nav/>
           <Switch>
             <Route path={'/exercises'} component={Exercises}/>
             <Route path={'/workouts'} component={Workouts}/>

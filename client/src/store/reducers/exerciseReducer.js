@@ -1,4 +1,4 @@
-import {GET_EXERCISES} from '../actions/types';
+import {CLEAR_EXERCISES, GET_EXERCISES} from '../actions/types';
 
 const initialState = {
     exercises: null
@@ -10,6 +10,11 @@ const exerciseReducer = (state = initialState, action) => {
             return {
                 ...state,
                 exercises: action.payload
+            };
+        case CLEAR_EXERCISES:
+            return {
+                ...state,
+                exercises: null
             };
         default: return state;
     }
