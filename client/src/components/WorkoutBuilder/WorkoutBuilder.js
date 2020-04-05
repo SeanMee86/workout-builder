@@ -1,11 +1,12 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {removeFromWorkout} from "../../store/actions/workouts";
+import classes from './WorkoutBuilder.module.scss';
 
 const WorkoutBuilder = (props) => {
 
     return (
-        <div>
+        <div className={classes.Builder}>
             {props.workout.map(exercise => {
                 return (
                     <div key={exercise.id}>
