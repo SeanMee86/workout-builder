@@ -6,11 +6,17 @@ const Workout = new Schema({
         type: String,
         required: true
     },
+    submittedBy: String,
     workout: [
         {
-            exercise: Exercise,
+            exercise: {
+                type: Exercise,
+                required: true
+            },
             rest: String,
-            repetitions: Number
+            repetitions: Number,
+            distance: String,
+            time: String
         }
     ]
 });
