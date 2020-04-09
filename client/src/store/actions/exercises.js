@@ -1,4 +1,4 @@
-import {CLEAR_EXERCISES, GET_EXERCISES} from "./types";
+import {CLEAR_EXERCISES, GET_EXERCISES, LOAD_EXERCISE} from "./types";
 import axios from 'axios';
 
 export const getExercises = () => dispatch => {
@@ -15,4 +15,9 @@ export const getExercises = () => dispatch => {
 
 export const clearExercises = () => ({
     type: CLEAR_EXERCISES
+});
+
+export const loadExercise = (exercise) => ({
+    type: LOAD_EXERCISE,
+    payload: exercise
 });

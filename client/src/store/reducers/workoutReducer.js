@@ -1,7 +1,8 @@
-import {ADD_WORKOUT, ADD_TO_WORKOUT, REMOVE_FROM_WORKOUT} from "../actions/types";
+import {ADD_WORKOUT, ADD_TO_WORKOUT, REMOVE_FROM_WORKOUT, SHOW_MODAL, HIDE_MODAL} from "../actions/types";
 
 const initialState = {
-    workout: []
+    workout: [],
+    showModal: false
 };
 
 const addWorkout = (state) => {
@@ -10,15 +11,25 @@ const addWorkout = (state) => {
     };
 };
 
+const showModal = (state) => {
+    return{
+        ...state,
+        showModal: true
+    }
+};
+
+const hideModal = (state) => {
+    return {
+        ...state,
+        showModal: false
+    }
+};
+
 const addToWorkout = (state, action) => {
-    if(state.workout.filter(exercise => exercise.id === action.payload.id).length < 1) {
-        const newWorkout = state.workout.concat(action.payload);
-        return {
-            ...state,
-            workout: newWorkout
-        };
-    }else{
-        return state;
+    const newWorkout = state.workout.concat(action.payload);
+    return {
+        ...state,
+        workout: newWorkout
     }
 };
 
@@ -37,6 +48,8 @@ const workoutReducer = (state = initialState, action) => {
         case ADD_WORKOUT: return addWorkout(state);
         case ADD_TO_WORKOUT: return addToWorkout(state, action);
         case REMOVE_FROM_WORKOUT: return removeFromWorkout(state, action);
+        case SHOW_MODAL: return showModal(state);
+        case HIDE_MODAL: return hideModal(state);
         default: return state;
     }
 };

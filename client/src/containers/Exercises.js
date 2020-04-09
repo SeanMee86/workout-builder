@@ -16,7 +16,7 @@ const Exercises = (props) => {
                 props.getExercises();
                 setShowExercises(!showExercises);
             }} text={showExercises ? 'Hide Exercises' : 'View Exercises'}/>
-            {showExercises ? <ExerciseList/> : null}
+            {showExercises ? <ExerciseList shouldHover={false}/> : null}
         </React.Fragment>
     );
 };

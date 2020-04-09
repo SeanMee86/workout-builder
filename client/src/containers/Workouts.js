@@ -5,6 +5,8 @@ import ExerciseList from "../components/ExerciseList/ExerciseList";
 import WorkoutBuilder from "../components/WorkoutBuilder/WorkoutBuilder";
 import classes from './Workouts.module.scss'
 import Spinner from "../components/UI/Spinner/Spinner";
+import Modal from "../components/UI/Modal/Modal";
+import AddToWorkoutForm from "../components/AddToWorkoutForm/AddToWorkoutForm";
 
 const Workouts = (props) => {
 
@@ -21,20 +23,27 @@ const Workouts = (props) => {
             </div>
             <div className={classes.ExerciseList}>
                 <h2>Available Exercises</h2>
-                <ExerciseList/>
+                <ExerciseList shouldHover={true}/>
             </div>
         </div>
     ) : (<Spinner/>);
 
+    let modal = props.workouts.showModal ? (
+        <Modal>
+            <AddToWorkoutForm />
+        </Modal>
+    ) : null;
+
     return (
         <React.Fragment>
+            {modal}
             {workoutBody}
         </React.Fragment>
     )
 };
 
 const mapStateToProps = state => ({
-    workouts: state.user.userWorkouts,
+    workouts: state.workouts,
     exercises: state.exercises.exercises
 });
 

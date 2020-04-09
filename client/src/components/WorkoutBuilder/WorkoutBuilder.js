@@ -7,9 +7,9 @@ const WorkoutBuilder = (props) => {
 
     return (
         <div className={classes.Builder}>
-            {props.workout.map(exercise => {
+            {props.workout.map((exercise, ind) => {
                 return (
-                    <div key={exercise.id}>
+                    <div key={ind}>
                         <h2 onClick={() => props.removeFromWorkout(exercise)}>{exercise.name}</h2>
                     </div>
                 )
