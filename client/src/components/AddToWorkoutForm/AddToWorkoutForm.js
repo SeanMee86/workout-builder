@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { addToWorkout } from "../../store/actions/workouts";
+import { addToWorkout, hideModal } from "../../store/actions/workouts";
 import classes from './AddToWorkoutForm.module.scss';
 import Button from "../UI/Button/Button";
 
@@ -19,6 +19,10 @@ class AddToWorkoutForm extends Component {
             case 'Interval':
                 this.setState({
                     additionalFields: {
+                        repetitions: {
+                            type: 'number',
+                            value: 0
+                        },
                         sets: {
                             type: 'number',
                             value: 0
@@ -26,10 +30,6 @@ class AddToWorkoutForm extends Component {
                         rest: {
                             type: 'text',
                             value: '',
-                        },
-                        repetitions: {
-                            type: 'number',
-                            value: 0
                         }
                     }
                 });
@@ -55,13 +55,13 @@ class AddToWorkoutForm extends Component {
                             type: 'text',
                             value: ''
                         },
+                        sets: {
+                            type: 'number',
+                            value: 0
+                        },
                         rest: {
                             type: 'text',
                             value: '',
-                        },
-                        repetitions: {
-                            type: 'number',
-                            value: 0
                         }
                     }
                 })
@@ -80,9 +80,17 @@ class AddToWorkoutForm extends Component {
         })
     };
 
-    onSubmitHandler = (e) => {
+    onSubmitForm = (e) => {
         e.preventDefault();
-        this.props.addToWorkout();
+        const fieldValues = {};
+        for(let field in this.state.additionalFields){
+            fieldValues[field] = this.state.additionalFields[field].value
+        }
+        this.props.addToWorkout({
+            ...this.props.exercise,
+            ...fieldValues
+        })
+        this.props.hideModal();
     };
 
     render() {
@@ -96,7 +104,6 @@ class AddToWorkoutForm extends Component {
                 value: this.state.additionalFields[field].value
             })
         }
-        console.log(formFields);
         return(
             <div className={classes.FormContainer}>
                 <div className={classes.GenInfo}>
@@ -115,7 +122,7 @@ class AddToWorkoutForm extends Component {
                         </div>
                     ))}
                     <div className={classes.ButtonContainer}>
-                        <Button text={'Add Exercise To Workout'}/>
+                        <Button clicked={(event) => this.onSubmitForm(event)} text={'Add Exercise To Workout'}/>
                     </div>
                 </form>
             </div>
@@ -127,4 +134,4 @@ const mapStateToProps = state => ({
     exercise: state.exercises.exerciseToAdd
 });
 
-export default connect(mapStateToProps, {addToWorkout})(AddToWorkoutForm);
+export default connect(mapStateToProps, {addToWorkout, hideModal})(AddToWorkoutForm);
