@@ -2,4 +2,12 @@
   @media screen and (min-width: 768px){
     width: 400px;
   }
+
+  .ExerciseCard {
+    padding: 0 20px;
+    text-align: center;
+    border: 1px solid darkgray;
+    border-radius: 5px;
+    margin-bottom: 20px;
+  }
 }

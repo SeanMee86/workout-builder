@@ -64,7 +64,9 @@ class AddToWorkoutForm extends Component {
                             value: '',
                         }
                     }
-                })
+                });
+                break;
+            default: return this.state;
         }
     };
 
@@ -89,7 +91,7 @@ class AddToWorkoutForm extends Component {
         this.props.addToWorkout({
             ...this.props.exercise,
             ...fieldValues
-        })
+        });
         this.props.hideModal();
     };
 
@@ -110,7 +112,7 @@ class AddToWorkoutForm extends Component {
                     <h2>{this.props.exercise.name}</h2>
                     <p>{this.props.exercise.type} Workout</p>
                 </div>
-                <form className={classes.Form}>
+                <form method={'post'} className={classes.Form}>
                     {formFields.map(field => (
                         <div className={classes.Field} key={field.label}>
                             <label>{field.label}:</label>
