@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {removeFromWorkout} from "../../store/actions/workouts";
+import {removeFromWorkout, clearWorkout} from "../../store/actions/workouts";
 import classes from './WorkoutBuilder.module.scss';
 import Button from "../UI/Button/Button";
 import axios from 'axios';
@@ -15,6 +15,7 @@ const WorkoutBuilder = (props) => {
         axios.post('/api/workouts', newWorkout)
             .then(res => {
                 console.log(res.data);
+                props.clearWorkout();
             }).catch(err => {
                 console.log(err);
         })
@@ -50,4 +51,4 @@ const mapStateToProps = state => ({
     workoutName: state.workouts.workoutName
 });
 
-export default connect(mapStateToProps, {removeFromWorkout})(WorkoutBuilder);
+export default connect(mapStateToProps, {removeFromWorkout, clearWorkout})(WorkoutBuilder);

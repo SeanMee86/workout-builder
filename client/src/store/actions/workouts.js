@@ -3,7 +3,7 @@ import {
     REMOVE_FROM_WORKOUT,
     SHOW_MODAL,
     HIDE_MODAL,
-    NAME_WORKOUT
+    NAME_WORKOUT, CLEAR_WORKOUT
 } from "./types";
 
 export const addToWorkout = (exercise) => {
@@ -36,5 +36,11 @@ export const removeFromWorkout = (exercise) => {
     return {
         type: REMOVE_FROM_WORKOUT,
         payload: exercise
+    }
+};
+
+export const clearWorkout = () => {
+    return {
+        type: CLEAR_WORKOUT
     }
 };

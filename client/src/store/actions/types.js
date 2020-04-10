@@ -10,3 +10,4 @@ export const REMOVE_FROM_WORKOUT = 'REMOVE_FROM_WORKOUT';
 export const SHOW_MODAL = 'SHOW_MODAL';
 export const HIDE_MODAL = 'HIDE_MODAL';
 export const NAME_WORKOUT = 'NAME_WORKOUT';
+export const CLEAR_WORKOUT = 'CLEAR_WORKOUT';
