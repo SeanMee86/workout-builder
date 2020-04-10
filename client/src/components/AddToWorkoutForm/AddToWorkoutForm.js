@@ -89,7 +89,9 @@ class AddToWorkoutForm extends Component {
             fieldValues[field] = this.state.additionalFields[field].value
         }
         this.props.addToWorkout({
-            ...this.props.exercise,
+            exercise: {
+                ...this.props.exercise
+            },
             ...fieldValues
         });
         this.props.hideModal();
