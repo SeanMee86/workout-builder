@@ -1,4 +1,11 @@
-import {ADD_WORKOUT, ADD_TO_WORKOUT, REMOVE_FROM_WORKOUT, SHOW_MODAL, HIDE_MODAL, NAME_WORKOUT} from "../actions/types";
+import {
+    ADD_WORKOUT,
+    ADD_TO_WORKOUT,
+    REMOVE_FROM_WORKOUT,
+    SHOW_MODAL,
+    HIDE_MODAL,
+    NAME_WORKOUT
+} from "../actions/types";
 
 const initialState = {
     workoutName: '',

@@ -2,8 +2,9 @@ import React, {useState} from 'react';
 import { connect } from 'react-redux';
 import Button from "../UI/Button/Button";
 import {nameWorkout} from "../../store/actions/workouts";
+import classes from './NameWorkoutField.module.scss';
 
-const NameWorkoutField = () => {
+const NameWorkoutField = (props) => {
     const [workoutName, setWorkoutName] = useState('');
 
     const onChangeHandler = (e) => {
@@ -12,11 +13,11 @@ const NameWorkoutField = () => {
 
     const submitForm = (e) => {
         e.preventDefault();
-        nameWorkout(workoutName);
+        props.nameWorkout(workoutName);
     };
 
     return(
-        <div>
+        <div className={classes.FieldContainer}>
             <form method={'post'}>
                 <label htmlFor={'workoutName'}>Name Your Workout</label>
                 <input onChange={onChangeHandler} id={'workoutName'} name={'workoutName'} type="text"/>

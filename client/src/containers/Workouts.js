@@ -7,6 +7,7 @@ import classes from './Workouts.module.scss'
 import Spinner from "../components/UI/Spinner/Spinner";
 import Modal from "../components/UI/Modal/Modal";
 import AddToWorkoutForm from "../components/AddToWorkoutForm/AddToWorkoutForm";
+import NameWorkoutField from "../components/NameWorkoutField/NameWorkoutField";
 
 const Workouts = (props) => {
 
@@ -18,7 +19,7 @@ const Workouts = (props) => {
     let workoutBody = props.exercises ? (
         <div className={classes.Workouts}>
             <div className={classes.WorkoutBuilder}>
-                <h2>Your Workout</h2>
+                <h2>{props.workouts.workoutName ? props.workouts.workoutName : 'Click an Exercise to Start Building Your Workout'}</h2>
                 <WorkoutBuilder/>
             </div>
             <div className={classes.ExerciseList}>
@@ -28,9 +29,11 @@ const Workouts = (props) => {
         </div>
     ) : (<Spinner/>);
 
+    let form = props.workouts.workoutName ? <AddToWorkoutForm /> : <NameWorkoutField/>;
+
     let modal = props.workouts.showModal ? (
         <Modal>
-            <AddToWorkoutForm />
+            {form}
         </Modal>
     ) : null;
 

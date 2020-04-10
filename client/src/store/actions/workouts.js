@@ -2,7 +2,8 @@ import {
     ADD_TO_WORKOUT,
     REMOVE_FROM_WORKOUT,
     SHOW_MODAL,
-    HIDE_MODAL, NAME_WORKOUT
+    HIDE_MODAL,
+    NAME_WORKOUT
 } from "./types";
 
 export const addToWorkout = (exercise) => {
