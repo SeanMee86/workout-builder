@@ -1,0 +1,10 @@
+.WorkoutsList {
+  @media screen and (min-width: 768px) {
+    display: grid;
+    grid-template-columns: 50% 50%;
+  }
+
+  .AddMargin {
+    margin: 20px;
+  }
+}

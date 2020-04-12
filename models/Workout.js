@@ -14,6 +14,7 @@ const Workout = new Schema({
                 required: true
             },
             rest: String,
+            sets: Number,
             repetitions: Number,
             distance: String,
             time: String

@@ -4,6 +4,7 @@ import {removeFromWorkout, clearWorkout} from "../../store/actions/workouts";
 import classes from './WorkoutBuilder.module.scss';
 import Button from "../UI/Button/Button";
 import axios from 'axios';
+import {setWorkoutVars} from "../../shared/utilities/setWorkoutVars";
 
 const Workout = (props) => {
 
@@ -24,11 +25,7 @@ const Workout = (props) => {
     return (
         <div className={classes.Builder}>
             {props.workout.map((exercise, ind) => {
-                const reps = exercise.repetitions ? (<p>Reps: {exercise.repetitions}</p>): null;
-                const sets = exercise.sets ? (<p>Sets: {exercise.sets}</p>) : null;
-                const rest = exercise.rest ? (<p>Rest: {exercise.rest}</p>): null;
-                const time = exercise.time ? (<p>Time: {exercise.time}</p>) : null;
-                const distance = exercise.distance ? (<p>Distance: {exercise.distance}</p>) : null;
+                const {reps, sets, time, distance, rest} = setWorkoutVars(exercise);
                 return (
                     <div className={classes.ExerciseCard} onClick={() => props.removeFromWorkout(exercise)} key={ind}>
                         <h2>{exercise.exercise.name}</h2>

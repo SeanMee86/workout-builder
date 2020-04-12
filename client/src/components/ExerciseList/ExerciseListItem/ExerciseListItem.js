@@ -1,5 +1,5 @@
 import React from 'react';
-import classes from './ExerciseListItem.module.scss'
+import classes from '../../../shared/styles/ListItems.module.scss'
 import { connect } from 'react-redux';
 import { showModal } from "../../../store/actions/workouts";
 import { loadExercise } from "../../../store/actions/exercises";

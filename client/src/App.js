@@ -1,12 +1,12 @@
 import React from 'react';
 import {Switch, Route, Link} from 'react-router-dom';
 
-import Exercises from "./containers/Exercises";
-import WorkoutBuilder from "./containers/WorkoutBuilder";
+import Exercises from "./containers/Exercises/Exercises";
+import WorkoutBuilder from "./containers/WorkoutBuilder/WorkoutBuilder";
 import classes from './App.module.scss';
 import Header from "./components/UI/Header/Header";
 import Nav from "./components/UI/Nav/Nav";
-import Workouts from "./containers/Workouts";
+import Workouts from "./containers/Workouts/Workouts";
 
 function App() {
   return (

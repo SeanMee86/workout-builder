@@ -36,6 +36,7 @@ const hideModal = (state) => {
 
 const addToWorkout = (state, action) => {
     const newWorkout = state.workout.concat(action.payload);
+    console.log(newWorkout);
     return {
         ...state,
         workout: newWorkout

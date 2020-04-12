@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
-import ExerciseDataForm from "../components/ExerciseForm/ExerciseDataForm";
-import Button from "../components/UI/Button/Button";
+import ExerciseDataForm from "../../components/ExerciseForm/ExerciseDataForm";
+import Button from "../../components/UI/Button/Button";
 import { connect } from 'react-redux';
-import {getExercises} from "../store/actions/exercises";
-import ExerciseList from "../components/ExerciseList/ExerciseList";
+import {getExercises} from "../../store/actions/exercises";
+import ExerciseList from "../../components/ExerciseList/ExerciseList";
 
 const Exercises = (props) => {
 

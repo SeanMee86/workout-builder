@@ -1,13 +1,13 @@
 import React, { useEffect } from 'react';
 import {connect} from 'react-redux';
-import {getExercises, clearExercises} from "../store/actions/exercises";
-import ExerciseList from "../components/ExerciseList/ExerciseList";
-import Workout from "../components/Workout/Workout";
-import classes from './Workouts.module.scss'
-import Spinner from "../components/UI/Spinner/Spinner";
-import Modal from "../components/UI/Modal/Modal";
-import AddToWorkoutForm from "../components/AddToWorkoutForm/AddToWorkoutForm";
-import NameWorkoutField from "../components/NameWorkoutField/NameWorkoutField";
+import {getExercises, clearExercises} from "../../store/actions/exercises";
+import ExerciseList from "../../components/ExerciseList/ExerciseList";
+import Workout from "../../components/Workout/Workout";
+import classes from './WorkoutBuilder.module.scss'
+import Spinner from "../../components/UI/Spinner/Spinner";
+import Modal from "../../components/UI/Modal/Modal";
+import AddToWorkoutForm from "../../components/AddToWorkoutForm/AddToWorkoutForm";
+import NameWorkoutField from "../../components/NameWorkoutField/NameWorkoutField";
 
 const WorkoutBuilder = (props) => {
 
