@@ -4,12 +4,13 @@ import {
     REMOVE_FROM_WORKOUT,
     SHOW_MODAL,
     HIDE_MODAL,
-    NAME_WORKOUT, CLEAR_WORKOUT
+    NAME_WORKOUT, CLEAR_WORKOUT, GET_WORKOUTS
 } from "../actions/types";
 
 const initialState = {
     workoutName: '',
     workout: [],
+    workouts: [],
     showModal: false
 };
 
@@ -66,6 +67,13 @@ const clearWorkout = (state) => {
     }
 };
 
+const getWorkouts = (state, action) => {
+    return {
+        ...state,
+        workouts: action.payload
+    }
+};
+
 const workoutReducer = (state = initialState, action) => {
     switch(action.type){
         case ADD_WORKOUT: return addWorkout(state);
@@ -75,6 +83,7 @@ const workoutReducer = (state = initialState, action) => {
         case HIDE_MODAL: return hideModal(state);
         case NAME_WORKOUT: return nameWorkout(state, action);
         case CLEAR_WORKOUT: return clearWorkout(state);
+        case GET_WORKOUTS: return getWorkouts(state, action);
         default: return state;
     }
 };

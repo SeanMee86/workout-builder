@@ -11,3 +11,4 @@ export const SHOW_MODAL = 'SHOW_MODAL';
 export const HIDE_MODAL = 'HIDE_MODAL';
 export const NAME_WORKOUT = 'NAME_WORKOUT';
 export const CLEAR_WORKOUT = 'CLEAR_WORKOUT';
+export const GET_WORKOUTS = 'GET_WORKOUTS';

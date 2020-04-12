@@ -5,7 +5,7 @@ import classes from './WorkoutBuilder.module.scss';
 import Button from "../UI/Button/Button";
 import axios from 'axios';
 
-const WorkoutBuilder = (props) => {
+const Workout = (props) => {
 
     const submitWorkout = (workout) => {
         const newWorkout = {
@@ -51,4 +51,4 @@ const mapStateToProps = state => ({
     workoutName: state.workouts.workoutName
 });
 
-export default connect(mapStateToProps, {removeFromWorkout, clearWorkout})(WorkoutBuilder);
+export default connect(mapStateToProps, {removeFromWorkout, clearWorkout})(Workout);

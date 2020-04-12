@@ -3,8 +3,9 @@ import {
     REMOVE_FROM_WORKOUT,
     SHOW_MODAL,
     HIDE_MODAL,
-    NAME_WORKOUT, CLEAR_WORKOUT
+    NAME_WORKOUT, CLEAR_WORKOUT, GET_WORKOUTS
 } from "./types";
+import axios from 'axios';
 
 export const addToWorkout = (exercise) => {
     return {
@@ -43,4 +44,14 @@ export const clearWorkout = () => {
     return {
         type: CLEAR_WORKOUT
     }
+};
+
+export const getWorkouts = () => dispatch => {
+    axios.get('/api/workouts')
+        .then(res => {
+            dispatch({
+                type: GET_WORKOUTS,
+                payload: res.data
+            })
+        })
 };
