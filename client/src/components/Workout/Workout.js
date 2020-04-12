@@ -15,7 +15,7 @@ const Workout = (props) => {
         };
         axios.post('/api/workouts', newWorkout)
             .then(res => {
-                console.log(res.data);
+                // Need to let client know their workout was submitted successfully
                 props.clearWorkout();
             }).catch(err => {
                 console.log(err);
