@@ -1,7 +1,8 @@
 import {GET_USER_WORKOUTS} from "../actions/types";
 
 const initialState = {
-    userWorkouts: null
+    userWorkouts: null,
+    isAuth: true
 };
 
 const userReducer = (state = initialState, action) => {

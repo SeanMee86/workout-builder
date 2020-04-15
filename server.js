@@ -3,6 +3,11 @@ const express = require('express');
 const app = express();
 require('dotenv').config();
 const routes = require('./routes');
+const passport = require('passport');
+
+app.use(passport.initialize());
+
+require('./config/passport')(passport);
 
 app.use(
     express.json(),
