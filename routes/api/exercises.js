@@ -6,6 +6,7 @@ const insertExercise = require('../../utils/dbInserts/exercises');
 const getExercises = require('../../utils/dbRetrieve/exercises');
 const connectionString = process.env.CONNECTION_STRING;
 const connectionOptions = {useNewUrlParser: true, useUnifiedTopology: true};
+const passport = require('passport');
 
 const secureRoute = passport.authenticate('jwt', {session: false});
 

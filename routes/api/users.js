@@ -5,6 +5,7 @@ require('dotenv').config();
 const getUser = require('../../utils/dbRetrieve/users');
 const connectionString = process.env.CONNECTION_STRING;
 const connectionOptions = {useNewUrlParser: true, useUnifiedTopology: true};
+const passport = require('passport');
 
 const secureRoute = passport.authenticate('jwt', {session: false});
 
