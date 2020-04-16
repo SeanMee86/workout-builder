@@ -10,6 +10,15 @@ import Login from "./containers/Login/Login";
 import Registration from "./containers/Registration/Registration";
 import Workouts from "./containers/Workouts/Workouts";
 import { connect } from 'react-redux';
+import jwt_decode from 'jwt-decode';
+import store from "./store";
+import {setUser} from "./store/actions/users";
+
+if(localStorage.jwtToken){
+    const token = localStorage.jwtToken;
+    const decodedToken = jwt_decode(token);
+    store.dispatch(setUser(decodedToken));
+}
 
 function App(props) {
 

@@ -6,15 +6,18 @@ const connectionString = process.env.CONNECTION_STRING;
 const connectionOptions = {useNewUrlParser: true, useUnifiedTopology: true};
 const insertWorkout = require('../../utils/dbInserts/workouts');
 const getWorkouts = require('../../utils/dbRetrieve/workouts');
+const passport = require('passport');
+
+const secureRoute = passport.authenticate('jwt', {session: false});
 
 router.route('/api/workouts')
-    .post((req, res) => {
+    .post(secureRoute, (req, res) => {
         connect(connectionString, connectionOptions)
             .then(() => {
                 insertWorkout(req.body, res);
             })
     })
-    .get((req, res) => {
+    .get(secureRoute, (req, res) => {
         connect(connectionString, connectionOptions)
             .then(() => {
                 getWorkouts(res);

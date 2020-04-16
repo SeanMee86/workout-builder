@@ -1,12 +1,68 @@
 import React from 'react';
-import {NavLink} from "react-router-dom";
+import {NavLink, withRouter} from "react-router-dom";
 import classes from './Nav.module.scss'
+import { connect } from 'react-redux';
+import { logOutUser } from "../../../store/actions/users";
 
-const Nav = () => {
+const Nav = (props) => {
 
     const removeSideDrawer = () => {
         document.getElementById('menu-toggle').checked = false;
     };
+
+    let navigation = <ul className={classes.List}>
+        <li onClick={removeSideDrawer}>
+            <NavLink
+                activeClassName={classes.active}
+                exact
+                to={'/'}>Home</NavLink>
+        </li>
+        <li onClick={removeSideDrawer}>
+            <NavLink
+                activeClassName={classes.active}
+                to={'/login'}>Log In</NavLink>
+        </li>
+        <li onClick={removeSideDrawer}>
+            <NavLink
+                activeClassName={classes.active}
+                to={'/register'}>Register</NavLink>
+        </li>
+    </ul>;
+
+    if(props.authenticated){
+        navigation = <ul className={classes.List}>
+            <li onClick={removeSideDrawer}>
+                <NavLink
+                    activeClassName={classes.active}
+                    exact
+                    to={'/'}>Home</NavLink>
+            </li>
+            <li onClick={removeSideDrawer}>
+                <NavLink
+                    activeClassName={classes.active}
+                    to={'/workout-builder'}>Workout Builder</NavLink>
+            </li>
+            <li onClick={removeSideDrawer}>
+                <NavLink
+                    activeClassName={classes.active}
+                    to={'/workouts'}>Your Workouts</NavLink>
+            </li>
+            <li onClick={removeSideDrawer}>
+                <NavLink
+                    activeClassName={classes.active}
+                    to={'/exercises'}>Exercises</NavLink>
+            </li>
+            <li onClick={() => {
+                props.logOutUser();
+                removeSideDrawer();
+            }}>
+                <NavLink
+                    to={'/'}>
+                Log Out
+                </NavLink>
+            </li>
+        </ul>
+    }
 
     return (
         <header>
@@ -18,29 +74,7 @@ const Nav = () => {
                 <nav className={classes.Menu}>
                     <div>
                         <div>
-                            <ul className={classes.List}>
-                                <li onClick={removeSideDrawer}>
-                                    <NavLink
-                                        activeClassName={classes.active}
-                                        exact
-                                        to={'/'}>Home</NavLink>
-                                </li>
-                                <li onClick={removeSideDrawer}>
-                                    <NavLink
-                                        activeClassName={classes.active}
-                                        to={'/workout-builder'}>Workout Builder</NavLink>
-                                </li>
-                                <li onClick={removeSideDrawer}>
-                                    <NavLink
-                                        activeClassName={classes.active}
-                                        to={'/workouts'}>Your Workouts</NavLink>
-                                </li>
-                                <li onClick={removeSideDrawer}>
-                                    <NavLink
-                                        activeClassName={classes.active}
-                                        to={'/exercises'}>Exercises</NavLink>
-                                </li>
-                            </ul>
+                            {navigation}
                         </div>
                     </div>
                 </nav>
@@ -49,4 +83,8 @@ const Nav = () => {
     );
 }
 
-export default Nav;
+const mapStateToProps = state => ({
+    authenticated: state.user.isAuth
+});
+
+export default withRouter(connect(mapStateToProps, {logOutUser})(Nav));

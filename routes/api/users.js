@@ -6,8 +6,10 @@ const getUser = require('../../utils/dbRetrieve/users');
 const connectionString = process.env.CONNECTION_STRING;
 const connectionOptions = {useNewUrlParser: true, useUnifiedTopology: true};
 
+const secureRoute = passport.authenticate('jwt', {session: false});
+
 router.route('/api/users')
-    .get((req, res)=> {
+    .get(secureRoute, (req, res)=> {
     connect(connectionString, connectionOptions)
         .then(() => {
             getUser(res);

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import classes from './ExerciseFormData.module.scss';
+import classes from '../../shared/styles/Form.module.scss';
 
 class ExerciseDataForm extends Component{
 

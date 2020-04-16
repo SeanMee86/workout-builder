@@ -7,14 +7,17 @@ const getExercises = require('../../utils/dbRetrieve/exercises');
 const connectionString = process.env.CONNECTION_STRING;
 const connectionOptions = {useNewUrlParser: true, useUnifiedTopology: true};
 
+const secureRoute = passport.authenticate('jwt', {session: false});
+
+
 router.route('/api/exercises')
-    .post((req, res) => {
+    .post(secureRoute, (req, res) => {
         connect(connectionString, connectionOptions)
             .then(() => {
                 insertExercise(req.body, res);
             })
     })
-    .get((req, res) => {
+    .get(secureRoute, (req, res) => {
         connect(connectionString, connectionOptions)
             .then(() => {
                 getExercises(res);

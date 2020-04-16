@@ -1,4 +1,7 @@
 export const GET_USER_WORKOUTS = 'GET_USER_WORKOUTS';
+export const LOGIN_USER = 'LOGIN_USER';
+export const LOGOUT_USER = 'LOGOUT_USER';
+export const REGISTER_USER = 'REGISTER_USER';
 
 export const GET_EXERCISES = 'GET_EXERCISES';
 export const CLEAR_EXERCISES = 'CLEAR_EXERCISES';
