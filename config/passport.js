@@ -18,7 +18,6 @@ module.exports = passport => {
                     User.findById(jwt_payload.id)
                         .then(user => {
                             if (user) {
-                                console.log("passport run");
                                 return done(null, user);
                             }
                             return done(null, false);

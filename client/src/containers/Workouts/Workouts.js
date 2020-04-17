@@ -5,12 +5,17 @@ import classes from '../../shared/styles/ListItems.module.scss'
 import workoutsClasses from './Workouts.module.scss'
 import Button from "../../components/UI/Button/Button";
 import {setWorkoutVars} from "../../shared/utilities/setWorkoutVars";
+import jwt_decode from 'jwt-decode';
+import axios from 'axios';
 
 class Workouts extends Component{
 
     state = {
         showWorkouts: true,
-        loadedWorkout: []
+        loadedWorkout: {
+            id: null,
+            workout: []
+        }
     };
 
     componentDidMount() {
@@ -20,8 +25,22 @@ class Workouts extends Component{
     loadWorkout = (workout) => {
         this.setState({
             showWorkouts: false,
-            loadedWorkout: workout
+            loadedWorkout: {
+                ...this.state.loadedWorkout,
+                id: workout['_id'],
+                workout: workout.workout
+            }
         })
+    };
+
+    addToMyWorkouts = (workoutId) => {
+        const data = {
+            userId: jwt_decode(localStorage.jwtToken).id,
+            workoutId
+        };
+        axios.post('/api/users/workouts', data)
+            .then(res => console.log(res))
+            .catch(err => console.log(err))
     };
 
     render() {
@@ -31,7 +50,7 @@ class Workouts extends Component{
                     return (
                         <div
                             className={`${classes.ListItem} ${classes.Hover} ${workoutsClasses.AddMargin}`}
-                            onClick={() => this.loadWorkout(workout.workout)}
+                            onClick={() => this.loadWorkout(workout)}
                             key={ind}>
                             <h2>{workout.name}</h2>
                             <p>{workout.workout.length} exercise{workout.workout.length !== 1 ? 's' : ''}</p>
@@ -39,9 +58,9 @@ class Workouts extends Component{
                     )})
                 }</div>);
 
-        const workout = this.state.loadedWorkout.length ?
+        const workout = this.state.loadedWorkout.workout.length ?
             (<div>
-                {this.state.loadedWorkout.map((workout, ind) => {
+                {this.state.loadedWorkout.workout.map((workout, ind) => {
                     const {reps, time, sets, distance, rest} = setWorkoutVars(workout);
                     return (
                         <div className={classes.ListItem} key={ind}>
@@ -58,6 +77,10 @@ class Workouts extends Component{
                 <Button
                     text={'Get Workouts'}
                     clicked={() => this.setState({showWorkouts: true})}
+                />
+                <Button
+                    text={'Add to My Workouts'}
+                    clicked={() => this.addToMyWorkouts(this.state.loadedWorkout.id)}
                 />
             </div>) : null;
         return(

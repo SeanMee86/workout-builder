@@ -9,14 +9,17 @@ import Nav from "./components/UI/Nav/Nav";
 import Login from "./containers/Login/Login";
 import Registration from "./containers/Registration/Registration";
 import Workouts from "./containers/Workouts/Workouts";
+import UserWorkouts from "./containers/UserWorkouts/UserWorkouts";
 import { connect } from 'react-redux';
 import jwt_decode from 'jwt-decode';
 import store from "./store";
 import {setUser} from "./store/actions/users";
+import setAuthToken from "./shared/utilities/setAuthToken";
 
 if(localStorage.jwtToken){
     const token = localStorage.jwtToken;
     const decodedToken = jwt_decode(token);
+    setAuthToken(token);
     store.dispatch(setUser(decodedToken));
 }
 
@@ -37,6 +40,7 @@ function App(props) {
                 <Route path={'/exercises'} component={Exercises}/>
                 <Route path={'/workout-builder'} component={WorkoutBuilder}/>
                 <Route path={'/workouts'} component={Workouts}/>
+                <Route path={'/user/workouts'} component={UserWorkouts}/>
                 <Route path={'/'} render={() => (<div>Welcome to The Workout Builder <Link to={'/exercises'}>Click Here</Link> to add/view Exercises.</div>)}/>
             </Switch>
         )

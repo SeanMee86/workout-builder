@@ -6,6 +6,7 @@ const getUser = require('../../utils/dbRetrieve/users');
 const connectionString = process.env.CONNECTION_STRING;
 const connectionOptions = {useNewUrlParser: true, useUnifiedTopology: true};
 const passport = require('passport');
+const { insertUserWorkout, getUserWorkouts } = require('../../utils/dbInserts/users');
 
 const secureRoute = passport.authenticate('jwt', {session: false});
 
@@ -15,5 +16,21 @@ router.route('/api/users')
         .then(() => {
             getUser(res);
         });
+    });
+
+router.route('/api/users/workouts')
+    .post(secureRoute, (req, res) => {
+        connect(connectionString, connectionOptions)
+            .then(() => {
+                insertUserWorkout(req, res);
+            })
+    });
+
+router.route('/api/users/getworkouts')
+    .post(secureRoute, (req, res) => {
+        connect(connectionString, connectionOptions)
+            .then(() => {
+                getUserWorkouts(req, res)
+            })
     });
 

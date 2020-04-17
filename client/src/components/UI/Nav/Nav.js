@@ -45,7 +45,12 @@ const Nav = (props) => {
             <li onClick={removeSideDrawer}>
                 <NavLink
                     activeClassName={classes.active}
-                    to={'/workouts'}>Your Workouts</NavLink>
+                    to={'/workouts'}>Workouts</NavLink>
+            </li>
+            <li onClick={removeSideDrawer}>
+                <NavLink
+                    activeClassName={classes.active}
+                    to={'/user/workouts'}>Your Workouts</NavLink>
             </li>
             <li onClick={removeSideDrawer}>
                 <NavLink
