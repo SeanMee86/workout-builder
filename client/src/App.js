@@ -8,7 +8,7 @@ import Header from "./components/UI/Header/Header";
 import Nav from "./components/UI/Nav/Nav";
 import Login from "./containers/Login/Login";
 import Registration from "./containers/Registration/Registration";
-import Workouts from "./containers/Workouts/Workouts";
+import AllWorkouts from "./containers/AllWorkouts/AllWorkouts";
 import UserWorkouts from "./containers/UserWorkouts/UserWorkouts";
 import { connect } from 'react-redux';
 import jwt_decode from 'jwt-decode';
@@ -39,7 +39,7 @@ function App(props) {
             <Switch>
                 <Route path={'/exercises'} component={Exercises}/>
                 <Route path={'/workout-builder'} component={WorkoutBuilder}/>
-                <Route path={'/workouts'} component={Workouts}/>
+                <Route path={'/workouts'} component={AllWorkouts}/>
                 <Route path={'/user/workouts'} component={UserWorkouts}/>
                 <Route path={'/'} render={() => (<div>Welcome to The Workout Builder <Link to={'/exercises'}>Click Here</Link> to add/view Exercises.</div>)}/>
             </Switch>

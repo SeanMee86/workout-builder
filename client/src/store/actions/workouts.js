@@ -3,7 +3,9 @@ import {
     REMOVE_FROM_WORKOUT,
     SHOW_MODAL,
     HIDE_MODAL,
-    NAME_WORKOUT, CLEAR_WORKOUT, GET_WORKOUTS
+    NAME_WORKOUT,
+    CLEAR_WORKOUT,
+    GET_ALL_WORKOUTS
 } from "./types";
 import axios from 'axios';
 
@@ -21,18 +23,6 @@ export const nameWorkout = (name) => {
     }
 };
 
-export const showModal = () => {
-    return {
-        type: SHOW_MODAL
-    }
-};
-
-export const hideModal = () => {
-    return {
-        type: HIDE_MODAL
-    }
-};
-
 export const removeFromWorkout = (exercise) => {
     return {
         type: REMOVE_FROM_WORKOUT,
@@ -46,11 +36,11 @@ export const clearWorkout = () => {
     }
 };
 
-export const getWorkouts = () => dispatch => {
+export const getAllWorkouts = () => dispatch => {
     axios.get('/api/workouts')
         .then(res => {
             dispatch({
-                type: GET_WORKOUTS,
+                type: GET_ALL_WORKOUTS,
                 payload: res.data
             })
         })

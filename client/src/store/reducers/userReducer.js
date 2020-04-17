@@ -22,14 +22,17 @@ const logoutUser = (state) => {
     }
 };
 
+const getUserWorkouts = (state, action) => {
+    return {
+        ...state,
+        userWorkouts: action.payload
+    }
+};
+
 const userReducer = (state = initialState, action) => {
     switch(action.type){
         case LOGIN_USER: return loginUser(state, action);
-        case GET_USER_WORKOUTS:
-            return {
-                ...state,
-                userWorkouts: action.payload
-            };
+        case GET_USER_WORKOUTS: return getUserWorkouts(state, action);
         case LOGOUT_USER: return logoutUser;
         default:
             return state;

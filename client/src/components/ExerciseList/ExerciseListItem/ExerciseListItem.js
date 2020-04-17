@@ -1,7 +1,7 @@
 import React from 'react';
 import classes from '../../../shared/styles/ListItems.module.scss'
 import { connect } from 'react-redux';
-import { showModal } from "../../../store/actions/workouts";
+import { showModal } from "../../../store/actions/ui";
 import { loadExercise } from "../../../store/actions/exercises";
 
 const ExerciseListItem = (props) => (

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { addToWorkout, hideModal } from "../../store/actions/workouts";
+import { addToWorkout} from "../../store/actions/workouts";
+import { hideModal } from "../../store/actions/ui";
 import classes from './AddToWorkoutForm.module.scss';
 import Button from "../UI/Button/Button";
 

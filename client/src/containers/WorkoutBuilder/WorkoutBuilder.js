@@ -31,7 +31,7 @@ const WorkoutBuilder = (props) => {
 
     let form = props.workouts.workoutName ? <AddToWorkoutForm /> : <NameWorkoutField/>;
 
-    let modal = props.workouts.showModal ? (
+    let modal = props.showModal ? (
         <Modal>
             {form}
         </Modal>
@@ -47,7 +47,8 @@ const WorkoutBuilder = (props) => {
 
 const mapStateToProps = state => ({
     workouts: state.workouts,
-    exercises: state.exercises.exercises
+    exercises: state.exercises.exercises,
+    showModal: state.ui.showModal
 });
 
 export default connect(mapStateToProps, {getExercises, clearExercises})(WorkoutBuilder);

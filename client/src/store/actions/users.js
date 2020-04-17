@@ -4,11 +4,13 @@ import jwt_decode from 'jwt-decode';
 import setAuthToken from "../../shared/utilities/setAuthToken";
 
 export const getUserWorkouts = () => dispatch => {
-    axios.get('/api/users')
+    const userId = jwt_decode(localStorage.jwtToken).id;
+    const data = { userId };
+    axios.post('/api/users/getworkouts', data)
         .then(res => {
             dispatch({
                 type: GET_USER_WORKOUTS,
-                payload: res.data[0].workouts
+                payload: res.data
             })
         })
 };

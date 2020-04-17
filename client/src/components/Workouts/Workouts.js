@@ -1,12 +1,8 @@
 import React, { Component } from 'react';
-import {connect} from 'react-redux';
-import {getWorkouts} from "../../store/actions/workouts";
 import classes from '../../shared/styles/ListItems.module.scss'
 import workoutsClasses from './Workouts.module.scss'
-import Button from "../../components/UI/Button/Button";
+import Button from "../UI/Button/Button";
 import {setWorkoutVars} from "../../shared/utilities/setWorkoutVars";
-import jwt_decode from 'jwt-decode';
-import axios from 'axios';
 
 class Workouts extends Component{
 
@@ -17,10 +13,6 @@ class Workouts extends Component{
             workout: []
         }
     };
-
-    componentDidMount() {
-        this.props.getWorkouts();
-    }
 
     loadWorkout = (workout) => {
         this.setState({
@@ -33,17 +25,22 @@ class Workouts extends Component{
         })
     };
 
-    addToMyWorkouts = (workoutId) => {
-        const data = {
-            userId: jwt_decode(localStorage.jwtToken).id,
-            workoutId
-        };
-        axios.post('/api/users/workouts', data)
-            .then(res => console.log(res))
-            .catch(err => console.log(err))
-    };
-
     render() {
+        let buttons;
+        if(this.props.allWorkouts){
+            buttons =
+                <React.Fragment>
+                    <Button
+                        text={'Get Workouts'}
+                        clicked={() => this.setState({showWorkouts: true})}
+                    />
+                    <Button
+                        text={'Add to My Workouts'}
+                        clicked={() => this.props.addToUserWorkouts(this.state.loadedWorkout.id)}
+                        />
+                </React.Fragment>
+        }
+
         const workouts =
             (<div className={workoutsClasses.WorkoutsList}>
                 {this.props.workouts.map((workout, ind) => {
@@ -74,14 +71,7 @@ class Workouts extends Component{
                         </div>
                     )
                 })}
-                <Button
-                    text={'Get Workouts'}
-                    clicked={() => this.setState({showWorkouts: true})}
-                />
-                <Button
-                    text={'Add to My Workouts'}
-                    clicked={() => this.addToMyWorkouts(this.state.loadedWorkout.id)}
-                />
+                {buttons}
             </div>) : null;
         return(
             <div>
@@ -93,8 +83,4 @@ class Workouts extends Component{
     }
 }
 
-const mapStateToProps = state => ({
-    workouts: state.workouts.workouts
-});
-
-export default connect(mapStateToProps, {getWorkouts})(Workouts);
+export default Workouts;

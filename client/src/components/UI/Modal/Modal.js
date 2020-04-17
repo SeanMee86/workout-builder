@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import classes from './Modal.module.scss';
 import { connect } from 'react-redux';
-import { hideModal } from "../../../store/actions/workouts";
+import { hideModal } from "../../../store/actions/ui";
 
 class Modal extends Component {
     render() {

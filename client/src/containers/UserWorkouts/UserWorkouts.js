@@ -1,25 +1,34 @@
 import React, { Component } from 'react';
-import axios from 'axios';
-import jwt_decode from 'jwt-decode';
+import { connect } from 'react-redux';
+import {getUserWorkouts} from "../../store/actions/users";
+import Workouts from "../../components/Workouts/Workouts";
+import Spinner from "../../components/UI/Spinner/Spinner";
 
 class UserWorkouts extends Component {
 
     componentDidMount() {
-        const userId = jwt_decode(localStorage.jwtToken).id;
-        const data = { userId };
-        axios.post('/api/users/getworkouts', data)
-            .then(res => {
-                console.log(res);
-            })
+        this.props.getUserWorkouts();
     }
 
     render() {
+        let workouts = (<Spinner/>);
+        if(this.props.userWorkouts){
+            workouts =(
+                <Workouts
+                userWorkouts
+                workouts={this.props.userWorkouts} />
+            )
+        }
         return (
-            <div>
-                User Workouts
-            </div>
+            <React.Fragment>
+                {workouts}
+            </React.Fragment>
         );
     }
 }
 
-export default UserWorkouts;
+const mapStateToProps = state => ({
+    userWorkouts: state.user.userWorkouts
+});
+
+export default connect(mapStateToProps, {getUserWorkouts})(UserWorkouts);
