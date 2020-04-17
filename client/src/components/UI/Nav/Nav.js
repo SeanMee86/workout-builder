@@ -14,12 +14,6 @@ const Nav = (props) => {
         <li onClick={removeSideDrawer}>
             <NavLink
                 activeClassName={classes.active}
-                exact
-                to={'/'}>Home</NavLink>
-        </li>
-        <li onClick={removeSideDrawer}>
-            <NavLink
-                activeClassName={classes.active}
                 to={'/login'}>Log In</NavLink>
         </li>
         <li onClick={removeSideDrawer}>
@@ -31,12 +25,6 @@ const Nav = (props) => {
 
     if(props.authenticated){
         navigation = <ul className={classes.List}>
-            <li onClick={removeSideDrawer}>
-                <NavLink
-                    activeClassName={classes.active}
-                    exact
-                    to={'/'}>Home</NavLink>
-            </li>
             <li onClick={removeSideDrawer}>
                 <NavLink
                     activeClassName={classes.active}

@@ -1,5 +1,15 @@
 .Heading {
-  h1 {
-    margin: 0;
+  a {
+    text-decoration: none;
+    color: #092577;
+
+    h1 {
+      margin: 0;
+    }
+
+    &:hover {
+      cursor: pointer;
+      color: #f97e05;
+    }
   }
 }
