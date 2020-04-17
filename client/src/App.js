@@ -1,20 +1,24 @@
 import React from 'react';
-import {Switch, Route, Link, Redirect} from 'react-router-dom';
+import { Switch, Route, Link, Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
+import jwt_decode from 'jwt-decode';
 
 import Exercises from "./containers/Exercises/Exercises";
 import WorkoutBuilder from "./containers/WorkoutBuilder/WorkoutBuilder";
-import classes from './App.module.scss';
-import Header from "./components/UI/Header/Header";
-import Nav from "./components/UI/Nav/Nav";
 import Login from "./containers/Login/Login";
 import Registration from "./containers/Registration/Registration";
 import AllWorkouts from "./containers/AllWorkouts/AllWorkouts";
 import UserWorkouts from "./containers/UserWorkouts/UserWorkouts";
-import { connect } from 'react-redux';
-import jwt_decode from 'jwt-decode';
+
+import Header from "./components/UI/Header/Header";
+import Nav from "./components/UI/Nav/Nav";
+
 import store from "./store";
-import {setUser} from "./store/actions/users";
+
+import { setUser } from "./store/actions/users";
 import setAuthToken from "./shared/utilities/setAuthToken";
+
+import classes from './App.module.scss';
 
 if(localStorage.jwtToken){
     const token = localStorage.jwtToken;

@@ -1,17 +1,28 @@
 import React, { Component } from 'react';
-import classes from './Modal.module.scss';
 import { connect } from 'react-redux';
+
 import { hideModal } from "../../../store/actions/ui";
+
+import classes from './Modal.module.scss';
 
 class Modal extends Component {
     render() {
         return(
             <div className={classes.Modal}>
                 <div onClick={this.props.hideModal} className={classes.ModalClickable}></div>
-                {this.props.children}
+                {this.props.ui.modalContent}
             </div>
         )
     }
 }
 
-export default connect(null, {hideModal})(Modal);
+const mapStateToProps = state => ({
+    ui: state.ui
+});
+
+export default connect(
+    mapStateToProps,
+    {
+        hideModal
+    }
+)(Modal);

@@ -1,6 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
+
 import ExerciseListItem from "./ExerciseListItem/ExerciseListItem";
+
 import classes from './ExersiceList.module.scss';
 
 const ExerciseList = (props) => {

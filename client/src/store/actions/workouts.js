@@ -5,6 +5,7 @@ import {
     CLEAR_WORKOUT,
     GET_ALL_WORKOUTS
 } from "./types";
+
 import axios from 'axios';
 
 export const addToWorkout = (exercise) => {

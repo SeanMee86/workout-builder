@@ -1,4 +1,8 @@
-import {GET_USER_WORKOUTS, LOGIN_USER, LOGOUT_USER} from "../actions/types";
+import {
+    GET_USER_WORKOUTS,
+    LOGIN_USER,
+    LOGOUT_USER
+} from "../actions/types";
 
 const initialState = {
     userWorkouts: null,
@@ -34,8 +38,7 @@ const userReducer = (state = initialState, action) => {
         case LOGIN_USER: return loginUser(state, action);
         case GET_USER_WORKOUTS: return getUserWorkouts(state, action);
         case LOGOUT_USER: return logoutUser;
-        default:
-            return state;
+        default: return state;
     }
 };
 

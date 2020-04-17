@@ -1,8 +1,10 @@
 import React from 'react';
-import {NavLink, withRouter} from "react-router-dom";
-import classes from './Nav.module.scss'
+import { NavLink, withRouter } from "react-router-dom";
 import { connect } from 'react-redux';
+
 import { logOutUser } from "../../../store/actions/users";
+
+import classes from './Nav.module.scss'
 
 const Nav = (props) => {
 
@@ -74,10 +76,17 @@ const Nav = (props) => {
             </div>
         </header>
     );
-}
+};
 
 const mapStateToProps = state => ({
     authenticated: state.user.isAuth
 });
 
-export default withRouter(connect(mapStateToProps, {logOutUser})(Nav));
+export default withRouter(
+    connect(
+        mapStateToProps,
+        {
+            logOutUser
+        }
+    )(Nav)
+);

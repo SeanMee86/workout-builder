@@ -1,6 +1,11 @@
-import {GET_USER_WORKOUTS, LOGIN_USER, LOGOUT_USER} from "./types";
+import {
+    GET_USER_WORKOUTS,
+    LOGIN_USER,
+    LOGOUT_USER
+} from "./types";
 import axios from 'axios';
 import jwt_decode from 'jwt-decode';
+
 import setAuthToken from "../../shared/utilities/setAuthToken";
 
 export const getUserWorkouts = () => dispatch => {

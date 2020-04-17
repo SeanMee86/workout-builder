@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
-import Workouts from "../../components/Workouts/Workouts";
 import { connect } from 'react-redux';
-import { getAllWorkouts } from "../../store/actions/workouts";
 import jwt_decode from "jwt-decode";
 import axios from "axios";
+
+import Workouts from "../../components/Workouts/Workouts";
 import Spinner from "../../components/UI/Spinner/Spinner";
+
+import { getAllWorkouts } from "../../store/actions/workouts";
 
 class AllWorkouts extends Component{
 
@@ -43,4 +45,9 @@ const mapStateToProps = state => ({
     workouts: state.workouts.workouts
 });
 
-export default connect(mapStateToProps, {getAllWorkouts})(AllWorkouts);
+export default connect(
+    mapStateToProps,
+    {
+        getAllWorkouts
+    }
+)(AllWorkouts);

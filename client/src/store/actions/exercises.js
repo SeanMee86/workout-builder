@@ -1,4 +1,9 @@
-import {CLEAR_EXERCISES, GET_EXERCISES, LOAD_EXERCISE} from "./types";
+import {
+    CLEAR_EXERCISES,
+    GET_EXERCISES,
+    LOAD_EXERCISE
+} from "./types";
+
 import axios from 'axios';
 
 export const getExercises = () => dispatch => {

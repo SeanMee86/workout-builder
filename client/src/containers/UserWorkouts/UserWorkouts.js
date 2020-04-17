@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import {getUserWorkouts} from "../../store/actions/users";
+
 import Workouts from "../../components/Workouts/Workouts";
 import Spinner from "../../components/UI/Spinner/Spinner";
+
+import { getUserWorkouts } from "../../store/actions/users";
 
 class UserWorkouts extends Component {
 
@@ -31,4 +33,9 @@ const mapStateToProps = state => ({
     userWorkouts: state.user.userWorkouts
 });
 
-export default connect(mapStateToProps, {getUserWorkouts})(UserWorkouts);
+export default connect(
+    mapStateToProps,
+    {
+        getUserWorkouts
+    }
+)(UserWorkouts);

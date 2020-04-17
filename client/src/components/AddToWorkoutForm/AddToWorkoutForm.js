@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+
+import Button from "../UI/Button/Button";
+
 import { addToWorkout} from "../../store/actions/workouts";
 import { hideModal } from "../../store/actions/ui";
+
 import classes from './AddToWorkoutForm.module.scss';
-import Button from "../UI/Button/Button";
 
 class AddToWorkoutForm extends Component {
 
@@ -139,4 +142,10 @@ const mapStateToProps = state => ({
     exercise: state.exercises.exerciseToAdd
 });
 
-export default connect(mapStateToProps, {addToWorkout, hideModal})(AddToWorkoutForm);
+export default connect(
+    mapStateToProps,
+    {
+        addToWorkout,
+        hideModal
+    }
+)(AddToWorkoutForm);

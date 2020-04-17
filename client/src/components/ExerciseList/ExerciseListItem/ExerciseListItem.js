@@ -1,8 +1,10 @@
 import React from 'react';
-import classes from '../../../shared/styles/ListItems.module.scss'
 import { connect } from 'react-redux';
+
 import { showModal } from "../../../store/actions/ui";
 import { loadExercise } from "../../../store/actions/exercises";
+
+import classes from '../../../shared/styles/ListItems.module.scss'
 
 const ExerciseListItem = (props) => (
     <div
@@ -24,4 +26,10 @@ const ExerciseListItem = (props) => (
     </div>
 );
 
-export default connect(null, {showModal, loadExercise})(ExerciseListItem);
+export default connect(
+    null,
+    {
+        showModal,
+        loadExercise
+    }
+)(ExerciseListItem);

@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
-import classes from "../../shared/styles/Form.module.scss";
-import { registerUser } from "../../store/actions/users";
 import { connect } from 'react-redux';
+
+import { registerUser } from "../../store/actions/users";
+
+import classes from "../../shared/styles/Form.module.scss";
 
 class Registration extends Component {
     state = {
@@ -67,4 +69,9 @@ class Registration extends Component {
     }
 }
 
-export default connect(null, {registerUser})(Registration);
+export default connect(
+    null,
+    {
+        registerUser
+    }
+)(Registration);

@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
+import Button from "../UI/Button/Button";
+
+import setWorkoutVars from "../../shared/utilities/setWorkoutVars";
+
 import classes from '../../shared/styles/ListItems.module.scss'
 import workoutsClasses from './Workouts.module.scss'
-import Button from "../UI/Button/Button";
-import {setWorkoutVars} from "../../shared/utilities/setWorkoutVars";
 
 class Workouts extends Component{
 
@@ -75,9 +77,7 @@ class Workouts extends Component{
             </div>) : null;
         return(
             <div>
-                {this.state.showWorkouts ?
-                    workouts :
-                    workout}
+                {this.state.showWorkouts ? workouts : workout}
             </div>
         )
     }

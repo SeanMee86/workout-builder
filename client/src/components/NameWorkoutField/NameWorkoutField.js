@@ -1,10 +1,16 @@
 import React, {useState} from 'react';
 import { connect } from 'react-redux';
+
 import Button from "../UI/Button/Button";
+import AddToWorkoutForm from "../AddToWorkoutForm/AddToWorkoutForm";
+
 import {nameWorkout} from "../../store/actions/workouts";
+import {setModalContent} from "../../store/actions/ui";
+
 import classes from './NameWorkoutField.module.scss';
 
 const NameWorkoutField = (props) => {
+
     const [workoutName, setWorkoutName] = useState('');
 
     const onChangeHandler = (e) => {
@@ -14,6 +20,7 @@ const NameWorkoutField = (props) => {
     const submitForm = (e) => {
         e.preventDefault();
         props.nameWorkout(workoutName);
+        props.setModalContent(<AddToWorkoutForm/>);
     };
 
     return(
@@ -27,4 +34,11 @@ const NameWorkoutField = (props) => {
     )
 };
 
-export default connect(null, {nameWorkout})(NameWorkoutField);
+
+export default connect(
+    null,
+    {
+        nameWorkout,
+        setModalContent
+    }
+)(NameWorkoutField);

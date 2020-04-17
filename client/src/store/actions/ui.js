@@ -1,4 +1,8 @@
-import {HIDE_MODAL, SHOW_MODAL} from "./types";
+import {
+    HIDE_MODAL,
+    SHOW_MODAL,
+    SET_MODAL_CONTENT
+} from "./types";
 
 export const showModal = () => {
     return {
@@ -9,5 +13,12 @@ export const showModal = () => {
 export const hideModal = () => {
     return {
         type: HIDE_MODAL
+    }
+};
+
+export const setModalContent = (component) => {
+    return {
+        type: SET_MODAL_CONTENT,
+        payload: component
     }
 };

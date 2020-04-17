@@ -1,10 +1,14 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {removeFromWorkout, clearWorkout} from "../../store/actions/workouts";
-import classes from './WorkoutBuilder.module.scss';
-import Button from "../UI/Button/Button";
 import axios from 'axios';
-import {setWorkoutVars} from "../../shared/utilities/setWorkoutVars";
+
+import Button from "../UI/Button/Button";
+
+import { removeFromWorkout, clearWorkout } from "../../store/actions/workouts";
+
+import setWorkoutVars from "../../shared/utilities/setWorkoutVars";
+
+import classes from './WorkoutBuilder.module.scss';
 
 const Workout = (props) => {
 
@@ -48,4 +52,10 @@ const mapStateToProps = state => ({
     workoutName: state.workouts.workoutName
 });
 
-export default connect(mapStateToProps, {removeFromWorkout, clearWorkout})(Workout);
+export default connect(
+    mapStateToProps,
+    {
+        removeFromWorkout,
+        clearWorkout
+    }
+)(Workout);
