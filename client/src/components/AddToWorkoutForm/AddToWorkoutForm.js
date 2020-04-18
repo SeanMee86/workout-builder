@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import Button from "../UI/Button/Button";
 
-import { addToWorkout} from "../../store/actions/workouts";
+import { addToWorkout } from "../../store/actions/workouts";
 import { hideModal } from "../../store/actions/ui";
 
 import classes from './AddToWorkoutForm.module.scss';
@@ -102,7 +102,9 @@ class AddToWorkoutForm extends Component {
     };
 
     render() {
+
         let formFields = [];
+
         for(let field in this.state.additionalFields){
             const firstLetter = field.charAt(0).toUpperCase();
             const newLabel = firstLetter + field.slice(1, field.length);
@@ -112,28 +114,35 @@ class AddToWorkoutForm extends Component {
                 value: this.state.additionalFields[field].value
             })
         }
+
+        let form =
+            formFields.map(field => (
+                <div className={classes.Field} key={field.label}>
+                    <label>{field.label}:</label>
+                    <input
+                        name={field.label.toLowerCase()}
+                        onChange={this.onChangeHandler}
+                        type={field.type}
+                        value={field.value}/>
+                </div>
+            ));
+
         return(
-            <div className={classes.FormContainer}>
+            <React.Fragment>
+
                 <div className={classes.GenInfo}>
                     <h2>{this.props.exercise.name}</h2>
                     <p>{this.props.exercise.type} Workout</p>
                 </div>
+
                 <form method={'post'} className={classes.Form}>
-                    {formFields.map(field => (
-                        <div className={classes.Field} key={field.label}>
-                            <label>{field.label}:</label>
-                            <input
-                                name={field.label.toLowerCase()}
-                                onChange={this.onChangeHandler}
-                                type={field.type}
-                                value={field.value}/>
-                        </div>
-                    ))}
+                    {form}
                     <div className={classes.ButtonContainer}>
                         <Button clicked={(event) => this.onSubmitForm(event)} text={'Add Exercise To Workout'}/>
                     </div>
                 </form>
-            </div>
+
+            </React.Fragment>
         )
     }
 }

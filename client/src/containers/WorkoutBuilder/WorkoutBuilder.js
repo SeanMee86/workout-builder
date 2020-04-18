@@ -32,7 +32,12 @@ class WorkoutBuilder extends Component {
             workoutBody = (
                 <div className={classes.Workouts}>
                     <div className={classes.WorkoutBuilder}>
-                        <h2 onClick={this.updateWorkoutName}>{this.props.workouts.workoutName ? this.props.workouts.workoutName : 'Click an Exercise to Start Building Your Workout'}</h2>
+                        <h2
+                            onClick={this.updateWorkoutName}>
+                            {this.props.workouts.workoutName ?
+                                this.props.workouts.workoutName :
+                                'Click an Exercise to Start Building Your Workout'}
+                        </h2>
                         <Workout/>
                     </div>
                     <div className={classes.ExerciseList}>

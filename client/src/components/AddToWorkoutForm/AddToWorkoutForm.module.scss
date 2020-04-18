@@ -1,38 +1,24 @@
-.FormContainer {
-  height: 50vh;
-  width: 80%;
-  max-width: 600px;
-  min-height: 330px;
-  background: beige;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-flow: column;
-  position: relative;
-  padding: 20px 20px 0;
+.GenInfo {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  text-align: center;
+}
 
-  .GenInfo {
-    position: absolute;
-    top: 0;
-    width: 100%;
+.Form {
+  width: 90%;
+  max-width: 320px;
+
+  .ButtonContainer {
     text-align: center;
+    position: relative;
+    box-sizing: border-box;
+    top: 20px;
   }
 
-  .Form {
-    width: 90%;
-    max-width: 320px;
-
-    .ButtonContainer {
-      text-align: center;
-      position: relative;
-      box-sizing: border-box;
-      top: 20px;
-    }
-
-    .Field {
-      display: flex;
-      flex-flow: column;
-      margin-bottom: 10px;
-    }
+  .Field {
+    display: flex;
+    flex-flow: column;
+    margin-bottom: 10px;
   }
 }

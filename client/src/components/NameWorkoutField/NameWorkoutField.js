@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 
 import Button from "../UI/Button/Button";
@@ -10,6 +10,12 @@ import { setModalContent, hideModal } from "../../store/actions/ui";
 import classes from './NameWorkoutField.module.scss';
 
 const NameWorkoutField = (props) => {
+
+    useEffect(() => {
+        if(props.workoutName){
+            setWorkoutName(props.workoutName)
+        }
+    }, []);
 
     const [workoutName, setWorkoutName] = useState('');
 
@@ -28,19 +34,32 @@ const NameWorkoutField = (props) => {
     };
 
     return(
-        <div className={classes.FieldContainer}>
+        <React.Fragment>
             <label htmlFor={'workoutName'}><h2>Name Your Workout</h2></label>
-            <form method={'post'}>
-                <input onChange={onChangeHandler} id={'workoutName'} name={'workoutName'} type="text"/>
-                <Button clicked={(e) => submitForm(e)} text={'Enter Name'}/>
+            <form
+                className={classes.NameWorkoutForm}
+                method={'post'}>
+                <input
+                    onChange={onChangeHandler}
+                    id={'workoutName'}
+                    value={workoutName}
+                    name={'workoutName'}
+                    type="text"/>
+                <Button
+                    clicked={(e) => submitForm(e)}
+                    text={'Enter Name'}/>
             </form>
-        </div>
+        </React.Fragment>
     )
 };
 
+const mapStateToProps = state => ({
+    workoutName: state.workouts.workoutName
+});
+
 
 export default connect(
-    null,
+    mapStateToProps,
     {
         nameWorkout,
         setModalContent,

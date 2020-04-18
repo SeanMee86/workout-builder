@@ -12,7 +12,9 @@ class Modal extends Component {
                 <div
                     onClick={this.props.hideModal}
                     className={classes.ModalClickable} />
-                {this.props.ui.modalContent}
+                <div className={classes.ModalContent}>
+                    {this.props.ui.modalContent}
+                </div>
             </div>
         )
     }
