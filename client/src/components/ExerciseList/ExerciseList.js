@@ -10,7 +10,7 @@ const ExerciseList = (props) => {
         <div className={classes.List}>
             {props.exercises ? props.exercises.map(exercise => (
                 <ExerciseListItem
-                    shouldHover={props.shouldHover}
+                    clickable={props.clickableItems}
                     key={exercise["_id"]}
                     id={exercise["_id"]}
                     exerciseName={exercise.name}

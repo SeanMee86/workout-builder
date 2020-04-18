@@ -5,12 +5,36 @@ import axios from 'axios';
 import Button from "../UI/Button/Button";
 
 import { removeFromWorkout, clearWorkout } from "../../store/actions/workouts";
+import { setModalContent, showModal } from "../../store/actions/ui";
 
 import setWorkoutVars from "../../shared/utilities/setWorkoutVars";
 
-import classes from './WorkoutBuilder.module.scss';
+import classes from './Workout.module.scss';
 
 const Workout = (props) => {
+
+    const successMessage = (content) => (
+        <div className={classes.SuccessMessage}>
+            <h3>Thank You, Your Workout: <strong>{content}</strong> has been submitted.</h3>
+        </div>
+    );
+
+    const errorMessage = (content) => (
+        <div className={classes.SuccessMessage}>
+            {content}
+        </div>
+    );
+
+    const submissionSuccess = (workoutName) => {
+        props.setModalContent(successMessage(workoutName));
+        props.showModal();
+        props.clearWorkout();
+    };
+
+    const submissionFail = (error) => {
+        props.setModalContent(errorMessage(error));
+        props.showModal();
+    };
 
     const submitWorkout = (workout) => {
         const newWorkout = {
@@ -19,11 +43,10 @@ const Workout = (props) => {
         };
         axios.post('/api/workouts', newWorkout)
             .then(res => {
-                // Need to let client know their workout was submitted successfully
-                props.clearWorkout();
+                submissionSuccess(res.data.name);
             }).catch(err => {
-                console.log(err);
-        })
+                submissionFail(err.response.data.message)
+            })
     };
 
     return (
@@ -56,6 +79,8 @@ export default connect(
     mapStateToProps,
     {
         removeFromWorkout,
-        clearWorkout
+        clearWorkout,
+        setModalContent,
+        showModal
     }
 )(Workout);

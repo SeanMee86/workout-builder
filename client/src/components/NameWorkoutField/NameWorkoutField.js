@@ -4,8 +4,8 @@ import { connect } from 'react-redux';
 import Button from "../UI/Button/Button";
 import AddToWorkoutForm from "../AddToWorkoutForm/AddToWorkoutForm";
 
-import {nameWorkout} from "../../store/actions/workouts";
-import {setModalContent} from "../../store/actions/ui";
+import { nameWorkout } from "../../store/actions/workouts";
+import { setModalContent, hideModal } from "../../store/actions/ui";
 
 import classes from './NameWorkoutField.module.scss';
 
@@ -20,7 +20,11 @@ const NameWorkoutField = (props) => {
     const submitForm = (e) => {
         e.preventDefault();
         props.nameWorkout(workoutName);
-        props.setModalContent(<AddToWorkoutForm/>);
+        if(props.shouldContinue) {
+            props.setModalContent(<AddToWorkoutForm/>);
+        }else{
+            props.hideModal();
+        }
     };
 
     return(
@@ -39,6 +43,7 @@ export default connect(
     null,
     {
         nameWorkout,
-        setModalContent
+        setModalContent,
+        hideModal
     }
 )(NameWorkoutField);

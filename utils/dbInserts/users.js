@@ -3,6 +3,7 @@ const userSchema = require('../../models/User');
 const workoutSchema = require('../../models/Workout');
 const User = model('user', userSchema);
 const Workout = model('workout', workoutSchema);
+// const clearMissingWorkouts = require('../cleanDB/clearMissingWorkouts');
 
 module.exports = {
     insertUserWorkout: (req, res) => {
@@ -28,8 +29,13 @@ module.exports = {
                 return res.json(err);
             }
             const workoutIdArray = user.workouts.map(workout => workout.workoutID);
+            // clearMissingWorkouts(workoutIdArray, Workout, user);
             Workout.find({_id: {$in: workoutIdArray}}, (err, workouts) => {
-                res.send(workouts);
+                if(err){
+                    res.send(err);
+                }else {
+                    res.send(workouts);
+                }
             })
         })
     }

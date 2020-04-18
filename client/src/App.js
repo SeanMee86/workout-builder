@@ -19,6 +19,7 @@ import { setUser } from "./store/actions/users";
 import setAuthToken from "./shared/utilities/setAuthToken";
 
 import classes from './App.module.scss';
+import Modal from "./components/UI/Modal/Modal";
 
 if(localStorage.jwtToken){
     const token = localStorage.jwtToken;
@@ -50,17 +51,25 @@ function App(props) {
         )
     }
 
+    let modal = null;
+
+    if(props.ui.showModal){
+        modal = <Modal/>
+    }
+
   return (
       <div className={classes.App}>
           <Header/>
           <Nav/>
+          {modal}
           {routes}
       </div>
   );
 }
 
 const mapStateToProps = state => ({
-    authenticated: state.user.isAuth
+    authenticated: state.user.isAuth,
+    ui: state.ui
 });
 
 export default connect(mapStateToProps)(App);

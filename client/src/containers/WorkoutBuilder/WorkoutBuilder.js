@@ -1,59 +1,55 @@
-import React, { useEffect } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import ExerciseList from "../../components/ExerciseList/ExerciseList";
 import Workout from "../../components/Workout/Workout";
 import Spinner from "../../components/UI/Spinner/Spinner";
-import Modal from "../../components/UI/Modal/Modal";
-import AddToWorkoutForm from "../../components/AddToWorkoutForm/AddToWorkoutForm";
 import NameWorkoutField from "../../components/NameWorkoutField/NameWorkoutField";
 
 import { getExercises, clearExercises } from "../../store/actions/exercises";
-import { setModalContent } from "../../store/actions/ui";
+import { setModalContent, showModal } from "../../store/actions/ui";
 
 import classes from './WorkoutBuilder.module.scss'
 
 
-const WorkoutBuilder = (props) => {
+class WorkoutBuilder extends Component {
 
-    useEffect(() => {
-        props.getExercises();
-        !props.workouts.workoutName ?
-            props.setModalContent(<NameWorkoutField/>) :
-            props.setModalContent(<AddToWorkoutForm />);
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    componentDidMount() {
+        this.props.getExercises();
+    }
 
-    let workoutBody = <Spinner/>;
+    updateWorkoutName = () => {
+        if(this.props.workouts.workoutName){
+            this.props.setModalContent(<NameWorkoutField/>);
+            this.props.showModal();
+        }
+    };
 
-    if(props.exercises){
-        workoutBody = (
-            <div className={classes.Workouts}>
-                <div className={classes.WorkoutBuilder}>
-                    <h2>{props.workouts.workoutName ? props.workouts.workoutName : 'Click an Exercise to Start Building Your Workout'}</h2>
-                    <Workout/>
+    render() {
+        let workoutBody = <Spinner/>;
+
+        if(this.props.exercises){
+            workoutBody = (
+                <div className={classes.Workouts}>
+                    <div className={classes.WorkoutBuilder}>
+                        <h2 onClick={this.updateWorkoutName}>{this.props.workouts.workoutName ? this.props.workouts.workoutName : 'Click an Exercise to Start Building Your Workout'}</h2>
+                        <Workout/>
+                    </div>
+                    <div className={classes.ExerciseList}>
+                        <h2>Available Exercises</h2>
+                        <ExerciseList clickableItems/>
+                    </div>
                 </div>
-                <div className={classes.ExerciseList}>
-                    <h2>Available Exercises</h2>
-                    <ExerciseList shouldHover={true}/>
-                </div>
-            </div>
+            )
+        }
+
+        return (
+            <React.Fragment>
+                {workoutBody}
+            </React.Fragment>
         )
     }
-
-    let modal = null;
-
-    if(props.ui.showModal){
-        modal = <Modal/>
-    }
-
-    return (
-        <React.Fragment>
-            {modal}
-            {workoutBody}
-        </React.Fragment>
-    )
-};
+}
 
 const mapStateToProps = state => ({
     workouts: state.workouts,
@@ -66,6 +62,7 @@ export default connect(
     {
         getExercises,
         clearExercises,
-        setModalContent
+        setModalContent,
+        showModal
     }
 )(WorkoutBuilder);
