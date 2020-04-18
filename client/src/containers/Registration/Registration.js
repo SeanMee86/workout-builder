@@ -2,10 +2,12 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { registerUser } from "../../store/actions/users";
+import { removeErrors, removeAllErrors } from "../../store/actions/errors";
 
 import classes from "../../shared/styles/Form.module.scss";
 
 class Registration extends Component {
+
     constructor(props){
         super(props);
         this.state = {
@@ -18,15 +20,6 @@ class Registration extends Component {
             }
         }
     }
-
-    onChangeHandler = (e) => {
-        this.setState({
-            formData: {
-                ...this.state.formData,
-                [e.target.name]: e.target.value
-            }
-        })
-    };
 
     static getDerivedStateFromProps(nextProps, prevState){
         if(nextProps.errors !== prevState.formData.errors){
@@ -44,46 +37,72 @@ class Registration extends Component {
         }
     }
 
+    componentWillUnmount() {
+        this.props.removeAllErrors();
+    }
+
+    onChangeHandler = (e) => {
+        this.setState({
+            ...this.state,
+            formData: {
+                ...this.state.formData,
+                [e.target.name]: e.target.value
+            }
+        })
+    };
+
+    onFocusHandler = (e) => {
+        this.props.removeErrors(e.target.name)
+    };
+
     onSubmitHandler = (e, formData) => {
         e.preventDefault();
+        this.props.removeAllErrors();
         this.props.registerUser(formData, this.props.history);
     };
 
     render() {
         return(
             <div className={classes.Form}>
-                <form method={'post'} onSubmit={(e) => this.onSubmitHandler(e, this.state.formData)}>
+                <form
+                    method={'post'}
+                    onSubmit={(e) => this.onSubmitHandler(e, this.state.formData)}>
+
                     <label htmlFor="name">Name:</label>
                     <input
+                        onFocus={this.onFocusHandler}
                         onChange={this.onChangeHandler}
                         name={'name'}
                         type="text"
                         value={this.state.name}/>
-                    <span>{this.props.errors.name}</span>
+                    <span className={classes.ErrorMessage}>{this.state.formData.errors.name}</span>
 
                     <label htmlFor="email">Email:</label>
                     <input
+                        onFocus={this.onFocusHandler}
                         onChange={this.onChangeHandler}
                         name={'email'}
                         type="text"
                         value={this.state.email}/>
-                    <span>{this.props.errors.email}</span>
+                    <span className={classes.ErrorMessage}>{this.state.formData.errors.email}</span>
 
                     <label htmlFor="password">Password:</label>
                     <input
+                        onFocus={this.onFocusHandler}
                         onChange={this.onChangeHandler}
                         name={'password'}
                         type="password"
                         value={this.state.password}/>
-                    <span>{this.props.errors.password}</span>
+                    <span className={classes.ErrorMessage}>{this.state.formData.errors.password}</span>
 
                     <label htmlFor="password2">Confirm Password:</label>
                     <input
+                        onFocus={this.onFocusHandler}
                         onChange={this.onChangeHandler}
                         name={'password2'}
                         type="password"
                         value={this.state.password2}/>
-                    <span>{this.props.errors.password2}</span>
+                    <span className={classes.ErrorMessage}>{this.state.formData.errors.password2}</span>
 
                     <input
                         type="submit"/>
@@ -100,6 +119,8 @@ const mapStateToProps = state => ({
 export default connect(
     mapStateToProps,
     {
-        registerUser
+        registerUser,
+        removeErrors,
+        removeAllErrors
     }
 )(Registration);

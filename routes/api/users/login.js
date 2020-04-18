@@ -26,7 +26,7 @@ router.route('/api/users/login')
                 User.findOne({ email })
                     .then(user => {
                         if(!user) {
-                            res.status(404).json({emailNotFound:'Email not found'})
+                            res.status(404).json({email:'Email not found'})
                         }
 
                         bcrypt.compare(password, user.password)
@@ -49,7 +49,7 @@ router.route('/api/users/login')
                                         }
                                     )
                                 }else {
-                                    res.status(400).json({passwordIncorrect: 'Incorrect Password'})
+                                    res.status(400).json({password: 'Incorrect Password'})
                                 }
                             })
                     })

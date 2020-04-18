@@ -3,15 +3,42 @@ import { connect } from 'react-redux';
 
 import { loginUser } from "../../store/actions/users";
 
+import { removeErrors, removeAllErrors } from "../../store/actions/errors";
+
 import classes from '../../shared/styles/Form.module.scss';
 
 class Login extends Component {
-    state = {
-        formData: {
-            email: '',
-            password: ''
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            formData: {
+                email: '',
+                password: '',
+                errors: {}
+            }
+        };
+    }
+
+    static getDerivedStateFromProps(nextProps, prevState){
+        if(nextProps.errors !== prevState.formData.errors){
+            return {
+                ...prevState,
+                formData: {
+                    ...prevState.formData,
+                    errors: {
+                        ...nextProps.errors
+                    }
+                }
+            }
+        }else{
+            return null;
         }
-    };
+    }
+
+    componentWillUnmount() {
+        this.props.removeAllErrors();
+    }
 
     onChangeHandler = (e) => {
         this.setState({
@@ -22,19 +49,43 @@ class Login extends Component {
         })
     };
 
+    onFocusHandler = (e) => {
+        this.props.removeErrors(e.target.name)
+    };
+
     onSubmitHandler = (e, formData) => {
         e.preventDefault();
+        this.props.removeAllErrors();
         this.props.loginUser(formData);
     };
 
     render() {
         return(
             <div className={classes.Form}>
-                <form method={'post'} onSubmit={(e) => this.onSubmitHandler(e, this.state.formData)}>
+                <form
+                    method={'post'}
+                    onSubmit={(e) => this.onSubmitHandler(e, this.state.formData)}>
+
                     <label htmlFor="email">Email</label>
-                    <input onChange={this.onChangeHandler} name={'email'} type="text" value={this.state.email}/>
+                    <input
+                        onFocus={this.onFocusHandler}
+                        onChange={this.onChangeHandler}
+                        name={'email'}
+                        type="text"
+                        value={this.state.formData.email}/>
+                    <span className={classes.ErrorMessage}>{this.state.formData.errors.email}</span>
+
+
                     <label htmlFor="email">Password</label>
-                    <input onChange={this.onChangeHandler} name={'password'} type="password" value={this.state.password}/>
+                    <input
+                        onFocus={this.onFocusHandler}
+                        onChange={this.onChangeHandler}
+                        name={'password'}
+                        type="password"
+                        value={this.state.formData.password}/>
+                    <span className={classes.ErrorMessage}>{this.state.formData.errors.password}</span>
+
+
                     <input type="submit"/>
                 </form>
             </div>
@@ -42,9 +93,15 @@ class Login extends Component {
     }
 }
 
+const mapStateToProps = state => ({
+    errors: state.errors
+});
+
 export default connect(
-    null,
+    mapStateToProps,
     {
-        loginUser
+        loginUser,
+        removeErrors,
+        removeAllErrors
     }
 )(Login);

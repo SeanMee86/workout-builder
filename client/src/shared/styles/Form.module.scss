@@ -28,7 +28,7 @@
       -moz-box-shadow: 10px 10px 10px -10px rgba(0,0,0,0.45);
       box-shadow: 10px 10px 10px -10px rgba(0,0,0,0.45);
       box-sizing: border-box;
-      margin-bottom: 15px;
+      margin-bottom: 5px;
 
       &[type=submit]{
         width: 250px;
@@ -46,6 +46,12 @@
         }
 
       }
+    }
+
+    .ErrorMessage {
+      color: red;
+      text-decoration: underline;
+      margin-bottom: 15px;
     }
   }
 }

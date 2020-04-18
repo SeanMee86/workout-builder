@@ -18,3 +18,5 @@ export const HIDE_MODAL = 'HIDE_MODAL';
 export const SET_MODAL_CONTENT = 'SET_MODAL_CONTENT';
 
 export const SET_ERRORS = 'SET_ERRORS';
+export const REMOVE_ERRORS = 'REMOVE_ERRORS';
+export const REMOVE_ALL_ERRORS = 'REMOVE_ALL_ERRORS';
