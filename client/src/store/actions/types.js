@@ -16,3 +16,5 @@ export const GET_ALL_WORKOUTS = 'GET_ALL_WORKOUTS';
 export const SHOW_MODAL = 'SHOW_MODAL';
 export const HIDE_MODAL = 'HIDE_MODAL';
 export const SET_MODAL_CONTENT = 'SET_MODAL_CONTENT';
+
+export const SET_ERRORS = 'SET_ERRORS';

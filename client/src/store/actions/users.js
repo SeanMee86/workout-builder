@@ -6,6 +6,8 @@ import {
 import axios from 'axios';
 import jwt_decode from 'jwt-decode';
 
+import { setErrors } from "./errors";
+
 import setAuthToken from "../../shared/utilities/setAuthToken";
 
 export const getUserWorkouts = () => dispatch => {
@@ -29,7 +31,7 @@ export const loginUser = (formData) => dispatch => {
             dispatch(setUser(jwt_decode(token)))
         })
         .catch(err => {
-            console.log(err.response.data);
+            dispatch(setErrors(err.response.data))
         })
 };
 
@@ -41,14 +43,12 @@ export const setUser = (decodedToken) => {
 };
 
 export const registerUser = (formData, history) => dispatch => {
-    console.log(formData);
     axios.post('/api/users/register', formData)
         .then(res => {
-            console.log(res);
             history.push('/login')
         })
         .catch(err => {
-            console.log(err.response.data);
+            dispatch(setErrors(err.response.data));
         })
 };
 

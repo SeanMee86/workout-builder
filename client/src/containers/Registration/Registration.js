@@ -6,14 +6,18 @@ import { registerUser } from "../../store/actions/users";
 import classes from "../../shared/styles/Form.module.scss";
 
 class Registration extends Component {
-    state = {
-        formData: {
-            name: '',
-            email: '',
-            password: '',
-            password2: ''
+    constructor(props){
+        super(props);
+        this.state = {
+            formData: {
+                name: '',
+                email: '',
+                password: '',
+                password2: '',
+                errors: {}
+            }
         }
-    };
+    }
 
     onChangeHandler = (e) => {
         this.setState({
@@ -23,6 +27,22 @@ class Registration extends Component {
             }
         })
     };
+
+    static getDerivedStateFromProps(nextProps, prevState){
+        if(nextProps.errors !== prevState.formData.errors){
+            return {
+                ...prevState,
+                formData: {
+                    ...prevState.formData,
+                    errors: {
+                        ...nextProps.errors
+                    }
+                }
+            }
+        }else{
+            return null;
+        }
+    }
 
     onSubmitHandler = (e, formData) => {
         e.preventDefault();
@@ -39,6 +59,7 @@ class Registration extends Component {
                         name={'name'}
                         type="text"
                         value={this.state.name}/>
+                    <span>{this.props.errors.name}</span>
 
                     <label htmlFor="email">Email:</label>
                     <input
@@ -46,6 +67,7 @@ class Registration extends Component {
                         name={'email'}
                         type="text"
                         value={this.state.email}/>
+                    <span>{this.props.errors.email}</span>
 
                     <label htmlFor="password">Password:</label>
                     <input
@@ -53,6 +75,7 @@ class Registration extends Component {
                         name={'password'}
                         type="password"
                         value={this.state.password}/>
+                    <span>{this.props.errors.password}</span>
 
                     <label htmlFor="password2">Confirm Password:</label>
                     <input
@@ -60,6 +83,7 @@ class Registration extends Component {
                         name={'password2'}
                         type="password"
                         value={this.state.password2}/>
+                    <span>{this.props.errors.password2}</span>
 
                     <input
                         type="submit"/>
@@ -69,8 +93,12 @@ class Registration extends Component {
     }
 }
 
+const mapStateToProps = state => ({
+    errors: state.errors
+});
+
 export default connect(
-    null,
+    mapStateToProps,
     {
         registerUser
     }

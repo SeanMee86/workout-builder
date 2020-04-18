@@ -15,6 +15,7 @@ const NameWorkoutField = (props) => {
         if(props.workoutName){
             setWorkoutName(props.workoutName)
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const [workoutName, setWorkoutName] = useState('');
