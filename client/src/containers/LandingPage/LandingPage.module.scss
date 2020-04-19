@@ -1,9 +1,41 @@
 .LandingPage {
   text-align: center;
+  width: 100%;
 
-  .Buttons {
+  .Hero {
+    height: 50vh;
     display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    background-position: 12% 0 !important;
+    position: relative;
+
+    &:after {
+      content: '';
+      position: absolute;
+      height: 100%;
+      width: 100%;
+      background-color: #092577;
+      top: 0;
+      left: 0;
+      opacity: 0.5;
+    }
+
+    @media screen and (min-width: 768px) {
+      height: 65vh;
+    }
+
+    .HeroContent {
+      width: 90%;
+      max-width: 600px;
+      color: #fff;
+      z-index: 1;
+    }
+
+    .Buttons {
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+    }
   }
 }
