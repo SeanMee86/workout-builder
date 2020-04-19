@@ -9,7 +9,11 @@ import WorkoutBuilder from "./containers/WorkoutBuilder/WorkoutBuilder";
 import Login from "./containers/Login/Login";
 import Registration from "./containers/Registration/Registration";
 import AllWorkouts from "./containers/AllWorkouts/AllWorkouts";
+import HomePage from "./containers/HomePage/HomePage";
+import Chat from "./containers/Chat/Chat";
 import UserWorkouts from "./containers/UserWorkouts/UserWorkouts";
+import Modal from "./components/UI/Modal/Modal";
+
 
 import Header from "./components/UI/Header/Header";
 import Nav from "./components/UI/Nav/Nav";
@@ -20,8 +24,6 @@ import { setUser } from "./store/actions/users";
 import setAuthToken from "./shared/utilities/setAuthToken";
 
 import classes from './App.module.scss';
-import Modal from "./components/UI/Modal/Modal";
-import HomePage from "./containers/HomePage/HomePage";
 
 if(localStorage.jwtToken){
     const token = localStorage.jwtToken;
@@ -48,6 +50,7 @@ function App(props) {
                 <Route path={'/workout-builder'} component={WorkoutBuilder}/>
                 <Route path={'/workouts'} component={AllWorkouts}/>
                 <Route path={'/user/workouts'} component={UserWorkouts}/>
+                <Route path={'/chat'} component={Chat}/>
                 <Route path={'/'} component={HomePage}/>
                 <Redirect to={'/'}/>
             </Switch>

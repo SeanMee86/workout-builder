@@ -47,6 +47,11 @@ const Nav = (props) => {
                     activeClassName={classes.active}
                     to={'/exercises'}>Exercises</NavLink>
             </li>
+            <li onClick={removeSideDrawer}>
+                <NavLink
+                    activeClassName={classes.active}
+                    to={'/chat'}>User Chat</NavLink>
+            </li>
             <li onClick={() => {
                 props.logOutUser();
                 removeSideDrawer();
