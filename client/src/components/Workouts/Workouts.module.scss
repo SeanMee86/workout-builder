@@ -1,10 +1,22 @@
-.WorkoutsList {
-  @media screen and (min-width: 768px) {
-    display: grid;
-    grid-template-columns: 50% 50%;
+.Workouts {
+  width: 100%;
+  max-width: 900px;
+
+  .WorkoutsList {
+    @media screen and (min-width: 768px) {
+      display: grid;
+      grid-template-columns: 50% 50%;
+    }
+
+    .AddMargin {
+      margin: 20px;
+    }
   }
 
-  .AddMargin {
-    margin: 20px;
+  .Buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: center;
   }
 }

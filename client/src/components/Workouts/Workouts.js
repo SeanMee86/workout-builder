@@ -4,8 +4,9 @@ import Button from "../UI/Button/Button";
 
 import setWorkoutVars from "../../shared/utilities/setWorkoutVars";
 
-import classes from '../../shared/styles/ListItems.module.scss'
-import workoutsClasses from './Workouts.module.scss'
+import ListItemClasses from '../../shared/styles/ListItems.module.scss';
+import WorkoutListItemClasses from '../../shared/styles/WorkoutListItem.module.scss';
+import classes from './Workouts.module.scss';
 
 class Workouts extends Component{
 
@@ -34,24 +35,24 @@ class Workouts extends Component{
         let buttons;
         if(this.props.allWorkouts){
             buttons =
-                <React.Fragment>
+                <div className={classes.Buttons}>
                     <Button
-                        text={'Get Workouts'}
+                        text={'View All Workouts'}
                         clicked={() => this.setState({showWorkouts: true})}
                     />
                     <Button
                         text={'Add to My Workouts'}
                         clicked={() => this.props.addToUserWorkouts(this.state.loadedWorkout)}
                         />
-                </React.Fragment>
+                </div>
         }
 
         const workouts =
-            (<div className={workoutsClasses.WorkoutsList}>
+            (<div className={classes.WorkoutsList}>
                 {this.props.workouts.map((workout, ind) => {
                     return (
                         <div
-                            className={`${classes.ListItem} ${classes.Hover} ${workoutsClasses.AddMargin}`}
+                            className={`${ListItemClasses.ListItem} ${WorkoutListItemClasses.WorkoutListItem} ${ListItemClasses.Hover} ${classes.AddMargin}`}
                             onClick={() => this.loadWorkout(workout)}
                             key={ind}>
                             <h2>{workout.name}</h2>
@@ -61,11 +62,11 @@ class Workouts extends Component{
                 }</div>);
 
         const workout = this.state.loadedWorkout.workout.length ?
-            (<div>
+            (<React.Fragment>
                 {this.state.loadedWorkout.workout.map((workout, ind) => {
                     const {reps, time, sets, distance, rest} = setWorkoutVars(workout);
                     return (
-                        <div className={classes.ListItem} key={ind}>
+                        <div className={ListItemClasses.ListItem} key={ind}>
                             <h2>{workout.exercise.name}</h2>
                             <p>{workout.exercise.type} workout</p>
                             {reps}
@@ -77,9 +78,9 @@ class Workouts extends Component{
                     )
                 })}
                 {buttons}
-            </div>) : null;
+            </React.Fragment>) : null;
         return(
-            <div>
+            <div className={classes.Workouts}>
                 {this.state.showWorkouts ? workouts : workout}
             </div>
         )
