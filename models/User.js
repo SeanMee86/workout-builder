@@ -23,10 +23,7 @@ const userSchema = new Schema({
     },
     workouts: [
         {
-            workoutID: {
-                type: String,
-                required: true
-            }
+            type: Workout
         }
     ]
 });

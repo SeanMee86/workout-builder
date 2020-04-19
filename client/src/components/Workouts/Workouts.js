@@ -13,6 +13,7 @@ class Workouts extends Component{
         showWorkouts: true,
         loadedWorkout: {
             id: null,
+            name: '',
             workout: []
         }
     };
@@ -23,6 +24,7 @@ class Workouts extends Component{
             loadedWorkout: {
                 ...this.state.loadedWorkout,
                 id: workout['_id'],
+                name: workout.name,
                 workout: workout.workout
             }
         })
@@ -39,7 +41,7 @@ class Workouts extends Component{
                     />
                     <Button
                         text={'Add to My Workouts'}
-                        clicked={() => this.props.addToUserWorkouts(this.state.loadedWorkout.id)}
+                        clicked={() => this.props.addToUserWorkouts(this.state.loadedWorkout)}
                         />
                 </React.Fragment>
         }

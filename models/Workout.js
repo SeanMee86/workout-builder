@@ -7,19 +7,22 @@ const Workout = new Schema({
         required: true
     },
     submittedBy: String,
-    workout: [
-        {
-            exercise: {
-                type: Exercise,
-                required: true
-            },
-            rest: String,
-            sets: Number,
-            repetitions: Number,
-            distance: String,
-            time: String
-        }
-    ]
+    workout: {
+        type: [
+            {
+                exercise: {
+                    type: Exercise,
+                    required: true
+                },
+                rest: String,
+                sets: Number,
+                repetitions: Number,
+                distance: String,
+                time: String
+            }
+        ],
+        required: true
+    }
 });
 
 module.exports = Workout;

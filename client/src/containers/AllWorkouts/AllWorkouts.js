@@ -14,10 +14,10 @@ class AllWorkouts extends Component{
         this.props.getAllWorkouts();
     }
 
-    addToMyWorkouts = (workoutId) => {
+    addToMyWorkouts = (workoutData) => {
         const data = {
             userId: jwt_decode(localStorage.jwtToken).id,
-            workoutId
+            workoutData
         };
         axios.post('/api/users/workouts', data)
             .then(res => console.log(res))
