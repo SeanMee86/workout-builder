@@ -1,9 +1,12 @@
-const chatHistory = ['some', 'stuff', 'here'];
+const chatHistory = [];
 
 module.exports = (io) => {
     io.on('connection', socket => {
-        console.log('connection');
-        socket.emit('updateChat', chatHistory);
+
+        socket.on('getChatLogs', () => {
+            socket.emit('receiveChatLogs', chatHistory);
+        });
+
         socket.on('messageSent', (message) => {
             chatHistory.push(message);
             io.emit('messageToClients', message);

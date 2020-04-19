@@ -7,6 +7,7 @@ import {
 const initialState = {
     userWorkouts: null,
     userId: null,
+    userName: '',
     isAuth: false
 };
 
@@ -14,6 +15,7 @@ const loginUser = (state, action) => {
     return {
         ...state,
         userId: action.payload.id,
+        userName: action.payload.name,
         isAuth: true
     }
 };
