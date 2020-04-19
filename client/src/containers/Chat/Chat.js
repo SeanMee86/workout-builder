@@ -10,8 +10,7 @@ const Chat = (props) => {
         //eslint-disable-next-line
     }, []);
 
-    const [logs, setLogs] = useState([]);
-
+    const [chatLogs, setChatLogs] = useState([]);
     const [message, setMessage] =  useState('');
 
     const onChangeHandler = (e) => {
@@ -19,11 +18,11 @@ const Chat = (props) => {
     };
 
     socket.on('receiveChatLogs', chatLogs => {
-        setLogs([...chatLogs])
+        setChatLogs([...chatLogs])
     });
 
     socket.on('messageToClients', messageData => {
-        setLogs(logs.concat(messageData));
+        setChatLogs(chatLogs.concat(messageData));
     });
 
     const sendMessage = (message, userName) => {
@@ -39,7 +38,7 @@ const Chat = (props) => {
             <input onChange={onChangeHandler} name={'chat'} type="text"/>
             <Button text={'Send'} clicked={() => sendMessage(message, props.userName)}/>
             <ul>
-                {logs.map((chat, ind) => {
+                {chatLogs.map((chat, ind) => {
                     return(
                         <li key={ind}>{chat.userName}: {chat.message}</li>
                     )
