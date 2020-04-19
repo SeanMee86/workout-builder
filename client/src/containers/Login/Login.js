@@ -57,7 +57,7 @@ class Login extends Component {
     onSubmitHandler = (e, formData) => {
         e.preventDefault();
         this.props.removeAllErrors();
-        this.props.loginUser(formData);
+        this.props.loginUser(formData, this.props.history);
     };
 
     render() {

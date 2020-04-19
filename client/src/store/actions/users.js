@@ -22,13 +22,14 @@ export const getUserWorkouts = () => dispatch => {
         })
 };
 
-export const loginUser = (formData) => dispatch => {
+export const loginUser = (formData, history) => dispatch => {
     axios.post('/api/users/login', formData)
         .then(res => {
             const { token } = res.data;
             localStorage.setItem('jwtToken', token);
             setAuthToken(token);
-            dispatch(setUser(jwt_decode(token)))
+            dispatch(setUser(jwt_decode(token)));
+            history.push('/');
         })
         .catch(err => {
             dispatch(setErrors(err.response.data))

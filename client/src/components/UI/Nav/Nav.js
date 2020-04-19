@@ -64,7 +64,7 @@ const Nav = (props) => {
             <div className={classes.MenuWrapper}>
                 <input id={'menu-toggle'} title={'Menu Box'} type="checkbox" className={classes.Toggler}/>
                 <div className={classes.Hamburger}>
-                    <div></div>
+                    <div/>
                 </div>
                 <nav className={classes.Menu}>
                     <div>

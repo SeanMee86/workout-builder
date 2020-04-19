@@ -21,6 +21,7 @@ import setAuthToken from "./shared/utilities/setAuthToken";
 
 import classes from './App.module.scss';
 import Modal from "./components/UI/Modal/Modal";
+import HomePage from "./containers/HomePage/HomePage";
 
 if(localStorage.jwtToken){
     const token = localStorage.jwtToken;
@@ -47,7 +48,8 @@ function App(props) {
                 <Route path={'/workout-builder'} component={WorkoutBuilder}/>
                 <Route path={'/workouts'} component={AllWorkouts}/>
                 <Route path={'/user/workouts'} component={UserWorkouts}/>
-                <Route path={'/'} render={() => (<div>Welcome to The Workout Builder <Link to={'/exercises'}>Click Here</Link> to add/view Exercises.</div>)}/>
+                <Route path={'/'} component={HomePage}/>
+                <Redirect to={'/'}/>
             </Switch>
         )
     }
