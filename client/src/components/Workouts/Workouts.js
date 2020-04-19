@@ -5,7 +5,6 @@ import Button from "../UI/Button/Button";
 import setWorkoutVars from "../../shared/utilities/setWorkoutVars";
 
 import ListItemClasses from '../../shared/styles/ListItems.module.scss';
-import WorkoutListItemClasses from '../../shared/styles/WorkoutListItem.module.scss';
 import classes from './Workouts.module.scss';
 
 class Workouts extends Component{
@@ -52,7 +51,7 @@ class Workouts extends Component{
                 {this.props.workouts.map((workout, ind) => {
                     return (
                         <div
-                            className={`${ListItemClasses.ListItem} ${WorkoutListItemClasses.WorkoutListItem} ${ListItemClasses.Hover} ${classes.AddMargin}`}
+                            className={`${ListItemClasses.ListItem} ${ListItemClasses.Hover} ${classes.AddMargin}`}
                             onClick={() => this.loadWorkout(workout)}
                             key={ind}>
                             <h2>{workout.name}</h2>
