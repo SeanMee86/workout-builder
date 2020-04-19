@@ -3,6 +3,7 @@ import { Switch, Route, Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import jwt_decode from 'jwt-decode';
 
+import LandingPage from "./containers/LandingPage/LandingPage";
 import Exercises from "./containers/Exercises/Exercises";
 import WorkoutBuilder from "./containers/WorkoutBuilder/WorkoutBuilder";
 import Login from "./containers/Login/Login";
@@ -34,7 +35,7 @@ function App(props) {
         <Switch>
             <Route path={'/register'} component={Registration}/>
             <Route path={'/login'} component={Login}/>
-            <Route path={'/'} render={() => (<div>Welcome to The Workout Builder <Link to={'/exercises'}>Click Here</Link> to add/view Exercises.</div>)}/>
+            <Route path={'/'} component={LandingPage}/>
             <Redirect to={'/'}/>
         </Switch>
     );
@@ -60,7 +61,7 @@ function App(props) {
   return (
       <div className={classes.App}>
           <Header/>
-          <Nav/>
+          {props.authenticated ? <Nav/> : null}
           {modal}
           {routes}
       </div>

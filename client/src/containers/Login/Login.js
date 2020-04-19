@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { loginUser } from "../../store/actions/users";
+import Button from "../../components/UI/Button/Button";
 
+import { loginUser } from "../../store/actions/users";
 import { removeErrors, removeAllErrors } from "../../store/actions/errors";
 
 import classes from '../../shared/styles/Form.module.scss';
@@ -88,6 +89,7 @@ class Login extends Component {
 
                     <input type="submit"/>
                 </form>
+                <Button text={'Register'} clicked={() => this.props.history.push('/register')}/>
             </div>
         )
     }
