@@ -1,7 +1,7 @@
 const chatHistory = [];
 
 module.exports = (io) => {
-    io.on('connection', socket => {
+    io.to('/sockets').on('connection', socket => {
 
         socket.on('getChatLogs', () => {
             socket.emit('receiveChatLogs', chatHistory);
