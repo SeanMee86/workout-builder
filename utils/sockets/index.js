@@ -6,7 +6,7 @@ module.exports = (io) => {
             socket.emit('receiveChatLogs', chatHistory);
         });
         socket.on('messageSent', (message) => {
-            chatHistory.push(message);
+            chatHistory.unshift(message);
             if(chatHistory.length >= 10){
                 chatHistory.shift();
             }
