@@ -1,35 +1,49 @@
-import React, { useEffect, useState } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import Button from "../../components/UI/Button/Button";
 
-import socket from '../../shared/utilities/socketConnection';
-
 import classes from './Chat.module.scss';
 
-const Chat = (props) => {
+class Chat extends Component {
 
-    useEffect(() => {
-        socket.emit('getChatLogs');
-        //eslint-disable-next-line
-    }, []);
+    constructor(props){
+        super(props);
+        this.state = {
+            chatLogs: [],
+            message: ''
+        };
+    }
 
-    const [chatLogs, setChatLogs] = useState([]);
-    const [message, setMessage] =  useState('');
+    async componentDidMount() {
+        this.socket = await import('../../shared/utilities/socketConnection.js')
+            .then(socket => socket.default);
 
-    const onChangeHandler = (e) => {
-        setMessage(e.target.value);
+        this.socket.emit('getChatLogs');
+
+        this.socket.on('receiveChatLogs', chatLogs => {
+            this.setState({
+                ...this.state,
+                chatLogs: [...chatLogs]
+            })
+        });
+
+        this.socket.on('messageToClients', messageData => {
+            this.setState({
+                ...this.state,
+                chatLogs: [messageData].concat(this.state.chatLogs)
+            });
+        });
+    }
+
+    onChangeHandler = (e) => {
+        this.setState({
+            ...this.state,
+            message: e.target.value
+        });
     };
 
-    socket.on('receiveChatLogs', chatLogs => {
-        setChatLogs([...chatLogs])
-    });
-
-    socket.on('messageToClients', messageData => {
-        setChatLogs([messageData].concat(chatLogs));
-    });
-
-    const sendMessage = (message, userName) => {
+    onSendMessage = (message, userName) => {
         if(message === '') {
             message = "I'm a little bitch trying to fuck with shit";
         }
@@ -37,27 +51,32 @@ const Chat = (props) => {
             userName,
             message
         };
-        socket.emit('messageSent', messageObj);
-        setMessage('');
+        this.socket.emit('messageSent', messageObj);
+        this.setState({
+            ...this.state,
+            message: ''
+        });
     };
 
-    return(
-        <div className={classes.ChatContainer}>
-            <textarea className={classes.ChatInput} onChange={onChangeHandler} value={message} name={'chat'} type="text"/>
-            <Button text={'Send'} clicked={() => sendMessage(message, props.userName)}/>
-            <ul className={classes.Chat}>
-                {chatLogs.map((chat, ind) => {
-                    return(
-                        <li key={ind}>
-                            <p>{chat.userName}:</p>
-                            <p>{chat.message}</p>
-                        </li>
-                    )
-                })}
-            </ul>
-        </div>
-    )
-};
+    render(){
+        return(
+            <div className={classes.ChatContainer}>
+                <textarea className={classes.ChatInput} onChange={this.onChangeHandler} value={this.state.message} name={'chat'} type="text"/>
+                <Button text={'Send'} clicked={() => this.onSendMessage(this.state.message, this.props.userName)}/>
+                <ul className={classes.Chat}>
+                    {this.state.chatLogs.map((chat, ind) => {
+                        return(
+                            <li key={ind}>
+                                <p>{chat.userName}:</p>
+                                <p>{chat.message}</p>
+                            </li>
+                        )
+                    })}
+                </ul>
+            </div>
+        )
+    }
+}
 
 const mapStateToProps = state => ({
     userName: state.user.userName
