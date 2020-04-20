@@ -30,6 +30,9 @@ const Chat = (props) => {
     });
 
     const sendMessage = (message, userName) => {
+        if(message === '') {
+            message = "I'm a little bitch trying to fuck with shit";
+        }
         const messageObj = {
             userName,
             message
