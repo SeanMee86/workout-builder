@@ -8,7 +8,7 @@ module.exports = (io) => {
         socket.on('messageSent', (message) => {
             chatHistory.unshift(message);
             if(chatHistory.length >= 10){
-                chatHistory.shift();
+                chatHistory.unshift();
             }
             io.emit('messageToClients', message);
         })
