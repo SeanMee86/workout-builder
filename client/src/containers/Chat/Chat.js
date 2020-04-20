@@ -36,6 +36,10 @@ class Chat extends Component {
         });
     }
 
+    componentWillUnmount() {
+        this.socket.emit('leavingChat', {message: 'User Left'});
+    }
+
     onChangeHandler = (e) => {
         this.setState({
             ...this.state,
