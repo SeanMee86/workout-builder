@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-import socket from '../../shared/utilities/socketConnection';
+
 import Button from "../../components/UI/Button/Button";
+
+import socket from '../../shared/utilities/socketConnection';
+
+import classes from './Chat.module.scss';
 
 const Chat = (props) => {
 
@@ -22,7 +26,7 @@ const Chat = (props) => {
     });
 
     socket.on('messageToClients', messageData => {
-        setChatLogs(chatLogs.concat(messageData));
+        setChatLogs([messageData].concat(chatLogs));
     });
 
     const sendMessage = (message, userName) => {
@@ -31,16 +35,20 @@ const Chat = (props) => {
             message
         };
         socket.emit('messageSent', messageObj);
+        setMessage('');
     };
 
     return(
-        <div>
-            <input onChange={onChangeHandler} name={'chat'} type="text"/>
+        <div className={classes.ChatContainer}>
+            <textarea className={classes.ChatInput} onChange={onChangeHandler} value={message} name={'chat'} type="text"/>
             <Button text={'Send'} clicked={() => sendMessage(message, props.userName)}/>
-            <ul>
+            <ul className={classes.Chat}>
                 {chatLogs.map((chat, ind) => {
                     return(
-                        <li key={ind}>{chat.userName}: {chat.message}</li>
+                        <li key={ind}>
+                            <p>{chat.userName}:</p>
+                            <p>{chat.message}</p>
+                        </li>
                     )
                 })}
             </ul>
