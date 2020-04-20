@@ -1,10 +1,66 @@
 import React from 'react';
+import { Link } from "react-router-dom";
 
-const HomePage = (props) => {
+import classes from './HomePage.module.scss';
+
+import workoutBuilderImage from '../../shared/images/workoutBuilder.jpg';
+import workoutsImage from '../../shared/images/workouts.jpg';
+
+const HomePage = () => {
     return (
-        <div>
-            Home Page
-        </div>
+        <React.Fragment>
+            <div className={classes.HomePage}>
+                <div className={classes.Link}>
+                    <Link to={'/workout-builder'}>
+                        <div
+                            style={{background: `url(${workoutBuilderImage}) 0% 0% / cover no-repeat`}}
+                            className={classes.LinkImage} />
+                        {/*<p>Build your custom workout using exercises submitted by the WB community!</p>*/}
+                        <p>Workout Builder</p>
+                    </Link>
+                </div>
+                <div className={classes.Link}>
+                    <Link to={'/workouts'}>
+                        <div
+                            style={{background: `url(${workoutsImage}) 0% 0% / cover no-repeat`}}
+                            className={classes.LinkImage} />
+                        {/*<p>View full workouts built by other WB users!</p>*/}
+                        <p>Pre-built Workouts</p>
+                    </Link>
+                </div>
+            </div>
+            <div className={classes.HomePage}>
+                <div className={classes.Link}>
+                    <Link to={'/user/workouts'}>
+                        <div
+                            style={{background: `url(${workoutBuilderImage}) 0% 0% / cover no-repeat`}}
+                            className={classes.LinkImage} />
+                        {/*<p>Build your custom workout using exercises submitted by the WB community!</p>*/}
+                        <p>Your Workouts</p>
+                    </Link>
+                </div>
+                <div className={classes.Link}>
+                    <Link to={'/exercises'}>
+                        <div
+                            style={{background: `url(${workoutsImage}) 0% 0% / cover no-repeat`}}
+                            className={classes.LinkImage} />
+                        {/*<p>View full workouts built by other WB users!</p>*/}
+                        <p>WB User Submitted Exercises</p>
+                    </Link>
+                </div>
+            </div>
+            <div className={classes.HomePage}>
+                <div className={classes.Link}>
+                    <Link to={'/chat'}>
+                        <div
+                            style={{background: `url(${workoutBuilderImage}) 0% 0% / cover no-repeat`}}
+                            className={classes.LinkImage} />
+                        {/*<p>Build your custom workout using exercises submitted by the WB community!</p>*/}
+                        <p>Chat with other WB Users</p>
+                    </Link>
+                </div>
+            </div>
+        </React.Fragment>
     )
 };
 
