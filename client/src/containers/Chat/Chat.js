@@ -17,24 +17,30 @@ class Chat extends Component {
 
     async componentDidMount() {
         this.socket = await import('../../shared/utilities/socketConnection.js')
-            .then(socket => socket.default);
+            .then(socket => {
+                return this.setSockets(socket.default)
+            });
+    }
 
-        this.socket.emit('getChatLogs');
+    setSockets = (socket) => {
 
-        this.socket.on('receiveChatLogs', chatLogs => {
+        socket.emit('getChatLogs');
+
+        socket.on('receiveChatLogs', chatLogs => {
             this.setState({
                 ...this.state,
                 chatLogs: [...chatLogs]
             })
         });
 
-        this.socket.on('messageToClients', messageData => {
+        socket.on('messageToClients', messageData => {
             this.setState({
                 ...this.state,
                 chatLogs: [messageData].concat(this.state.chatLogs)
             });
         });
-    }
+        return socket;
+    };
 
     onChangeHandler = (e) => {
         this.setState({

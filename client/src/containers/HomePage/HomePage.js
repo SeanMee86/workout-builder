@@ -5,6 +5,7 @@ import classes from './HomePage.module.scss';
 
 import workoutBuilderImage from '../../shared/images/workoutBuilder.jpg';
 import workoutsImage from '../../shared/images/workouts.jpg';
+import yourWorkoutsImage from '../../shared/images/yourWorkouts.jpg';
 
 const HomePage = () => {
     return (
@@ -33,7 +34,7 @@ const HomePage = () => {
                 <div className={classes.Link}>
                     <Link to={'/user/workouts'}>
                         <div
-                            style={{background: `url(${workoutBuilderImage}) 0% 0% / cover no-repeat`}}
+                            style={{background: `url(${yourWorkoutsImage}) 0% 0% / cover no-repeat`}}
                             className={classes.LinkImage} />
                         {/*<p>Build your custom workout using exercises submitted by the WB community!</p>*/}
                         <p>Your Workouts</p>

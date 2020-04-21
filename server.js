@@ -13,7 +13,7 @@ require('./config/passport')(passport);
 
 app.use(
     express.json(),
-    express.urlencoded(),
+    express.urlencoded({extended: false}),
     routes
 );
 
