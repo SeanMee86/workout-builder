@@ -34,6 +34,10 @@
 
     li {
       padding: 5px;
+      height: 45px;
+      display: flex;
+      flex-flow: column;
+      justify-content: center;
 
       &.UserJoined {
         text-align: center;
