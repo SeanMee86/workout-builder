@@ -35,6 +35,14 @@
     li {
       padding: 5px;
 
+      &.UserJoined {
+        text-align: center;
+
+        p:first-child {
+          text-decoration: none;
+        }
+      }
+
       p {
         margin: 0;
 
@@ -51,7 +59,7 @@
       &:nth-child(odd) {
         background: darkgray;
 
-        p:first-child {
+        p {
           color: #fff;
         }
       }

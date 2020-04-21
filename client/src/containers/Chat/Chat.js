@@ -22,9 +22,14 @@ class Chat extends Component {
             });
     }
 
-    setSockets = (socket) => {
+    componentWillUnmount() {
+        this.socket.emit('userDisconnected', {user: this.props.userName})
+    }
 
+    setSockets = (socket) => {
         socket.emit('getChatLogs');
+
+        socket.emit('userConnected', {user: this.props.userName});
 
         socket.on('receiveChatLogs', chatLogs => {
             this.setState({
@@ -33,12 +38,21 @@ class Chat extends Component {
             })
         });
 
-        socket.on('messageToClients', messageData => {
+        this.socketHandler('userConnected', socket);
+        this.socketHandler('messageToClients', socket);
+        this.socketHandler('userDisconnected', socket);
+
+        return socket;
+    };
+
+    socketHandler = (event, socket) => {
+        socket.on(event, messageData => {
             this.setState({
                 ...this.state,
                 chatLogs: [messageData].concat(this.state.chatLogs)
             });
         });
+
         return socket;
     };
 
@@ -53,11 +67,14 @@ class Chat extends Component {
         if(message === '') {
             message = "I'm a little bitch trying to fuck with shit";
         }
+
         const messageObj = {
             userName,
             message
         };
+
         this.socket.emit('messageSent', messageObj);
+
         this.setState({
             ...this.state,
             message: ''
@@ -67,16 +84,39 @@ class Chat extends Component {
     render(){
         return(
             <div className={classes.ChatContainer}>
-                <textarea className={classes.ChatInput} onChange={this.onChangeHandler} value={this.state.message} name={'chat'} type="text"/>
-                <Button text={'Send'} clicked={() => this.onSendMessage(this.state.message, this.props.userName)}/>
+                <textarea
+                    className={classes.ChatInput}
+                    onChange={this.onChangeHandler}
+                    value={this.state.message}
+                    name={'chat'}/>
+                <Button
+                    text={'Send'}
+                    clicked={() => this.onSendMessage(this.state.message, this.props.userName)}/>
                 <ul className={classes.Chat}>
                     {this.state.chatLogs.map((chat, ind) => {
-                        return(
-                            <li key={ind}>
-                                <p>{chat.userName}:</p>
-                                <p>{chat.message}</p>
-                            </li>
-                        )
+                        let chatLog = null;
+                        if(chat.userName){
+                            chatLog = (
+                                <li key={ind}>
+                                    <p><strong>{chat.userName}:</strong></p>
+                                    <p>
+                                        <i
+                                            className="fas fa-angle-right"/> {chat.message}
+                                    </p>
+                                </li>
+                            )
+                        }else{
+                            chatLog = (
+                                <li
+                                    className={classes.UserJoined}
+                                    key={ind}>
+                                    <p>
+                                        {chat}
+                                    </p>
+                                </li>
+                            )
+                        }
+                        return chatLog;
                     })}
                 </ul>
             </div>
