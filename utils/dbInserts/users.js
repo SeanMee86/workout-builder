@@ -5,7 +5,6 @@ const User = model('user', userSchema);
 module.exports = {
     insertUserWorkout: (req, res) => {
         const { userId, workoutData} = req.body;
-        console.log(workoutData);
         User.findById(userId, (err, user) => {
             if(err){
                 return res.json(err);
