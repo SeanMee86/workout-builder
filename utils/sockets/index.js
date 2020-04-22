@@ -17,7 +17,8 @@ module.exports = (io) => {
         });
         socket.on('userConnected', userData => {
             currentUsers.push({userName: userData.user, userId: socket.id});
-            io.emit('userConnected', `${userData.user} Has Joined The Chat`);
+            socket.broadcast.emit('userConnected', `${userData.user} Has Joined The Chat`);
+            socket.emit('userConnected', `You've Joined The Chat`);
         });
         socket.on('messageSent', (message) => {
             chatHistory.unshift(message);

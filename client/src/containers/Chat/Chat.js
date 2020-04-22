@@ -98,7 +98,7 @@ class Chat extends Component {
                         if(chat.userName){
                             chatLog = (
                                 <li key={ind}>
-                                    <p><strong>{chat.userName}:</strong></p>
+                                    <p>{chat.userName}:</p>
                                     <p>
                                         <i
                                             className="fas fa-angle-right"/> {chat.message}
