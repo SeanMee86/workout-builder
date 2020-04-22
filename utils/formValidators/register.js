@@ -9,6 +9,10 @@ module.exports = (data) => {
     data.password = !isEmpty(data.password) ? data.password : "";
     data.password2 = !isEmpty(data.password2) ? data.password2 : "";
 
+    if(/\s/.test(data.name)){
+        errors.name = "Username may not contain spaces";
+    }
+
     if (Validator.isEmpty(data.name)) {
         errors.name = "Name field is required";
     }

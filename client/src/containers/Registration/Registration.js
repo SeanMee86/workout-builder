@@ -70,7 +70,7 @@ class Registration extends Component {
                     method={'post'}
                     onSubmit={(e) => this.onSubmitHandler(e, this.state.formData)}>
 
-                    <label htmlFor="name">User Name:</label>
+                    <label htmlFor="name">Username:</label>
                     <input
                         onFocus={this.onFocusHandler}
                         onChange={this.onChangeHandler}
