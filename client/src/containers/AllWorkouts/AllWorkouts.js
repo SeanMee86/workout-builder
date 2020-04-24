@@ -15,6 +15,19 @@ class AllWorkouts extends Component{
         this.props.getAllWorkouts();
     }
 
+    showMessage(data) {
+        let content = (<div>{data}</div>);
+
+        if(data.name) content = (
+            <div>
+                <strong>{data.name}</strong> has been added to your workouts!
+            </div>
+        );
+
+        this.props.setModalContent(content);
+        this.props.showModal();
+    }
+
     addToMyWorkouts = (workoutData) => {
         const data = {
             userId: jwt_decode(localStorage.jwtToken).id,
@@ -22,16 +35,7 @@ class AllWorkouts extends Component{
         };
         axios.post('/api/users/workouts', data)
             .then(res => {
-                const content = (
-                    <div>
-                        {res.data.name ?
-                            `<strong>${res.data.name}</strong> has been added to your workouts!` :
-                            res.data
-                        }
-                    </div>
-                );
-                this.props.setModalContent(content);
-                this.props.showModal();
+                this.showMessage(res.data);
             })
             .catch(err => console.log(err))
     };
