@@ -7,6 +7,7 @@ import Workouts from "../../components/Workouts/Workouts";
 import Spinner from "../../components/UI/Spinner/Spinner";
 
 import { getAllWorkouts } from "../../store/actions/workouts";
+import { setModalContent, showModal } from "../../store/actions/ui";
 
 class AllWorkouts extends Component{
 
@@ -20,7 +21,18 @@ class AllWorkouts extends Component{
             workoutData
         };
         axios.post('/api/users/workouts', data)
-            .then(res => console.log(res))
+            .then(res => {
+                const content = (
+                    <div>
+                        {res.data.name ?
+                            `<strong>${res.data.name}</strong> has been added to your workouts!` :
+                            res.data
+                        }
+                    </div>
+                );
+                this.props.setModalContent(content);
+                this.props.showModal();
+            })
             .catch(err => console.log(err))
     };
 
@@ -48,6 +60,8 @@ const mapStateToProps = state => ({
 export default connect(
     mapStateToProps,
     {
-        getAllWorkouts
+        getAllWorkouts,
+        showModal,
+        setModalContent
     }
 )(AllWorkouts);
