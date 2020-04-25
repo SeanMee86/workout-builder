@@ -1,4 +1,5 @@
 export const GET_USER_WORKOUTS = 'GET_USER_WORKOUTS';
+export const DELETE_USER_WORKOUT = 'DELETE_USER_WORKOUT';
 export const LOGIN_USER = 'LOGIN_USER';
 export const LOGOUT_USER = 'LOGOUT_USER';
 

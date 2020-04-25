@@ -4,8 +4,8 @@ const { connect } = require('mongoose');
 require('dotenv').config();
 const connectionString = process.env.CONNECTION_STRING;
 const connectionOptions = {useNewUrlParser: true, useUnifiedTopology: true};
-const insertWorkout = require('../../utils/dbInserts/workouts');
-const getWorkouts = require('../../utils/dbRetrieve/workouts');
+const insertWorkout = require('../../utils/dbCRUD/Create/workouts');
+const getWorkouts = require('../../utils/dbCRUD/Read/workouts');
 const passport = require('passport');
 
 const secureRoute = passport.authenticate('jwt', {session: false});

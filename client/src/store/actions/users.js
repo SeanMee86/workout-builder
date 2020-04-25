@@ -1,7 +1,8 @@
 import {
     GET_USER_WORKOUTS,
     LOGIN_USER,
-    LOGOUT_USER
+    LOGOUT_USER,
+    HIDE_MODAL
 } from "./types";
 import axios from 'axios';
 import jwt_decode from 'jwt-decode';
@@ -18,6 +19,24 @@ export const getUserWorkouts = () => dispatch => {
             dispatch({
                 type: GET_USER_WORKOUTS,
                 payload: res.data
+            })
+        })
+};
+
+export const deleteUserWorkout = (workoutId) => dispatch => {
+    const userId = jwt_decode(localStorage.jwtToken).id;
+    const data = {
+        userId,
+        workoutId
+    };
+    axios.delete('/api/users/workouts', {data})
+        .then(res => {
+            dispatch({
+                type: GET_USER_WORKOUTS,
+                payload: res.data
+            });
+            dispatch({
+                type: HIDE_MODAL
             })
         })
 };

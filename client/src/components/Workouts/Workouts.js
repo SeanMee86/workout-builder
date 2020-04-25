@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 import Button from "../UI/Button/Button";
+
+import { setModalContent, showModal, hideModal } from "../../store/actions/ui";
+import { deleteUserWorkout } from "../../store/actions/users";
 
 import setWorkoutVars from "../../shared/utilities/setWorkoutVars";
 
@@ -18,6 +22,18 @@ class Workouts extends Component{
         }
     };
 
+    loadOptions = (workout) => {
+        const modalContent = (
+            <div>
+                <Button text={'Load Workout'} clicked={() => this.loadWorkout(workout)} />
+                <Button text={'Update Workout'} clicked={() => this.updateWorkout(workout)} />
+                <Button text={'Delete Workout'} clicked={() => this.props.deleteUserWorkout(workout['_id'])} />
+            </div>
+        );
+        this.props.setModalContent(modalContent);
+        this.props.showModal();
+    };
+
     loadWorkout = (workout) => {
         this.setState({
             showWorkouts: false,
@@ -27,7 +43,8 @@ class Workouts extends Component{
                 name: workout.name,
                 workout: workout.workout
             }
-        })
+        });
+        this.props.hideModal();
     };
 
     render() {
@@ -47,37 +64,47 @@ class Workouts extends Component{
         }
 
         const workouts =
-            (<div className={classes.WorkoutsList}>
-                {this.props.workouts.map((workout, ind) => {
-                    return (
-                        <div
-                            className={`${ListItemClasses.ListItem} ${ListItemClasses.Hover} ${classes.AddMargin}`}
-                            onClick={() => this.loadWorkout(workout)}
-                            key={ind}>
-                            <h2>{workout.name}</h2>
-                            <p>{workout.workout.length} exercise{workout.workout.length !== 1 ? 's' : ''}</p>
-                        </div>
-                    )})
-                }</div>);
+            (
+                <div className={classes.WorkoutsList}>
+                    {
+                        this.props.workouts.map((workout, ind) => {
+                            return (
+                                <div
+                                    className={`${ListItemClasses.ListItem} ${ListItemClasses.Hover} ${classes.AddMargin}`}
+                                    onClick={() => this.props.userWorkouts ? this.loadOptions(workout) : this.loadWorkout(workout)}
+                                    key={ind}>
+                                    <h2>{workout.name}</h2>
+                                    <p>{workout.workout.length} exercise{workout.workout.length !== 1 ? 's' : ''}</p>
+                                </div>
+                            )
+                        })
+                    }
+                </div>
+            );
 
         const workout = this.state.loadedWorkout.workout.length ?
-            (<React.Fragment>
-                {this.state.loadedWorkout.workout.map((workout, ind) => {
-                    const {reps, time, sets, distance, rest} = setWorkoutVars(workout);
-                    return (
-                        <div className={ListItemClasses.ListItem} key={ind}>
-                            <h2>{workout.exercise.name}</h2>
-                            <p>{workout.exercise.type} workout</p>
-                            {reps}
-                            {time}
-                            {sets}
-                            {distance}
-                            {rest}
-                        </div>
-                    )
-                })}
-                {buttons}
-            </React.Fragment>) : null;
+            (
+                <React.Fragment>
+                    <h2>{this.state.loadedWorkout.name}</h2>
+                    {
+                        this.state.loadedWorkout.workout.map((workout, ind) => {
+                            const {reps, time, sets, distance, rest} = setWorkoutVars(workout);
+                            return (
+                                <div className={ListItemClasses.ListItem} key={ind}>
+                                    <h2>{workout.exercise.name}</h2>
+                                    <p>{workout.exercise.type} workout</p>
+                                    {reps}
+                                    {time}
+                                    {sets}
+                                    {distance}
+                                    {rest}
+                                </div>
+                            )
+                        })
+                    }
+                    {buttons}
+                </React.Fragment>
+            ) : null;
         return(
             <div className={classes.Workouts}>
                 {this.state.showWorkouts ? workouts : workout}
@@ -86,4 +113,12 @@ class Workouts extends Component{
     }
 }
 
-export default Workouts;
+export default connect(
+    null,
+    {
+        showModal,
+        setModalContent,
+        hideModal,
+        deleteUserWorkout
+    }
+)(Workouts);

@@ -1,5 +1,5 @@
 const { model } = require('mongoose');
-const exerciseSchema = require('../../models/Exercise');
+const exerciseSchema = require('../../../models/Exercise');
 const Exercise = model('exercise', exerciseSchema);
 
 module.exports = (req, response) => {

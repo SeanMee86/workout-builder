@@ -1,5 +1,5 @@
 const { model } = require('mongoose');
-const workoutSchema = require('../../models/Workout');
+const workoutSchema = require('../../../models/Workout');
 const Workout = model('workout', workoutSchema);
 const isEmpty = require('is-empty');
 
