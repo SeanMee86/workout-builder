@@ -26,7 +26,6 @@ class Workouts extends Component{
         const modalContent = (
             <div>
                 <Button text={'Load Workout'} clicked={() => this.loadWorkout(workout)} />
-                <Button text={'Update Workout'} clicked={() => this.updateWorkout(workout)} />
                 <Button text={'Delete Workout'} clicked={() => this.props.deleteUserWorkout(workout['_id'])} />
             </div>
         );
@@ -47,6 +46,19 @@ class Workouts extends Component{
         this.props.hideModal();
     };
 
+    loadExerciseOptions = (exercise) => {
+        const content = (
+            <div>
+                <h2>{exercise.name}</h2>
+                <p>{exercise.description}</p>
+                <Button text={'Modify Exercise'} clicked={() => {}} />
+                <Button text={'Remove Exercise'} clicked={() => {}} />
+            </div>
+        )
+        this.props.setModalContent(content);
+        this.props.showModal();
+    }
+
     render() {
         let buttons;
         if(this.props.allWorkouts){
@@ -63,7 +75,7 @@ class Workouts extends Component{
                 </div>
         }
 
-        const workouts =
+        const workoutsList =
             (
                 <div className={classes.WorkoutsList}>
                     {
@@ -82,7 +94,7 @@ class Workouts extends Component{
                 </div>
             );
 
-        const workout = this.state.loadedWorkout.workout.length ?
+        const singleWorkout = this.state.loadedWorkout.workout.length ?
             (
                 <React.Fragment>
                     <h2>{this.state.loadedWorkout.name}</h2>
@@ -90,7 +102,10 @@ class Workouts extends Component{
                         this.state.loadedWorkout.workout.map((workout, ind) => {
                             const {reps, time, sets, distance, rest} = setWorkoutVars(workout);
                             return (
-                                <div className={ListItemClasses.ListItem} key={ind}>
+                                <div
+                                    onClick={() => this.props.userWorkouts ? this.loadExerciseOptions(workout.exercise) : null}
+                                    className={ListItemClasses.ListItem}
+                                    key={ind}>
                                     <h2>{workout.exercise.name}</h2>
                                     <p>{workout.exercise.type} workout</p>
                                     {reps}
@@ -107,7 +122,7 @@ class Workouts extends Component{
             ) : null;
         return(
             <div className={classes.Workouts}>
-                {this.state.showWorkouts ? workouts : workout}
+                {this.state.showWorkouts ? workoutsList : singleWorkout}
             </div>
         )
     }

@@ -11,14 +11,18 @@ const Exercises = (props) => {
 
     const [showExercises, setShowExercises] = useState(false);
 
+    const formButtonClicked = () => {
+        props.getExercises();
+        setShowExercises(!showExercises);
+    }
+
     return (
         <React.Fragment>
             <ExerciseDataForm/>
-            <Button clicked={() => {
-                props.getExercises();
-                setShowExercises(!showExercises);
-            }} text={showExercises ? 'Hide Exercises' : 'View Exercises'}/>
-            {showExercises ? <ExerciseList shouldHover={false}/> : null}
+            <Button
+                clicked={formButtonClicked}
+                text={showExercises ? 'Hide Exercises' : 'View Exercises'}/>
+            {showExercises ? <ExerciseList /> : null}
         </React.Fragment>
     );
 };

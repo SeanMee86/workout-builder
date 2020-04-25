@@ -4,20 +4,32 @@ import { connect } from 'react-redux';
 import ExerciseListItem from "./ExerciseListItem/ExerciseListItem";
 
 import classes from './ExersiceList.module.scss';
+import Spinner from "../UI/Spinner/Spinner";
 
 const ExerciseList = (props) => {
+
+    let exerciseList = <Spinner/>;
+    if(props.exercises) {
+        exerciseList =
+            (
+                <div className={classes.List}>
+                    {props.exercises.map(exercise => (
+                        <ExerciseListItem
+                            clickable={props.clickableItems}
+                            key={exercise["_id"]}
+                            id={exercise["_id"]}
+                            exerciseName={exercise.name}
+                            exerciseType={exercise.type}
+                            exerciseDescription={exercise.description}/>
+                    ))}
+                </div>
+            )
+    }
+
     return (
-        <div className={classes.List}>
-            {props.exercises ? props.exercises.map(exercise => (
-                <ExerciseListItem
-                    clickable={props.clickableItems}
-                    key={exercise["_id"]}
-                    id={exercise["_id"]}
-                    exerciseName={exercise.name}
-                    exerciseType={exercise.type}
-                    exerciseDescription={exercise.description}/>
-            )) : null}
-        </div>
+        <React.Fragment>
+            {exerciseList}
+        </React.Fragment>
     )
 };
 

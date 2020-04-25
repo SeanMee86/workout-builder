@@ -8,6 +8,7 @@ import Spinner from "../../components/UI/Spinner/Spinner";
 
 import { getAllWorkouts } from "../../store/actions/workouts";
 import { setModalContent, showModal } from "../../store/actions/ui";
+import { getUserWorkouts } from "../../store/actions/users";
 
 class AllWorkouts extends Component{
 
@@ -36,6 +37,7 @@ class AllWorkouts extends Component{
         axios.post('/api/users/workouts', data)
             .then(res => {
                 this.showMessage(res.data);
+                this.props.getUserWorkouts();
             })
             .catch(err => console.log(err))
     };
@@ -66,6 +68,7 @@ export default connect(
     {
         getAllWorkouts,
         showModal,
-        setModalContent
+        setModalContent,
+        getUserWorkouts
     }
 )(AllWorkouts);
