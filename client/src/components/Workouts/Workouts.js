@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import Button from "../UI/Button/Button";
+import UpdateExerciseForm from "../UpdateExerciseForm/UpdateExerciseForm";
 
 import { setModalContent, showModal, hideModal } from "../../store/actions/ui";
 import { deleteUserWorkout } from "../../store/actions/users";
@@ -46,18 +47,25 @@ class Workouts extends Component{
         this.props.hideModal();
     };
 
-    loadExerciseOptions = (exercise) => {
+    updateExercise = (exerciseData) => {
+        const content = (
+            <UpdateExerciseForm {...exerciseData}/>
+        );
+        this.props.setModalContent(content);
+    };
+
+    loadExerciseOptions = (exerciseData) => {
         const content = (
             <div>
-                <h2>{exercise.name}</h2>
-                <p>{exercise.description}</p>
-                <Button text={'Modify Exercise'} clicked={() => {}} />
+                <h2>{exerciseData.exercise.name}</h2>
+                <p>{exerciseData.exercise.description}</p>
+                <Button text={'Modify Exercise'} clicked={() => this.updateExercise(exerciseData)} />
                 <Button text={'Remove Exercise'} clicked={() => {}} />
             </div>
-        )
+        );
         this.props.setModalContent(content);
         this.props.showModal();
-    }
+    };
 
     render() {
         let buttons;
@@ -103,7 +111,7 @@ class Workouts extends Component{
                             const {reps, time, sets, distance, rest} = setWorkoutVars(workout);
                             return (
                                 <div
-                                    onClick={() => this.props.userWorkouts ? this.loadExerciseOptions(workout.exercise) : null}
+                                    onClick={() => this.props.userWorkouts ? this.loadExerciseOptions(workout) : null}
                                     className={ListItemClasses.ListItem}
                                     key={ind}>
                                     <h2>{workout.exercise.name}</h2>
