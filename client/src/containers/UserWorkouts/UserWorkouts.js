@@ -9,7 +9,9 @@ import { getUserWorkouts } from "../../store/actions/users";
 class UserWorkouts extends Component {
 
     componentDidMount() {
-        this.props.getUserWorkouts();
+        if(!this.props.userWorkouts) {
+            this.props.getUserWorkouts();
+        }
     }
 
     render() {

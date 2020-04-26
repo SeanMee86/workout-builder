@@ -8,6 +8,7 @@ const passport = require('passport');
 const { deleteUserWorkout } = require("../../utils/dbCRUD/Delete/users");
 const { insertUserWorkout } = require('../../utils/dbCRUD/Create/users');
 const { getUserWorkouts, getUsers } = require('../../utils/dbCRUD/Read/users');
+const { updateUserWorkouts } = require('../../utils/dbCRUD/Update/users');
 
 const secureRoute = passport.authenticate('jwt', {session: false});
 
@@ -31,7 +32,13 @@ router.route('/api/users/workouts')
             .then(() => {
                 deleteUserWorkout(req, res);
             })
-    });
+    })
+    .put(secureRoute, (req, res) => {
+        connect(connectionString, connectionOptions)
+            .then(() => {
+                updateUserWorkouts(req, res);
+            })
+    })
 
 router.route('/api/users/getworkouts')
     .post(secureRoute, (req, res) => {
