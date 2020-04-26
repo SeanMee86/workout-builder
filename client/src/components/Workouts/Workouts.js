@@ -5,7 +5,7 @@ import Button from "../UI/Button/Button";
 import UpdateExerciseForm from "../UpdateExerciseForm/UpdateExerciseForm";
 
 import { setModalContent, showModal, hideModal } from "../../store/actions/ui";
-import { deleteUserWorkout } from "../../store/actions/users";
+import { getUserWorkouts, deleteUserWorkout, updateUserWorkout } from "../../store/actions/users";
 
 import setWorkoutVars from "../../shared/utilities/setWorkoutVars";
 
@@ -93,6 +93,21 @@ class Workouts extends Component{
         this.props.showModal();
     };
 
+    componentWillUnmount() {
+        if(this.state.workoutModified){
+            this.props.setModalContent(
+                <div>
+                    Would you like to save changes to your workout?
+                    <div>
+                        <Button text={'Yes'} clicked={() => {this.props.updateUserWorkout(this.state.loadedWorkout)}} />
+                        <Button text={'No'} clicked={() => this.props.hideModal()} />
+                    </div>
+                </div>
+            )
+            this.props.showModal();
+        }
+    }
+
     render() {
         let buttons;
         if(this.props.allWorkouts){
@@ -168,6 +183,8 @@ export default connect(
         showModal,
         setModalContent,
         hideModal,
-        deleteUserWorkout
+        deleteUserWorkout,
+        getUserWorkouts,
+        updateUserWorkout
     }
 )(Workouts);

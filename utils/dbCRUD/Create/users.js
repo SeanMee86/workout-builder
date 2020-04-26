@@ -15,7 +15,7 @@ module.exports = {
             }else {
                 user.workouts.push(workoutData);
                 user.save();
-                res.send(workoutData);
+                res.send({workoutData, userWorkouts: user.workouts});
             }
         })
     }

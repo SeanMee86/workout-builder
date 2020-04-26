@@ -1,7 +1,6 @@
 const path = require('path');
 const express = require('express');
 const app = express();
-require('dotenv').config();
 const routes = require('./routes');
 const passport = require('passport');
 const socketio = require('socket.io');
@@ -25,7 +24,7 @@ if(process.env.NODE_ENV === 'production') {
     })
 }
 
-const port = process.env.PORT;
-const io = socketio(app.listen(port, console.log(`listening on PORT: ${port}`)));
+const port = 8000 || process.env.PORT;
+const io = socketio(app.listen(port));
 socketMain(io);
 
