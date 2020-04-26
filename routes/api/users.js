@@ -12,7 +12,7 @@ const { updateUserWorkouts } = require('../../utils/dbCRUD/Update/users');
 
 const secureRoute = passport.authenticate('jwt', {session: false});
 
-router.route('/api/auth')
+router.route('/api/users')
     .get(secureRoute, (req, res)=> {
     connect(connectionString, connectionOptions)
         .then(() => {
@@ -20,7 +20,7 @@ router.route('/api/auth')
         });
     });
 
-router.route('/api/auth/workouts')
+router.route('/api/users/workouts')
     .post(secureRoute, (req, res) => {
         connect(connectionString, connectionOptions)
             .then(() => {
@@ -40,7 +40,7 @@ router.route('/api/auth/workouts')
             })
     })
 
-router.route('/api/auth/getworkouts')
+router.route('/api/users/getworkouts')
     .post(secureRoute, (req, res) => {
         connect(connectionString, connectionOptions)
             .then(() => {

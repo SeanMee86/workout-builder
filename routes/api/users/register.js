@@ -9,7 +9,7 @@ const connectionOptions = {useNewUrlParser: true, useUnifiedTopology: true};
 const User = model('user', userSchema);
 const bcrypt = require('bcrypt');
 
-router.route('/api/auth/register')
+router.route('/api/users/register')
     .post((req, res) => {
         connect(connectionString, connectionOptions)
             .then(() => {

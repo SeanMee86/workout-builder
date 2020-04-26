@@ -25,6 +25,6 @@ if(process.env.NODE_ENV === 'production') {
 }
 
 const port = 8000 || process.env.PORT;
-const io = socketio(app.listen(port));
+const io = socketio(app.listen(port, console.log(`listening on PORT: ${port}`)));
 socketMain(io);
 

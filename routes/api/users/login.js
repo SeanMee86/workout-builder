@@ -11,7 +11,7 @@ const bcrypt = require('bcrypt');
 const secretOrKey = process.env.SECRET_OR_KEY;
 const jwt = require('jsonwebtoken');
 
-router.route('/api/auth/login')
+router.route('/api/users/login')
     .post((req, res) => {
         connect(connectionString, connectionOptions)
             .then(() => {

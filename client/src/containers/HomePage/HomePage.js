@@ -25,7 +25,7 @@ const HomePage = () => {
                         <div
                             style={{background: `url(${workoutsImage}) 0% 0% / cover no-repeat`}}
                             className={classes.LinkImage} />
-                        {/*<p>View full workouts built by other WB auth!</p>*/}
+                        {/*<p>View full workouts built by other WB users!</p>*/}
                         <p>Pre-built Workouts</p>
                     </Link>
                 </div>
@@ -45,7 +45,7 @@ const HomePage = () => {
                         <div
                             style={{background: `url(${workoutsImage}) 0% 0% / cover no-repeat`}}
                             className={classes.LinkImage} />
-                        {/*<p>View full workouts built by other WB auth!</p>*/}
+                        {/*<p>View full workouts built by other WB users!</p>*/}
                         <p>WB User Submitted Exercises</p>
                     </Link>
                 </div>
