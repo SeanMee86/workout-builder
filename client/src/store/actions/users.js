@@ -56,7 +56,7 @@ export const getUserWorkouts = () => dispatch => {
         })
 };
 
-export const addToUserWorkouts = (workoutData) => dispatch => {
+export const addToUserWorkouts = (workoutData, history) => dispatch => {
     const data = {
         userId: jwt_decode(localStorage.jwtToken).id,
         workoutData
@@ -64,10 +64,13 @@ export const addToUserWorkouts = (workoutData) => dispatch => {
     axios.post('/api/users/workouts', data)
         .then(res => {
             showUserWorkoutAddedMessage(res.data, dispatch);
-            dispatch({
-                type: GET_USER_WORKOUTS,
-                payload: res.data.userWorkouts
-            })
+            if(res.data.userWorkouts) {
+                dispatch({
+                    type: GET_USER_WORKOUTS,
+                    payload: res.data.userWorkouts
+                })
+                history.push('/user/workouts');
+            }
         })
         .catch(err => console.log(err))
 };

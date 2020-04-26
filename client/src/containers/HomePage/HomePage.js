@@ -3,9 +3,11 @@ import { Link } from "react-router-dom";
 
 import classes from './HomePage.module.scss';
 
-import workoutBuilderImage from '../../shared/images/workoutBuilder.jpg';
+import workoutBuilderImage from '../../shared/images/workout-builder.jpg';
 import workoutsImage from '../../shared/images/workouts.jpg';
-import yourWorkoutsImage from '../../shared/images/yourWorkouts.jpg';
+import yourWorkoutsImage from '../../shared/images/your-workouts.jpg';
+import userChatImage from '../../shared/images/user-chat.jpg';
+import exercisesImage from '../../shared/images/exercises.jpg';
 
 const HomePage = () => {
     return (
@@ -16,7 +18,6 @@ const HomePage = () => {
                         <div
                             style={{background: `url(${workoutBuilderImage}) 0% 0% / cover no-repeat`}}
                             className={classes.LinkImage} />
-                        {/*<p>Build your custom workout using exercises submitted by the WB community!</p>*/}
                         <p>Workout Builder</p>
                     </Link>
                 </div>
@@ -25,7 +26,6 @@ const HomePage = () => {
                         <div
                             style={{background: `url(${workoutsImage}) 0% 0% / cover no-repeat`}}
                             className={classes.LinkImage} />
-                        {/*<p>View full workouts built by other WB users!</p>*/}
                         <p>Pre-built Workouts</p>
                     </Link>
                 </div>
@@ -36,16 +36,14 @@ const HomePage = () => {
                         <div
                             style={{background: `url(${yourWorkoutsImage}) 0% 0% / cover no-repeat`}}
                             className={classes.LinkImage} />
-                        {/*<p>Build your custom workout using exercises submitted by the WB community!</p>*/}
                         <p>Your Workouts</p>
                     </Link>
                 </div>
                 <div className={classes.Link}>
                     <Link to={'/exercises'}>
                         <div
-                            style={{background: `url(${workoutsImage}) 0% 0% / cover no-repeat`}}
+                            style={{background: `url(${exercisesImage}) 0% 0% / cover no-repeat`}}
                             className={classes.LinkImage} />
-                        {/*<p>View full workouts built by other WB users!</p>*/}
                         <p>WB User Submitted Exercises</p>
                     </Link>
                 </div>
@@ -54,9 +52,8 @@ const HomePage = () => {
                 <div className={classes.Link}>
                     <Link to={'/chat'}>
                         <div
-                            style={{background: `url(${workoutBuilderImage}) 0% 0% / cover no-repeat`}}
+                            style={{background: `url(${userChatImage}) 0% 0% / cover no-repeat`}}
                             className={classes.LinkImage} />
-                        {/*<p>Build your custom workout using exercises submitted by the WB community!</p>*/}
                         <p>Chat with other WB Users</p>
                     </Link>
                 </div>

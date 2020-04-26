@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 
 import Button from "../UI/Button/Button";
 import UpdateExerciseForm from "../UpdateExerciseForm/UpdateExerciseForm";
@@ -109,19 +110,13 @@ class Workouts extends Component{
     }
 
     render() {
-        let buttons;
+        let addWorkoutButton;
         if(this.props.allWorkouts){
-            buttons =
-                <div className={classes.Buttons}>
-                    <Button
-                        text={'View All Workouts'}
-                        clicked={() => this.setState({showWorkouts: true})}
-                    />
+            addWorkoutButton =
                     <Button
                         text={'Add to My Workouts'}
-                        clicked={() => this.props.addToUserWorkouts(this.state.loadedWorkout)}
+                        clicked={() => this.props.addToUserWorkouts(this.state.loadedWorkout, this.props.history)}
                         />
-                </div>
         }
 
         const workoutsList =
@@ -146,7 +141,11 @@ class Workouts extends Component{
         const singleWorkout = this.state.loadedWorkout.workout.length ?
             (
                 <React.Fragment>
-                    <h2>{this.state.loadedWorkout.name}</h2>
+                    <h2 className={classes.WorkoutHeader}>{this.state.loadedWorkout.name}</h2>
+                    <div className={classes.Buttons}>
+                        <Button text={'Back to Workouts'} clicked={() => this.setState({showWorkouts: true})} />
+                        {this.props.allWorkouts ? addWorkoutButton : null}
+                    </div>
                     {
                         this.state.loadedWorkout.workout.map((workout, ind) => {
                             const {reps, time, sets, distance, rest} = setWorkoutVars(workout);
@@ -166,7 +165,6 @@ class Workouts extends Component{
                             )
                         })
                     }
-                    {buttons}
                 </React.Fragment>
             ) : null;
         return(
@@ -177,7 +175,7 @@ class Workouts extends Component{
     }
 }
 
-export default connect(
+export default withRouter(connect(
     null,
     {
         showModal,
@@ -187,4 +185,4 @@ export default connect(
         getUserWorkouts,
         updateUserWorkout
     }
-)(Workouts);
+)(Workouts));

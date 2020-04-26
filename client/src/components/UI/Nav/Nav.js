@@ -71,7 +71,7 @@ const Nav = (props) => {
                 <div className={classes.Hamburger}>
                     <div/>
                 </div>
-                <nav className={classes.Menu}>
+                <nav onClick={removeSideDrawer} className={classes.Menu}>
                     <div>
                         <div>
                             {navigation}

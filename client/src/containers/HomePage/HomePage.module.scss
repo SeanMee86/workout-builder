@@ -16,6 +16,8 @@
       flex-flow: column;
       justify-content: center;
       align-items: center;
+      text-decoration: none;
+      color: #092577;
 
       .LinkImage {
         width: 300px;
@@ -24,6 +26,10 @@
 
       p {
         text-align: center;
+      }
+
+      &:hover {
+        color: #f97e05;
       }
     }
   }
