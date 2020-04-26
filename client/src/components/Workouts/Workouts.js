@@ -16,6 +16,7 @@ class Workouts extends Component{
 
     state = {
         showWorkouts: true,
+        workoutModified: false,
         loadedWorkout: {
             id: null,
             name: '',
@@ -47,9 +48,34 @@ class Workouts extends Component{
         this.props.hideModal();
     };
 
-    updateExercise = (exerciseData) => {
+    updateExercise = (exercise, id) => {
+        const newExerciseData = {};
+        for(let data in exercise){
+            newExerciseData[data] = exercise[data].value;
+        }
+        const newWorkout = this.state.loadedWorkout.workout.map(oldExercise => {
+            if(oldExercise._id === id){
+                return {
+                    ...oldExercise,
+                    ...newExerciseData
+                };
+            }
+            return oldExercise;
+        })
+        this.setState({
+            ...this.state,
+            loadedWorkout: {
+                ...this.state.loadedWorkout,
+                workout: [...newWorkout]
+            },
+            workoutModified: true
+        })
+        this.props.hideModal();
+    }
+
+    showUpdateForm = (exerciseData) => {
         const content = (
-            <UpdateExerciseForm {...exerciseData}/>
+            <UpdateExerciseForm {...exerciseData} onClick={this.updateExercise}/>
         );
         this.props.setModalContent(content);
     };
@@ -59,7 +85,7 @@ class Workouts extends Component{
             <div>
                 <h2>{exerciseData.exercise.name}</h2>
                 <p>{exerciseData.exercise.description}</p>
-                <Button text={'Modify Exercise'} clicked={() => this.updateExercise(exerciseData)} />
+                <Button text={'Modify Exercise'} clicked={() => this.showUpdateForm(exerciseData)} />
                 <Button text={'Remove Exercise'} clicked={() => {}} />
             </div>
         );
