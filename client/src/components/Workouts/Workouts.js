@@ -48,6 +48,7 @@ class Workouts extends Component{
                 ...this.state.loadedWorkout,
                 id: workout['_id'],
                 name: workout.name,
+                submittedBy: workout.submittedBy,
                 workout: workout.workout
             }
         });
@@ -134,12 +135,19 @@ class Workouts extends Component{
                 <div className={classes.WorkoutsList}>
                     {
                         this.props.workouts.map((workout, ind) => {
+                            let submittedBy = null;
+                            if(workout.submittedBy){
+                                submittedBy = (
+                                    <p>Created By: <strong>{workout.submittedBy}</strong></p>
+                                )
+                            }
                             return (
                                 <div
                                     className={`${ListItemClasses.ListItem} ${ListItemClasses.Hover} ${classes.AddMargin}`}
                                     onClick={() => this.props.userWorkouts ? this.loadOptions(workout) : this.loadWorkout(workout)}
                                     key={ind}>
                                     <h2>{workout.name}</h2>
+                                    {submittedBy}
                                     <p>{workout.workout.length} exercise{workout.workout.length !== 1 ? 's' : ''}</p>
                                 </div>
                             )

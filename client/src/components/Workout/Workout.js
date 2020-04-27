@@ -45,6 +45,7 @@ const Workout = (props) => {
     const submitWorkout = (workout) => {
         const newWorkout = {
             name: props.workoutName,
+            submittedBy: props.userName,
             workout
         };
         axios.post('/api/workouts', newWorkout)
@@ -78,7 +79,8 @@ const Workout = (props) => {
 
 const mapStateToProps = state => ({
     workout: state.workouts.workout,
-    workoutName: state.workouts.workoutName
+    workoutName: state.workouts.workoutName,
+    userName: state.user.userName
 });
 
 export default connect(

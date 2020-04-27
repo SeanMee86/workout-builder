@@ -8,6 +8,7 @@ module.exports = (req, res) => {
         if(isEmpty(workout)){
             new Workout({
                 name: req.name,
+                submittedBy: req.submittedBy,
                 workout: req.workout
             }).save()
                 .then((response) => {

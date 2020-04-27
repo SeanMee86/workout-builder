@@ -28,7 +28,7 @@ const addToWorkout = (state, action) => {
 };
 
 const removeFromWorkout = (state, action) => {
-    const elToSlice = state.workout.findIndex(exercise => exercise.id === action.payload.id);
+    const elToSlice = state.workout.findIndex(({exercise}) => exercise.id === action.payload.exercise.id);
     const newArray = [...state.workout];
     newArray.splice(elToSlice,1);
     return {
