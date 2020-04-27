@@ -109,8 +109,13 @@ class Workouts extends Component{
         if(this.state.workoutModified){
             this.props.setModalContent(
                 <div>
-                    Would you like to save changes to your workout?
-                    <div>
+                    <h2 style={{textAlign: "center"}}>Would you like to save changes to your workout?</h2>
+                    <div  style={{
+                        display: "flex",
+                        flexFlow: "column",
+                        justifyContent: "center",
+                        alignItems: "center"
+                    }}>
                         <Button text={'Yes'} clicked={() => {this.props.updateUserWorkout(this.state.loadedWorkout)}} />
                         <Button text={'No'} clicked={() => this.props.hideModal()} />
                     </div>
