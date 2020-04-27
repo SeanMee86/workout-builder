@@ -13,8 +13,8 @@
     width: 80%;
     max-width: 600px;
     min-height: 330px;
-    background: beige;
-    display: flex;
+    background: rgb(255,255,255);
+    background: radial-gradient(circle, rgba(255,255,255,1) 33%, rgba(255,233,211,1) 100%);    display: flex;
     justify-content: center;
     align-items: center;
     flex-flow: column;

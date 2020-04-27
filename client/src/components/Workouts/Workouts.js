@@ -27,7 +27,12 @@ class Workouts extends Component{
 
     loadOptions = (workout) => {
         const modalContent = (
-            <div>
+            <div style={{
+                display: "flex",
+                flexFlow: "column",
+                justifyContent: "center",
+                alignItems: "center"
+            }}>
                 <Button text={'Load Workout'} clicked={() => this.loadWorkout(workout)} />
                 <Button text={'Delete Workout'} clicked={() => this.props.deleteUserWorkout(workout['_id'])} />
             </div>
@@ -83,11 +88,16 @@ class Workouts extends Component{
 
     loadExerciseOptions = (exerciseData) => {
         const content = (
-            <div>
+            <div style={{
+                display: "flex",
+                flexFlow: "column",
+                justifyContent: "center",
+                alignItems: "center",
+                maxWidth: "500px"
+            }}>
                 <h2>{exerciseData.exercise.name}</h2>
                 <p>{exerciseData.exercise.description}</p>
                 <Button text={'Modify Exercise'} clicked={() => this.showUpdateForm(exerciseData)} />
-                <Button text={'Remove Exercise'} clicked={() => {}} />
             </div>
         );
         this.props.setModalContent(content);

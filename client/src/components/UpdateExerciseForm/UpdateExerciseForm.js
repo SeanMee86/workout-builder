@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import classes from "../AddToWorkoutForm/AddToWorkoutForm.module.scss";
 import Button from "../UI/Button/Button";
+import TextField from "@material-ui/core/TextField";
 
 class UpdateExerciseForm extends Component {
 
@@ -91,24 +92,37 @@ class UpdateExerciseForm extends Component {
         }
 
         let form =
-            formFields.map(field => (
-                <div className={classes.Field} key={field.label}>
-                    <label>{field.label}:</label>
-                    <input
-                        name={field.label.toLowerCase()}
-                        onChange={this.onChangeHandler}
-                        type={field.type}
-                        value={field.value}/>
-                </div>
-            ));
-        return(
             <div>
+                {formFields.map(field => (
+                        <TextField
+                            key={field.label}
+                            label={field.label}
+                            className={classes.Field}
+                            name={field.label.toLowerCase()}
+                            onChange={this.onChangeHandler}
+                            type={field.type}
+                            value={field.value}/>
+                ))}
+            </div>
+        return(
+            <div style={{
+                display: "flex",
+                width: "100%",
+                textAlign: "center",
+                justifyContent: "center"
+            }}>
                 <form
+                    style={{
+                        position: "relative",
+                        top: "-15px"
+                    }}
                     method={'post'}
                     className={classes.Form}
                     onSubmit={(e) => this.onSubmit(e)}>
                     {form}
-                    <Button clicked={() => this.props.onClick(this.state.fields, this.props._id)} text={'Update Exercise'}/>
+                    <div className={classes.ButtonContainer}>
+                        <Button clicked={() => this.props.onClick(this.state.fields, this.props._id)} text={'Update Exercise'}/>
+                    </div>
                 </form>
             </div>
         )

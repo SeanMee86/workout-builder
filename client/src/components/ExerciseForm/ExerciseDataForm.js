@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
+import { TextField, InputLabel, Select, MenuItem } from "@material-ui/core";
+
 import classes from '../../shared/styles/Form.module.scss';
 
 class ExerciseDataForm extends Component{
@@ -56,34 +58,37 @@ class ExerciseDataForm extends Component{
                 <form
                     onSubmit={this.onFormSubmitHandler}
                     id={'exerciseDataForm'}>
-                    <label
-                        htmlFor="exerciseType">Exercise Type:</label>
-                    <select
+                    {/*<label*/}
+                    {/*    htmlFor="exerciseType">Exercise Type:</label>*/}
+                    <InputLabel style={{marginBottom: "5px"}} id={'demo-simple-select-label'}>Exercise Type</InputLabel>
+                    <Select
+                        labelId={'demo-simple-select-label'}
                         onChange={this.onChangeHandler}
                         value={this.state.formData.exerciseType}
                         name="exerciseType"
-                        id="exerciseType">
-                        <option value="Interval">Interval</option>
-                        <option value="Timed">Timed</option>
-                        <option value="Cardio">Cardio</option>
-                    </select>
-                    <label
-                        htmlFor="exerciseName">Exercise Name:</label>
-                    <input
+                        id="demo-simple-select">
+                        <MenuItem value="Interval">Interval</MenuItem>
+                        <MenuItem value="Timed">Timed</MenuItem>
+                        <MenuItem value="Cardio">Cardio</MenuItem>
+                    </Select>
+
+                    <TextField
                         onChange={this.onChangeHandler}
+                        label={'Exercise Name'}
                         value={this.state.formData.exerciseName}
                         name={'exerciseName'}
                         id={'exerciseName'}
                         type="text"/>
-                    <label
-                        htmlFor="exerciseDescription">Exercise Description:</label>
-                    <input
+
+                    <TextField
                         onChange={this.onChangeHandler}
+                        label={'Exercise Description'}
                         value={this.state.formData.exerciseDescription}
                         name={'exerciseDescription'}
                         id={'exerciseDescription'}
                         type="text"/>
                     <input
+                        style={{marginTop: "20px"}}
                         type="submit"
                         value={'Submit Exercise'}/>
                 </form>

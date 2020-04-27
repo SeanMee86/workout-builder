@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import Button from "../UI/Button/Button";
+import TextField from "@material-ui/core/TextField";
 
 import { addToWorkout } from "../../store/actions/workouts";
 import { hideModal } from "../../store/actions/ui";
@@ -118,9 +119,9 @@ class AddToWorkoutForm extends Component {
         let form =
             formFields.map(field => (
                 <div className={classes.Field} key={field.label}>
-                    <label>{field.label}:</label>
-                    <input
+                    <TextField
                         name={field.label.toLowerCase()}
+                        label={field.label}
                         onChange={this.onChangeHandler}
                         type={field.type}
                         value={field.value}/>

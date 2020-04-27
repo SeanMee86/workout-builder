@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import Button from "../../components/UI/Button/Button";
-import TextField from "@material-ui/core";
+import TextField from "@material-ui/core/TextField";
 
 import { loginUser } from "../../store/actions/users";
 import { removeErrors, removeAllErrors } from "../../store/actions/errors";
@@ -68,22 +68,22 @@ class Login extends Component {
                     method={'post'}
                     onSubmit={(e) => this.onSubmitHandler(e, this.state.formData)}>
 
-                    <label htmlFor="email">Email</label>
-                    <input
+                    <TextField
+                        style={{border: 'none'}}
+                        id={'standard-basic'}
                         onFocus={this.onFocusHandler}
-                        onChange={this.onChangeHandler}
                         name={'email'}
-                        type="text"
+                        onChange={this.onChangeHandler}
+                        label={'Email'}
                         value={this.state.formData.email}/>
                     <span className={classes.ErrorMessage}>{this.state.formData.errors.email}</span>
 
-
-                    <label htmlFor="email">Password</label>
-                    <input
+                    <TextField
                         onFocus={this.onFocusHandler}
                         onChange={this.onChangeHandler}
                         name={'password'}
                         type="password"
+                        label={'Password'}
                         value={this.state.formData.password}/>
                     <span className={classes.ErrorMessage}>{this.state.formData.errors.password}</span>
 

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 
 import Button from "../UI/Button/Button";
+import TextField from "@material-ui/core/TextField";
 import AddToWorkoutForm from "../AddToWorkoutForm/AddToWorkoutForm";
 
 import { nameWorkout } from "../../store/actions/workouts";
@@ -36,13 +37,14 @@ const NameWorkoutField = (props) => {
 
     return(
         <React.Fragment>
-            <label htmlFor={'workoutName'}><h2>Name Your Workout</h2></label>
+            <h2 className={classes.FormHeader}>Name Your Workout</h2>
             <form
                 className={classes.NameWorkoutForm}
                 method={'post'}>
-                <input
+                <TextField
                     onChange={onChangeHandler}
                     id={'workoutName'}
+                    label={'Workout Name'}
                     value={workoutName}
                     name={'workoutName'}
                     type="text"/>

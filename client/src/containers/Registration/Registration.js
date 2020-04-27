@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import Button from "../../components/UI/Button/Button";
+import TextField from "@material-ui/core/TextField";
 
 import { registerUser } from "../../store/actions/users";
 import { removeErrors, removeAllErrors } from "../../store/actions/errors";
@@ -70,37 +71,37 @@ class Registration extends Component {
                     method={'post'}
                     onSubmit={(e) => this.onSubmitHandler(e, this.state.formData)}>
 
-                    <label htmlFor="name">Username:</label>
-                    <input
+                    <TextField
                         onFocus={this.onFocusHandler}
                         onChange={this.onChangeHandler}
+                        label={'Username'}
                         name={'name'}
                         type="text"
                         value={this.state.name}/>
                     <span className={classes.ErrorMessage}>{this.state.formData.errors.name}</span>
 
-                    <label htmlFor="email">Email:</label>
-                    <input
+                    <TextField
                         onFocus={this.onFocusHandler}
                         onChange={this.onChangeHandler}
                         name={'email'}
+                        label={'Email'}
                         type="text"
                         value={this.state.email}/>
                     <span className={classes.ErrorMessage}>{this.state.formData.errors.email}</span>
 
-                    <label htmlFor="password">Password:</label>
-                    <input
+                    <TextField
                         onFocus={this.onFocusHandler}
                         onChange={this.onChangeHandler}
+                        label={'Password'}
                         name={'password'}
                         type="password"
                         value={this.state.password}/>
                     <span className={classes.ErrorMessage}>{this.state.formData.errors.password}</span>
 
-                    <label htmlFor="password2">Confirm Password:</label>
-                    <input
+                    <TextField
                         onFocus={this.onFocusHandler}
                         onChange={this.onChangeHandler}
+                        label={'Confirm Password'}
                         name={'password2'}
                         type="password"
                         value={this.state.password2}/>
