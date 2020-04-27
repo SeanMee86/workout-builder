@@ -14,15 +14,21 @@ import classes from './Workout.module.scss';
 const Workout = (props) => {
 
     const successMessage = (content) => (
-        <React.Fragment>
-            <h3>Thank You, Your Workout: <strong>{content}</strong> has been submitted.</h3>
-        </React.Fragment>
+        <div style={{
+            textAlign: "center"
+        }}>
+            <h2>Thank You!</h2>
+            <h3>Your Workout: <strong>"{content}"</strong> has been submitted.</h3>
+        </div>
     );
 
     const errorMessage = (content) => (
-        <React.Fragment>
-            {content}
-        </React.Fragment>
+        <div style={{
+            textAlign: "center",
+            maxWidth: "450px"
+        }}>
+            <h3>{content}</h3>
+        </div>
     );
 
     const submissionSuccess = (workoutName) => {

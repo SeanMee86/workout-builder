@@ -25,11 +25,18 @@ const refreshUserWorkouts = (payload, dispatch) => {
 }
 
 const showUserWorkoutAddedMessage = (data, dispatch) => {
-    let content = (<div>{data}</div>);
+    let content = (
+        <div>
+            <h2>{data}</h2>
+        </div>
+    );
 
     if(data.workoutData) {
         content = (
-            <div>
+            <div style={{
+                textAlign: "center"
+            }}>
+                <h2>Success!</h2>
                 <strong>{data.workoutData.name}</strong> has been added to your workouts!
             </div>
         );
@@ -82,7 +89,25 @@ export const updateUserWorkout = (workout) => dispatch => {
         workout
     };
     axios.put('/api/users/workouts', data)
-        .then((res) => refreshUserWorkouts(res.data, dispatch))
+        .then((res) => {
+            const successMessage = (
+                <div>
+                    <h2>Success</h2>
+                    Your Workout Has Been Saved
+                </div>)
+            dispatch({
+                type: GET_USER_WORKOUTS,
+                payload: res.data
+            })
+            dispatch({
+                type: SET_MODAL_CONTENT,
+                payload: successMessage
+            })
+            dispatch({
+                type: SHOW_MODAL
+            })
+            // refreshUserWorkouts(res.data, dispatch)
+        })
 };
 
 export const deleteUserWorkout = (workoutId) => dispatch => {

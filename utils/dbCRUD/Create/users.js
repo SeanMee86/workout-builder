@@ -11,7 +11,7 @@ module.exports = {
             }
             const workoutExists = user.workouts.some(workout => workout.name === workoutData.name);
             if(workoutExists){
-                res.send('Workout already in your list');
+                res.send(`"${workoutData.name}" Workout already in your list`);
             }else {
                 user.workouts.push(workoutData);
                 user.save();

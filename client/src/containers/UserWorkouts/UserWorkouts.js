@@ -25,6 +25,7 @@ class UserWorkouts extends Component {
         }
         return (
             <React.Fragment>
+                {<h2>{this.props.userName}'s Workouts</h2>}
                 {workouts}
             </React.Fragment>
         );
@@ -32,7 +33,8 @@ class UserWorkouts extends Component {
 }
 
 const mapStateToProps = state => ({
-    userWorkouts: state.user.userWorkouts
+    userWorkouts: state.user.userWorkouts,
+    userName: state.user.userName
 });
 
 export default connect(

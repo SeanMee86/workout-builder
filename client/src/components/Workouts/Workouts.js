@@ -154,6 +154,10 @@ class Workouts extends Component{
                     <h2 className={classes.WorkoutHeader}>{this.state.loadedWorkout.name}</h2>
                     <div className={classes.Buttons}>
                         <Button text={'Back to Workouts'} clicked={() => this.setState({showWorkouts: true})} />
+                        {this.state.workoutModified ? <Button text={'Save Modified Workout'} clicked={() => {
+                            this.props.updateUserWorkout(this.state.loadedWorkout);
+                            this.setState({...this.state, workoutModified: false})
+                        }} /> : null}
                         {this.props.allWorkouts ? addWorkoutButton : null}
                     </div>
                     {
