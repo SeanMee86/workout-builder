@@ -7,6 +7,8 @@ import TextField from "@material-ui/core/TextField";
 import { addToWorkout } from "../../store/actions/workouts";
 import { hideModal } from "../../store/actions/ui";
 
+import { buildFormFields } from "../../shared/utilities/buildFormFields";
+
 import classes from './AddToWorkoutForm.module.scss';
 
 class AddToWorkoutForm extends Component {
@@ -16,10 +18,10 @@ class AddToWorkoutForm extends Component {
     };
 
     componentDidMount() {
-        this.buildNewFields(this.props.exercise.type);
+        this.setFieldsState(this.props.exercise.type);
     }
 
-    buildNewFields = (type) => {
+    setFieldsState = (type) => {
         switch(type){
             case 'Interval':
                 this.setState({
@@ -104,17 +106,7 @@ class AddToWorkoutForm extends Component {
 
     render() {
 
-        let formFields = [];
-
-        for(let field in this.state.additionalFields){
-            const firstLetter = field.charAt(0).toUpperCase();
-            const newLabel = firstLetter + field.slice(1, field.length);
-            formFields.push({
-                label: newLabel,
-                type: this.state.additionalFields[field].type,
-                value: this.state.additionalFields[field].value
-            })
-        }
+        const formFields = buildFormFields(this.state.additionalFields);
 
         let form =
             formFields.map(field => (

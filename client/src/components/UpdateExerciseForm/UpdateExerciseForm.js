@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
-import classes from "../AddToWorkoutForm/AddToWorkoutForm.module.scss";
+
 import Button from "../UI/Button/Button";
 import TextField from "@material-ui/core/TextField";
+
+import { buildFormFields } from "../../shared/utilities/buildFormFields";
+
+import classes from "../AddToWorkoutForm/AddToWorkoutForm.module.scss";
 
 class UpdateExerciseForm extends Component {
 
@@ -80,16 +84,7 @@ class UpdateExerciseForm extends Component {
     onSubmit = (e) => e.preventDefault();
 
     render() {
-        let formFields = [];
-        for(let field in this.state.fields){
-            const firstLetter = field.charAt(0).toUpperCase();
-            const newLabel = firstLetter + field.slice(1, field.length);
-            formFields.push({
-                label: newLabel,
-                type: this.state.fields[field].type,
-                value: this.state.fields[field].value
-            })
-        }
+        const formFields = buildFormFields(this.state.fields);
 
         let form =
             <div>
@@ -121,7 +116,9 @@ class UpdateExerciseForm extends Component {
                     onSubmit={(e) => this.onSubmit(e)}>
                     {form}
                     <div className={classes.ButtonContainer}>
-                        <Button clicked={() => this.props.onClick(this.state.fields, this.props._id)} text={'Update Exercise'}/>
+                        <Button
+                            clicked={() => this.props.onClick(this.state.fields, this.props._id)}
+                            text={'Update Exercise'}/>
                     </div>
                 </form>
             </div>

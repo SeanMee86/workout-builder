@@ -25,7 +25,7 @@ class UserWorkouts extends Component {
         }
         return (
             <React.Fragment>
-                {<h2>{this.props.userName}'s Workouts</h2>}
+                <h2>{this.props.userName}'s Workouts</h2>
                 {workouts}
             </React.Fragment>
         );

@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import axios from 'axios';
 
 import { TextField, InputLabel, Select, MenuItem } from "@material-ui/core";
+
+import { getExercises } from "../../store/actions/exercises";
 
 import classes from '../../shared/styles/Form.module.scss';
 
@@ -46,7 +49,7 @@ class ExerciseDataForm extends Component{
         axios.post('/api/exercises', newExercise)
             .then((res) => {
                 this.resetState();
-                console.log(res.data);
+                this.props.getExercises();
             }).catch(err => {
                 console.log(err);
         })
@@ -58,9 +61,9 @@ class ExerciseDataForm extends Component{
                 <form
                     onSubmit={this.onFormSubmitHandler}
                     id={'exerciseDataForm'}>
-                    {/*<label*/}
-                    {/*    htmlFor="exerciseType">Exercise Type:</label>*/}
-                    <InputLabel style={{marginBottom: "5px"}} id={'demo-simple-select-label'}>Exercise Type</InputLabel>
+                    <InputLabel
+                        style={{marginBottom: "5px"}}
+                        id={'demo-simple-select-label'}>Exercise Type</InputLabel>
                     <Select
                         labelId={'demo-simple-select-label'}
                         onChange={this.onChangeHandler}
@@ -97,4 +100,9 @@ class ExerciseDataForm extends Component{
     }
 }
 
-export default ExerciseDataForm;
+export default connect(
+    null,
+    {
+        getExercises
+    }
+)(ExerciseDataForm);

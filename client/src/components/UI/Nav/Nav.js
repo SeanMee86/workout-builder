@@ -12,66 +12,62 @@ const Nav = (props) => {
         document.getElementById('menu-toggle').checked = false;
     };
 
-    let navigation = <ul className={classes.List}>
-        <li onClick={removeSideDrawer}>
-            <NavLink
-                activeClassName={classes.active}
-                to={'/login'}>Log In</NavLink>
-        </li>
-        <li onClick={removeSideDrawer}>
-            <NavLink
-                activeClassName={classes.active}
-                to={'/register'}>Register</NavLink>
-        </li>
-    </ul>;
+    let navigation = null;
 
     if(props.authenticated){
-        navigation = <ul className={classes.List}>
-            <li onClick={removeSideDrawer}>
-                <NavLink
-                    activeClassName={classes.active}
-                    to={'/workout-builder'}>Workout Builder</NavLink>
-            </li>
-            <li onClick={removeSideDrawer}>
-                <NavLink
-                    activeClassName={classes.active}
-                    to={'/workouts'}>Workouts</NavLink>
-            </li>
-            <li onClick={removeSideDrawer}>
-                <NavLink
-                    activeClassName={classes.active}
-                    to={'/user/workouts'}>Your Workouts</NavLink>
-            </li>
-            <li onClick={removeSideDrawer}>
-                <NavLink
-                    activeClassName={classes.active}
-                    to={'/exercises'}>Exercises</NavLink>
-            </li>
-            <li onClick={removeSideDrawer}>
-                <NavLink
-                    activeClassName={classes.active}
-                    to={'/chat'}>User Chat</NavLink>
-            </li>
-            <li onClick={() => {
-                props.logOutUser();
-                removeSideDrawer();
-            }}>
-                <NavLink
-                    to={'/'}>
-                Log Out
-                </NavLink>
-            </li>
-        </ul>
+        navigation =
+            <ul className={classes.List}>
+                <li onClick={removeSideDrawer}>
+                    <NavLink
+                        activeClassName={classes.active}
+                        to={'/workout-builder'}>Workout Builder</NavLink>
+                </li>
+                <li onClick={removeSideDrawer}>
+                    <NavLink
+                        activeClassName={classes.active}
+                        to={'/workouts'}>Workouts</NavLink>
+                </li>
+                <li onClick={removeSideDrawer}>
+                    <NavLink
+                        activeClassName={classes.active}
+                        to={'/user/workouts'}>Your Workouts</NavLink>
+                </li>
+                <li onClick={removeSideDrawer}>
+                    <NavLink
+                        activeClassName={classes.active}
+                        to={'/exercises'}>Exercises</NavLink>
+                </li>
+                <li onClick={removeSideDrawer}>
+                    <NavLink
+                        activeClassName={classes.active}
+                        to={'/chat'}>User Chat</NavLink>
+                </li>
+                <li onClick={() => {
+                    props.logOutUser();
+                    removeSideDrawer();
+                }}>
+                    <NavLink
+                        to={'/'}>
+                    Log Out
+                    </NavLink>
+                </li>
+            </ul>
     }
 
     return (
         <header>
             <div className={classes.MenuWrapper}>
-                <input id={'menu-toggle'} title={'Menu Box'} type="checkbox" className={classes.Toggler}/>
+                <input
+                    id={'menu-toggle'}
+                    title={'Menu Box'}
+                    type="checkbox"
+                    className={classes.Toggler}/>
                 <div className={classes.Hamburger}>
                     <div/>
                 </div>
-                <nav onClick={removeSideDrawer} className={classes.Menu}>
+                <nav
+                    onClick={removeSideDrawer}
+                    className={classes.Menu}>
                     <div>
                         <div>
                             {navigation}

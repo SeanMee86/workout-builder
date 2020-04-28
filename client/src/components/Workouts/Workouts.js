@@ -15,15 +15,23 @@ import classes from './Workouts.module.scss';
 
 class Workouts extends Component{
 
-    state = {
-        showWorkouts: true,
-        workoutModified: false,
-        loadedWorkout: {
-            id: null,
-            name: '',
-            workout: []
-        }
-    };
+    constructor(props) {
+        super(props);
+        this.classes = [
+            ListItemClasses.ListItem,
+            ListItemClasses.Hover,
+            classes.AddMargin
+        ];
+        this.state = {
+            showWorkouts: true,
+            workoutModified: false,
+            loadedWorkout: {
+                id: null,
+                name: '',
+                workout: []
+            }
+        };
+    }
 
     loadOptions = (workout) => {
         const modalContent = (
@@ -33,8 +41,12 @@ class Workouts extends Component{
                 justifyContent: "center",
                 alignItems: "center"
             }}>
-                <Button text={'Load Workout'} clicked={() => this.loadWorkout(workout)} />
-                <Button text={'Delete Workout'} clicked={() => this.props.deleteUserWorkout(workout['_id'])} />
+                <Button
+                    text={'Load Workout'}
+                    clicked={() => this.loadWorkout(workout)} />
+                <Button
+                    text={'Delete Workout'}
+                    clicked={() => this.props.deleteUserWorkout(workout['_id'])} />
             </div>
         );
         this.props.setModalContent(modalContent);
@@ -82,7 +94,9 @@ class Workouts extends Component{
 
     showUpdateForm = (exerciseData) => {
         const content = (
-            <UpdateExerciseForm {...exerciseData} onClick={this.updateExercise}/>
+            <UpdateExerciseForm
+                {...exerciseData}
+                onClick={this.updateExercise}/>
         );
         this.props.setModalContent(content);
     };
@@ -98,16 +112,28 @@ class Workouts extends Component{
             }}>
                 <h2>{exerciseData.exercise.name}</h2>
                 <p>{exerciseData.exercise.description}</p>
-                <Button text={'Modify Exercise'} clicked={() => this.showUpdateForm(exerciseData)} />
+                <Button
+                    text={'Modify Exercise'}
+                    clicked={() => this.showUpdateForm(exerciseData)} />
             </div>
         );
         this.props.setModalContent(content);
         this.props.showModal();
     };
 
-    componentWillUnmount() {
+    saveModdedWorkout = () => {
+        this.props.updateUserWorkout(
+            this.state.loadedWorkout,
+            () => this.setState({
+                ...this.state,
+                workoutModified: false
+            })
+        )
+    }
+
+    saveWorkoutPrompt = () => {
         if(this.state.workoutModified){
-            this.props.setModalContent(
+            const content = (
                 <div>
                     <h2 style={{textAlign: "center"}}>Would you like to save changes to your workout?</h2>
                     <div  style={{
@@ -116,13 +142,20 @@ class Workouts extends Component{
                         justifyContent: "center",
                         alignItems: "center"
                     }}>
-                        <Button text={'Yes'} clicked={() => {this.props.updateUserWorkout(this.state.loadedWorkout)}} />
-                        <Button text={'No'} clicked={() => this.props.hideModal()} />
+                        <Button text={'Yes'}
+                                clicked={this.saveModdedWorkout} />
+                        <Button text={'No'}
+                                clicked={this.props.hideModal} />
                     </div>
                 </div>
             )
+            this.props.setModalContent(content)
             this.props.showModal();
         }
+    }
+
+    componentWillUnmount() {
+        this.saveWorkoutPrompt();
     }
 
     render() {
@@ -148,7 +181,7 @@ class Workouts extends Component{
                             }
                             return (
                                 <div
-                                    className={`${ListItemClasses.ListItem} ${ListItemClasses.Hover} ${classes.AddMargin}`}
+                                    className={this.classes.join(' ')}
                                     onClick={() => this.props.userWorkouts ? this.loadOptions(workout) : this.loadWorkout(workout)}
                                     key={ind}>
                                     <h2>{workout.name}</h2>
@@ -166,11 +199,19 @@ class Workouts extends Component{
                 <React.Fragment>
                     <h2 className={classes.WorkoutHeader}>{this.state.loadedWorkout.name}</h2>
                     <div className={classes.Buttons}>
-                        <Button text={'Back to Workouts'} clicked={() => this.setState({showWorkouts: true})} />
-                        {this.state.workoutModified ? <Button text={'Save Modified Workout'} clicked={() => {
-                            this.props.updateUserWorkout(this.state.loadedWorkout);
-                            this.setState({...this.state, workoutModified: false})
-                        }} /> : null}
+                        <Button text={'Back to Workouts'}
+                                clicked={() => {
+                                    this.saveWorkoutPrompt();
+                                    this.setState({showWorkouts: true});
+                                }}
+                        />
+
+                        {this.state.workoutModified ?
+                            <Button text={'Save Modified Workout'}
+                                    clicked={this.saveWorkoutPrompt}
+                            /> :
+                            null}
+
                         {this.props.allWorkouts ? addWorkoutButton : null}
                     </div>
                     {

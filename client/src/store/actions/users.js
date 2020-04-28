@@ -82,7 +82,7 @@ export const addToUserWorkouts = (workoutData, history) => dispatch => {
         .catch(err => console.log(err))
 };
 
-export const updateUserWorkout = (workout) => dispatch => {
+export const updateUserWorkout = (workout, workoutUpdated) => dispatch => {
     const userId = jwt_decode(localStorage.jwtToken).id;
     const data = {
         userId,
@@ -106,7 +106,7 @@ export const updateUserWorkout = (workout) => dispatch => {
             dispatch({
                 type: SHOW_MODAL
             })
-            // refreshUserWorkouts(res.data, dispatch)
+            workoutUpdated();
         })
 };
 

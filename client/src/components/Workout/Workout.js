@@ -61,7 +61,10 @@ const Workout = (props) => {
             {props.workout.map((exercise, ind) => {
                 const {reps, sets, time, distance, rest} = setWorkoutVars(exercise);
                 return (
-                    <div className={classes.ExerciseCard} onClick={() => props.removeFromWorkout(exercise)} key={ind}>
+                    <div
+                        className={classes.ExerciseCard}
+                        onClick={() => props.removeFromWorkout(exercise)}
+                        key={ind}>
                         <h2>{exercise.exercise.name}</h2>
                         <p>{exercise.exercise.type} Exercise</p>
                         {reps}
@@ -72,7 +75,11 @@ const Workout = (props) => {
                     </div>
                 )
             })}
-            {props.workout.length > 0 ? <Button text={'Submit Workout'} clicked={() => submitWorkout(props.workout)}/>: null}
+            {props.workout.length > 0 ?
+                <Button
+                    text={'Submit Workout'}
+                    clicked={() => submitWorkout(props.workout)}/> :
+                null}
         </div>
     )
 };

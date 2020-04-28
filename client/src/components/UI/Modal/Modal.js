@@ -13,7 +13,7 @@ class Modal extends Component {
                     onClick={this.props.hideModal}
                     className={classes.ModalClickable} />
                 <div className={classes.ModalContent}>
-                    {this.props.ui.modalContent}
+                    {this.props.modalContent}
                 </div>
             </div>
         )
@@ -21,7 +21,7 @@ class Modal extends Component {
 }
 
 const mapStateToProps = state => ({
-    ui: state.ui
+    modalContent: state.ui.modalContent
 });
 
 export default connect(

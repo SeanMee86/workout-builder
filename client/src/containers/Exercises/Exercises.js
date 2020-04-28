@@ -22,7 +22,9 @@ const Exercises = (props) => {
             <Button
                 clicked={formButtonClicked}
                 text={showExercises ? 'Hide Exercises' : 'View Exercises'}/>
-            {showExercises ? <ExerciseList /> : null}
+            {showExercises ?
+                <ExerciseList /> :
+                null}
         </React.Fragment>
     );
 };

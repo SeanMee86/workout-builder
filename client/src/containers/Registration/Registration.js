@@ -107,10 +107,11 @@ class Registration extends Component {
                         value={this.state.password2}/>
                     <span className={classes.ErrorMessage}>{this.state.formData.errors.password2}</span>
 
-                    <input
-                        type="submit"/>
+                    <input type="submit"/>
                 </form>
-                <Button text={'Log In'} clicked={() => this.props.history.push('/login')}/>
+                <Button
+                    text={'Log In'}
+                    clicked={() => this.props.history.push('/login')}/>
             </div>
         )
     }

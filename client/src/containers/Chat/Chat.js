@@ -65,7 +65,7 @@ class Chat extends Component {
 
     onSendMessage = (message, userName) => {
         if(message === '') {
-            message = "I'm a little bitch trying to fuck with shit";
+            message = "I think I'm cute...";
         }
 
         const messageObj = {
@@ -94,7 +94,7 @@ class Chat extends Component {
                     clicked={() => this.onSendMessage(this.state.message, this.props.userName)}/>
                 <ul className={classes.Chat}>
                     {this.state.chatLogs.map((chat, ind) => {
-                        let chatLog = null;
+                        let chatLog;
                         if(chat.userName){
                             chatLog = (
                                 <li key={ind}>
