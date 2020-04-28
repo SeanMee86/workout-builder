@@ -19,14 +19,6 @@ module.exports = {
                 return res.json(err);
             }
             res.send(user.workouts);
-            // const workoutIdArray = user.workouts.map(workout => workout.workoutID);
-            // Workout.find({_id: {$in: workoutIdArray}}, (err, workouts) => {
-            //     if(err){
-            //         res.send(err);
-            //     }else {
-            //         res.send(workouts);
-            //     }
-            // })
         })
     }
 };
