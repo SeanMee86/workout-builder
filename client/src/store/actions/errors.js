@@ -1,4 +1,8 @@
-import {SET_ERRORS, REMOVE_ERRORS, REMOVE_ALL_ERRORS} from "./types";
+import {
+    SET_ERRORS,
+    REMOVE_ERRORS,
+    REMOVE_ALL_ERRORS
+} from "./types";
 
 export const setErrors = (errors) => ({
     type: SET_ERRORS,
