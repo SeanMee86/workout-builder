@@ -21,7 +21,9 @@ router.route('/api/users/login')
                     res.status(400).json(errors);
                 }
 
-                const {email, password} = req.body;
+                const password = req.body.password;
+
+                const email = req.body.email.toLowerCase();
 
                 User.findOne({ email })
                     .then(user => {

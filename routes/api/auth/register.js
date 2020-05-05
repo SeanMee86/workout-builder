@@ -19,14 +19,16 @@ router.route('/api/users/register')
                     return res.status(400).json(errors);
                 }
 
-                User.findOne({email: req.body.email})
+                const email = req.body.email.toLowerCase();
+
+                User.findOne({email})
                     .then(user => {
                         if(user) {
                             return res.status(400).json({email: "Email already exists"})
                         }else {
                             const newUser = new User({
                                 name: req.body.name,
-                                email: req.body.email,
+                                email,
                                 password: req.body.password
                             });
 
