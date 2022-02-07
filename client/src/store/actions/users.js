@@ -52,9 +52,7 @@ const showUserWorkoutAddedMessage = (data, dispatch) => {
 }
 
 export const getUserWorkouts = () => dispatch => {
-    const userId = jwt_decode(localStorage.jwtToken).id;
-    const data = { userId };
-    axios.post('/api/users/getworkouts', data)
+    axios.get('/api/users/getworkouts')
         .then(res => {
             dispatch({
                 type: GET_USER_WORKOUTS,
@@ -65,7 +63,6 @@ export const getUserWorkouts = () => dispatch => {
 
 export const addToUserWorkouts = (workoutData, history) => dispatch => {
     const data = {
-        userId: jwt_decode(localStorage.jwtToken).id,
         workoutData
     };
     axios.post('/api/users/workouts', data)
@@ -83,9 +80,7 @@ export const addToUserWorkouts = (workoutData, history) => dispatch => {
 };
 
 export const updateUserWorkout = (workout, workoutUpdated) => dispatch => {
-    const userId = jwt_decode(localStorage.jwtToken).id;
     const data = {
-        userId,
         workout
     };
     axios.put('/api/users/workouts', data)
@@ -111,9 +106,7 @@ export const updateUserWorkout = (workout, workoutUpdated) => dispatch => {
 };
 
 export const deleteUserWorkout = (workoutId) => dispatch => {
-    const userId = jwt_decode(localStorage.jwtToken).id;
     const data = {
-        userId,
         workoutId
     };
     axios.delete('/api/users/workouts', {data})

@@ -4,7 +4,7 @@ const User = model('user', userSchema);
 
 module.exports = {
     updateUserWorkouts: (req, res) => {
-        User.findById(req.body.userId, (err, user) => {
+        User.findById(req.user.id, (err, user) => {
             if(err){
                 res.send(err);
             }

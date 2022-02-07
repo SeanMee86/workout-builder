@@ -50,7 +50,7 @@ router.route('/api/users/login')
                                             })
                                         }
                                     )
-                                }else {
+                                } else {
                                     res.status(400).json({password: 'Incorrect Password'})
                                 }
                             })

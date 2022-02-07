@@ -13,7 +13,7 @@ module.exports = {
         })
     },
     getUserWorkouts: (req, res) => {
-        const { userId } = req.body;
+        const { id: userId } = req.user;
         User.findById(userId, (err, user) => {
             if(err){
                 return res.json(err);

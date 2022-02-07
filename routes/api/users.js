@@ -41,7 +41,7 @@ router.route('/api/users/workouts')
     })
 
 router.route('/api/users/getworkouts')
-    .post(secureRoute, (req, res) => {
+    .get(secureRoute, (req, res) => {
         connect(connectionString, connectionOptions)
             .then(() => {
                 getUserWorkouts(req, res)
